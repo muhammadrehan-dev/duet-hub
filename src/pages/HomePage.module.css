@@ -1,0 +1,60 @@
+/* ─── Semester cards ──────────────────────────────────────────────────────── */
+.semestersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.semesterCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.semesterCard:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.semesterIcon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.semesterInfo {
+  flex: 1;
+}
+
+.semesterLabel {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  margin-bottom: 2px;
+}
+
+.semesterRepo {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.semesterArrow {
+  font-size: 14px;
+  color: var(--text-muted);
+  transition: transform 0.12s;
+}
+.semesterCard:hover .semesterArrow {
+  transform: translateX(3px);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .semestersGrid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,423 @@
+/* ─── Story / Timeline ────────────────────────────────────────────────────── */
+.storyCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+}
+
+.storyTimeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 1.25rem;
+  padding-bottom: 1.75rem;
+  position: relative;
+}
+.timelineItem:last-child { padding-bottom: 0; }
+
+.timelineItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 14px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.timelineDot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  outline: 1px solid var(--border-strong);
+  flex-shrink: 0;
+  margin-top: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.timelineDate {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: var(--font-ui);
+  margin-bottom: 0.4rem;
+}
+
+.timelineText {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-family: var(--font-ui);
+}
+
+/* ─── Developer card ──────────────────────────────────────────────────────── */
+.devCard {
+  display: flex;
+  gap: 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+}
+
+.devAvatarWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.devAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bg);
+  letter-spacing: 0.05em;
+}
+
+.devBadge {
+  font-size: 10px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--accent-light);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 99px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+
+.devName {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  margin-bottom: 2px;
+}
+
+.devAlias {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 0.75rem;
+}
+
+.devBio {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.devContacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.contactBtn {
+  display: inline-block;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-family: var(--font-ui);
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: var(--bg);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.contactBtn:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+.contactNote {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+}
+
+/* ─── Skills ──────────────────────────────────────────────────────────────── */
+.skillsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skillChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: var(--font-ui);
+  color: var(--text-secondary);
+  transition: border-color 0.15s, background 0.15s;
+}
+.skillChip:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-hover);
+}
+
+/* ─── Animals ─────────────────────────────────────────────────────────────── */
+.sectionNote {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  margin-left: 4px;
+}
+
+.animalsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.animalChip {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: background 0.15s, border-color 0.15s;
+}
+.animalChip:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+}
+
+.animalIcon { font-size: 20px; flex-shrink: 0; }
+
+.animalName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  line-height: 1.2;
+}
+
+.animalTech {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ─── Hobbies ─────────────────────────────────────────────────────────────── */
+.hobbyGroups {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hobbyGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.hobbyGroupLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  white-space: nowrap;
+  min-width: 130px;
+  padding-top: 4px;
+}
+
+.hobbiesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.hobbyTag {
+  padding: 4px 11px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 12px;
+  font-family: var(--font-ui);
+}
+
+.tagBooks  { background: #EAE4F5; color: #4A3070; border-color: #C8BBE8; }
+.tagUrdu   { background: #F5E8EA; color: #703040; border-color: #E8BBBB; }
+.tagLife   { background: var(--green-light); color: var(--green); border-color: #B8D8C8; }
+.tagTech   { background: var(--accent-light); color: var(--text-secondary); border-color: var(--border-strong); }
+
+/* ─── Projects ────────────────────────────────────────────────────────────── */
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.projectCard:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.projectTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.projectName {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+}
+
+.projectBadge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: var(--green-light);
+  color: var(--green);
+  border: 1px solid #B8D8C8;
+  font-family: var(--font-ui);
+  letter-spacing: 0.04em;
+}
+
+.projectDesc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  font-family: var(--font-ui);
+}
+
+.projectUrl {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-top: 4px;
+}
+
+/* ─── Contribute ──────────────────────────────────────────────────────────── */
+.contributeCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+}
+
+.contributeIntro {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.stepNum {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+}
+
+.stepTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  margin-bottom: 2px;
+}
+
+.stepDesc {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+}
+
+.repoBtn {
+  display: inline-block;
+  padding: 9px 20px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: var(--font-ui);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.repoBtn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .devCard { flex-direction: column; }
+  .devAvatarWrap { flex-direction: row; align-items: center; }
+  .storyCard { padding: 1.25rem; }
+  .animalsGrid { grid-template-columns: repeat(2, 1fr); }
+  .hobbyGroup { flex-direction: column; gap: 0.5rem; }
+  .hobbyGroupLabel { min-width: unset; }
+  .projectsGrid { grid-template-columns: 1fr; }
+}

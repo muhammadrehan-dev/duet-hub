@@ -1,0 +1,208 @@
+/* ─── Breadcrumb ──────────────────────────────────────────────────────────── */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.breadcrumbBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  padding: 0;
+  transition: color 0.15s;
+}
+.breadcrumbBtn:hover { color: var(--text-primary); }
+
+.sep {
+  color: var(--border-strong);
+  font-size: 13px;
+}
+
+.breadcrumbCurrent {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-family: var(--font-ui);
+}
+
+/* ─── Search ──────────────────────────────────────────────────────────────── */
+.searchWrapper {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.search {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-family: var(--font-ui);
+  outline: none;
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+}
+.search::placeholder { color: var(--text-muted); }
+.search:focus { border-color: var(--border-strong); }
+
+.clearSearch {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.clearSearch:hover { color: var(--text-primary); }
+
+/* ─── Categories ──────────────────────────────────────────────────────────── */
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.category {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.categoryHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  transition: background 0.15s;
+}
+.categoryHeader:hover { background: var(--surface-hover); }
+
+.categoryLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.categoryMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.chevron {
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+/* ─── File list ───────────────────────────────────────────────────────────── */
+.fileList {
+  border-top: 1px solid var(--border);
+}
+
+.fileRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 1.25rem;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+.fileRow:last-child { border-bottom: none; }
+.fileRow:hover { background: var(--accent-light); }
+
+.extBadge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  min-width: 38px;
+  text-align: center;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.fileIcon {
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+}
+
+.name {
+  flex: 1;
+  font-size: 13px;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-ui);
+}
+
+.size {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  min-width: 50px;
+  text-align: right;
+}
+
+.dlBtn {
+  padding: 4px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-decoration: none;
+  font-family: var(--font-ui);
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.dlBtn:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  background: var(--surface-hover);
+}
+
+@media (max-width: 600px) {
+  .size { display: none; }
+  .fileIcon { display: none; }
+  .fileRow { gap: 0.5rem; padding: 0.6rem 1rem; }
+}
