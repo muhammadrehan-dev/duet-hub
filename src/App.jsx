@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import HomePage from '@/pages/HomePage'
@@ -36,6 +37,7 @@ export default function App() {
       <Nav page={page} setPage={setPage} />
       <main>{renderPage()}</main>
       <Footer />
+      <Analytics />
     </>
   )
 }
