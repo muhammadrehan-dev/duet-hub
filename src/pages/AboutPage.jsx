@@ -50,7 +50,7 @@ const PROJECTS = [
   {
     name: 'TrustUs-PK',
     desc: 'A Sarcastic Cybersecurity Firm',
-    url: 'https://trustuspk.netlify.app',
+    url: 'https://trustuspk.vercel.app',
     badge: 'Live',
   },
   {
