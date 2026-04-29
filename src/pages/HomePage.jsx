@@ -29,12 +29,12 @@ export default function HomePage({ setPage }) {
   return (
     <div className="page">
       <div className="hero">
-        <p className="hero-label">{SITE.batch}</p>
+        <p className="hero-label">25F Cybersecurity & Artificial Intelligence. </p>
         <h1 className="hero-title">{SITE.university}</h1>
-        <p className="hero-sub">Browse course materials by semester.</p>
+        <p className="hero-sub">Browse course materials.</p>
       </div>
 
-      <p className="section-label">Semesters</p>
+      <p className="section-label">Contents</p>
       <div className={styles.semestersGrid}>
         {SEMESTERS.map(sem => (
           <SemesterCard key={sem.id} semester={sem} setPage={setPage} />
