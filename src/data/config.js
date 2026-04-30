@@ -31,10 +31,10 @@ export const DEVELOPER = {
 // ─── One entry per semester → points to its own GitHub repo ──────────────────
 export const SEMESTERS = [
   {
-    id: '1st Semester',
-    label: '1st Semester',
+    id: '25F Cybersecurity',
+    label: '25F Cybersecurity',
     // The root folder name inside the repo that holds all subjects
-    rootFolder: '1st Semester',
+    rootFolder: '25F Cybersecurity',
     github: {
       user: 'muhammadrehan-dev',
       repo: 'subjects',
@@ -42,17 +42,17 @@ export const SEMESTERS = [
      token: import.meta.env.VITE_GITHUB_TOKEN ,
     },
   },
-    {
-    id: '2nd Semester',
-    label: '2nd Semester',
+   // {
+  //  id: '2nd Semester',
+   // label: '2nd Semester',
     // The root folder name inside the repo that holds all subjects
-    rootFolder: '2nd Semester',
-    github: {
-      user: 'muhammadrehan-dev',
-      repo: 'subjects',
-      branch: 'main',
-      token: import.meta.env.VITE_GITHUB_TOKEN ,
-    },
+  //  rootFolder: '2nd Semester',
+  //  github: {
+   //   user: 'muhammadrehan-dev',
+    //  repo: 'subjects',
+     // branch: 'main',
+     // token: import.meta.env.VITE_GITHUB_TOKEN ,
+   // },
   },
   // ── Add more semesters below ─────────────────────────────────────────────
   // {
