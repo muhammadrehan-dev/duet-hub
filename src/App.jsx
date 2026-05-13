@@ -7,6 +7,7 @@ import HomePage from '@/pages/HomePage'
 import AboutPage from '@/pages/AboutPage'
 import BrowserPage from '@/pages/BrowserPage'
 import SemesterPage from '@/pages/SemesterPage'
+import NewBiePage from '@/pages/NewBiePage'
 
 export default function App() {
   const [page, setPage] = useState({ id: 'home' })
@@ -17,8 +18,10 @@ export default function App() {
         return <HomePage setPage={setPage} />
       case 'about':
         return <AboutPage />
-        case 'semester':
-  return <SemesterPage semester={page.semester} setPage={setPage} />
+      case 'newbie':
+        return <NewBiePage />
+      case 'semester':
+        return <SemesterPage semester={page.semester} setPage={setPage} />
       case 'browser':
         return (
           <BrowserPage
