@@ -2,6 +2,7 @@ import styles from './Nav.module.css'
 
 const LINKS = [
   { id: 'home',  label: 'Home' },
+  { id: 'newbie', label: 'Newbie' },
   { id: 'about', label: 'About' },
 ]
 
