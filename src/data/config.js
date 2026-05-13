@@ -25,6 +25,7 @@ export const DEVELOPER = {
   alias: 'CH4_EZIO',
   bio: 'Write whatever you want here about yourself...',
   github: 'https://github.com/muhammadrehan-dev',
+  // add more links if you want
 }
 
 // ─── One entry per semester → points to its own GitHub repo ──────────────────
@@ -32,17 +33,41 @@ export const SEMESTERS = [
   {
     id: '25F Cybersecurity',
     label: '25F Cybersecurity',
+    // The root folder name inside the repo that holds all subjects
     rootFolder: '25F Cybersecurity',
     github: {
       user: 'muhammadrehan-dev',
       repo: 'subjects',
       branch: 'main',
-      token: import.meta.env.VITE_GITHUB_TOKEN,
+     token: import.meta.env.VITE_GITHUB_TOKEN ,
     },
   },
-  {
-    id: '24F AI',
-    label: '24F Artificial Intelligence',
-    driveUrl: 'https://drive.google.com/drive/folders/1TsMhbKJCMl02MP4W8P5vHerMsGNgZ4dq',
-  },
+   // {
+  //  id: '2nd Semester',
+   // label: '2nd Semester',
+    // The root folder name inside the repo that holds all subjects
+  //  rootFolder: '2nd Semester',
+  //  github: {
+   //   user: 'muhammadrehan-dev',
+    //  repo: 'subjects',
+     // branch: 'main',
+     // token: import.meta.env.VITE_GITHUB_TOKEN ,
+   // },
+//  },
+  // ── Add more semesters below ─────────────────────────────────────────────
+  // {
+  //   id: 'semester-2',
+  //   label: '2nd Semester',
+  //   rootFolder: '2nd Semester',
+  //   github: {
+  //     user: 'muhammadrehan-dev',
+  //     repo: 'sem2-resources',
+  //     branch: 'main',
+  //     token: import.meta.env.VITE_GITHUB_TOKEN || null,
+  //   },
+  // },
 ]
+
+
+
+
