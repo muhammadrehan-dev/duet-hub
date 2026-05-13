@@ -42,18 +42,18 @@ export const SEMESTERS = [
      token: import.meta.env.VITE_GITHUB_TOKEN ,
     },
   },
-   // {
-  //  id: '2nd Semester',
-   // label: '2nd Semester',
+    {
+    id: '24F Artificial Intelligence',
+    label: '24F Artificial Intelligence',
     // The root folder name inside the repo that holds all subjects
-  //  rootFolder: '2nd Semester',
-  //  github: {
-   //   user: 'muhammadrehan-dev',
-    //  repo: 'subjects',
-     // branch: 'main',
-     // token: import.meta.env.VITE_GITHUB_TOKEN ,
-   // },
-//  },
+    rootFolder: '24F Artificial Intelligence',
+   github: {
+      user: 'muhammadrehan-dev',
+     repo: 'subjects',
+      branch: 'main',
+      token: import.meta.env.VITE_GITHUB_TOKEN ,
+    },
+  },
   // ── Add more semesters below ─────────────────────────────────────────────
   // {
   //   id: 'semester-2',
