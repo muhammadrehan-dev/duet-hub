@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from './NewbiePage.module.css'
+import styles from './Newbiepage.module.css'
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
