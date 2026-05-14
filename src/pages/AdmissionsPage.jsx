@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MERIT_LISTS } from '@/data/config'
+import { MERIT_LISTS, SAMPLE_PAPERS } from '@/data/config'
 import styles from './AdmissionsPage.module.css'
 
 
@@ -276,8 +276,8 @@ export default function AdmissionsPage({ setPage }) {
         <p className="hero-label">Before the admission letter arrives, read this.</p>
         <h1 className="hero-title">Getting Into DUET.<br />Here is Everything You Need to Know.</h1>
         <p className="hero-sub">
-          Eligibility, entry test breakdown, merit formula, past merit lists, documents,
-          timeline and tips that actually help. Written by a student who went through it.
+          Eligibility, entry test breakdown, merit formula, past merit lists, sample papers, 
+          documents, timeline and tips that actually help. Written by a student who went through it.
         </p>
       </div>
 
@@ -307,6 +307,36 @@ export default function AdmissionsPage({ setPage }) {
         <div className={styles.meritListBrowseInfo}>
           <p className={styles.meritListBrowseLabel}>Browse Merit Lists</p>
           <p className={styles.meritListBrowseNote}>Past merit list PDFs organized by year and department</p>
+        </div>
+        <span className={styles.meritListBrowseArrow}>→</span>
+      </div>
+
+      {/* Sample Papers */}
+      <p className="section-label" style={{ marginTop: '2.5rem' }}>Entry Test Sample Papers</p>
+      <div className={styles.meritListsIntroBox}>
+        <span>📝</span>
+        <p>
+          Practice is key to clearing the entry test. We have collected sample papers and 
+          past question patterns to help you understand the difficulty level and the 
+          type of questions asked in Mathematics, Physics, and English.
+        </p>
+      </div>
+      <div
+        className={styles.meritListBrowseCard}
+        onClick={() => setPage({
+          id: 'browser',
+          semester: SAMPLE_PAPERS,
+          initialPath: SAMPLE_PAPERS.rootFolder,
+          initialCrumbs: [
+            { label: 'Admissions', path: null },
+            { label: 'Sample Papers', path: SAMPLE_PAPERS.rootFolder },
+          ],
+        })}
+      >
+        <span className={styles.meritListBrowseIcon}>📚</span>
+        <div className={styles.meritListBrowseInfo}>
+          <p className={styles.meritListBrowseLabel}>Browse Sample Papers</p>
+          <p className={styles.meritListBrowseNote}>Official sample papers and community-sourced past questions</p>
         </div>
         <span className={styles.meritListBrowseArrow}>→</span>
       </div>
