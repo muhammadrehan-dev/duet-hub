@@ -91,9 +91,9 @@ const TEST_SECTIONS = [
 ]
 
 const MERIT_FORMULA = [
-  { label: 'Entry Test Score', weight: 50, color: 'blue' },
+  { label: 'Entry Test Score', weight: 60, color: 'blue' },
   { label: 'Intermediate Marks', weight: 30, color: 'green' },
-  { label: 'Matric Marks', weight: 20, color: 'amber' },
+  { label: 'Matric Marks', weight: 10, color: 'amber' },
 ]
 
 const TIMELINE = [
@@ -195,7 +195,7 @@ const FAQS = [
   },
   {
     q: 'How is merit calculated?',
-    a: 'Merit is a weighted combination of three scores: 50% from your entry test result, 30% from your intermediate marks, and 20% from your matric marks. A strong entry test performance can lift a moderate academic percentage. Neither alone is enough.',
+    a: 'Merit is a weighted combination of three scores: 60% from your entry test result, 30% from your intermediate marks, and 10% from your matric marks. A strong entry test performance can lift a moderate academic percentage. Neither alone is enough.',
   },
   {
     q: 'Is there negative marking in the entry test?',
