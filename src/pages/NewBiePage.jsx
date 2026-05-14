@@ -125,6 +125,101 @@ const PORTALS = [
   },
 ]
 
+// ─── Stories ──────────────────────────────────────────────────────────────────
+
+const STORIES = [
+  {
+    icon: '☁️',
+    date: 'Day 1 — The Azure Incident',
+    title: 'I locked myself out of my university account before the semester even started.',
+    text: `Got my credentials. Logged in. Immediately changed the password to something clever. Immediately forgot what that was. Completely locked out of my own account in under 4 minutes.
+
+So I go to the IT Department to reset it. They say: "Sure, we'll send a code to your Authenticator app." I say: "Great." The Authenticator says: "First, verify your identity via the code we sent to your Outlook." I open Outlook. Outlook says: "Enter the OTP showing on your Authenticator."
+
+I stared at my phone for 30 seconds. The two apps were asking each other for verification codes like two security guards who both forgot their IDs. I had to physically walk to the IT office, explain the situation, and watch them also be confused for a few minutes before solving it.
+
+Lesson: Set up your recovery email and phone number THE MOMENT you first log in. Before you do anything else. Before you even blink.`,
+  },
+  {
+    icon: '📋',
+    date: 'Week 2 The QOBE',
+    title: 'I uploaded my documents. QOBE said "documents not uploaded." I uploaded again.',
+    text: `QOBE has a talent for making you feel like nothing you do is real. I uploaded my Matric certificate. Portal said okay and after a few said portal forgot that i uploaded it and asked me to upload again .
+
+Keep everything in a Google Drive folder: Matric, Intermediate, Domicile, CNIC, passport photos, and a spare soul. You'll need all of them at some point.`,
+  },
+  {
+    icon: '📊',
+    date: 'Mids Week  The Attendance Wake-Up Call',
+    title: 'They checked their attendance right before mids. That was a mistake.',
+    text: `There's a specific kind of panic that sets in when you open QOBE two days before midterms and realize you've been "casually skipping" one class a little too consistently.
+
+The 75% rule isn't a suggestion. The system doesn't do rounding in your favour. It doesn't care that you were tired, or sick, or that the class was at 8am and that's basically still night. Two people in my batch sat out of finals because of this. Don't let that be you.
+
+Check your attendance after every class (literally just once after each class) . Not every month. Every week. Make it a habit like checking your phone which you're already doing every 4 minutes anyway.`,
+  },
+  {
+    icon: '🖨️',
+    date: 'Month 1, The Print Shop Economy',
+    title: 'I spent more on printing in one month than I did on actual food.',
+    text: `Nobody prepares you for the sheer volume of things that need to be printed at a Pakistani university. Assignment coversheet. Lab file. Lab report. Attendance form. Challan. Another challan because you lost the first one.
+
+I was running to the print shop every other day like it was a second campus. By the time I did the math, I realised a basic home printer would have paid for itself in six weeks.
+
+Buy a printer. I don't care what anyone says. Buy a printer. This is the most practical advice on this entire page.`,
+  },
+  {
+    icon: '🎓',
+    date: 'Finals Week  The 75% Wake-Up Call',
+    title: 'One student in my class took attendance lightly. He reappeared in summer.',
+    text: `He wasn't the type to fail subjects. He understood the material fine just didn't understand that the portal doesn't care about that.
+
+When finals came, he was barred. One person, but it was a very visible lesson for the rest of us. No warning, no negotiation, no appeal that went anywhere. The system blocked him automatically. He had to register for the summer repeat semester and sit the exams again while everyone else moved forward.
+
+The 75% rule feels theoretical until it happens to someone you sit next to every day.
+
+Check your attendance on QOBE every week. Treat 80% as your personal floor — that buffer is for actual sick days and real emergencies, not for "I'll skip just this once."`,
+  },
+  {
+    icon: '🔐',
+    date: 'Semester 1 , The Authenticator Incident',
+    title: '10–15 students uninstalled the Authenticator app. Then needed it to log in.',
+    text: `The setup process asks you to install Microsoft Authenticator. A surprising number of students treated this as optional and uninstalled it later to free up space or because it felt unnecessary.
+
+Then came the day Azure required an OTP to log in. They reinstalled Authenticator. Authenticator said: "First set up via Outlook." They opened Outlook. Outlook said: "Enter the OTP from your Authenticator."
+
+The loop was complete. Neither app would move first without the other.
+
+Each of them had to go to the IT department individually to get their account manually recovered. IT handled it but it took time, trips, and a queue. The IT department sorted everyone out eventually, but it was entirely avoidable.
+
+Install Authenticator Day 1. Never uninstall it. If you change phones, migrate it before wiping. It is not decorative it is your key to everything Microsoft.`,
+  },
+  {
+    icon: '📶',
+    date: 'Every Day The WiFi Reality',
+    title: 'Campus WiFi: sometimes 200 Mbps, sometimes 500 Kbps. Plan accordingly.',
+    text: `The student network is called "Student". Password is one of duet@1234, Duet@1234, or DUET@1234 try all three, nobody consistently knows which one is active.
+
+Speed is genuinely unpredictable. Off-peak you can hit 40 Mbps comfortably, occasionally even 200 Mbps. During peak hours between classes, lunch break, exam season it can crawl to 1 Mbps or drop entirely.
+
+The library PCs run on the same provider as the student network but tend to hold up slightly better during peak hours. In reality it's marginal — faculty WiFi might be 800 Kbps when student is at 500 Kbps, but if more people start connecting to that network too, it drops to 100 Kbps just as fast.
+
+Honest advice: for anything that actually matters, use your brain insted of Wi-Fi , JK;) , must have a plan B like mobile data ready `,
+  },
+  {
+    icon: '🤖',
+    date: 'Semester 1 ,GitHub Student Pack & Copilot',
+    title: 'I got Copilot Pro free. Built agents with it. One wiped my data. Would do again.',
+    text: `Your university email qualifies you for the GitHub Student Developer Pack. This includes GitHub Copilot Pro and I mean actually useful, not the stripped-down version. I run it straight from the terminal.
+
+I've built multiple agents that handle tasks for me. It's genuinely powerful once you figure out what you're doing.
+
+One of them wiped my data during an early experiment. It said oops, let me restart from basics and then wiped the remaining data too. I did not have anything important on that machine, which is the only reason this is a funny story and not a tragedy.
+
+Lesson: do not run unsupervised AI agents on your main machine. Use a VM, a spare drive, or something you genuinely don't mind losing. Get the Student Pack anyway it's one of the best things your .edu email unlocks.`,
+  },
+]
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function FaqItem({ q, a }) {
@@ -140,6 +235,29 @@ function FaqItem({ q, a }) {
   )
 }
 
+function StoryItem({ story }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={styles.storyItem} onClick={() => setOpen(o => !o)}>
+      <div className={styles.storyItemHeader}>
+        <span className={styles.storyItemDot}>{story.icon}</span>
+        <div className={styles.storyItemMeta}>
+          <p className={styles.storyItemDate}>{story.date}</p>
+          <p className={styles.storyItemTitle}>{story.title}</p>
+        </div>
+        <span className={styles.storyChevron}>{open ? '▲' : '▼'}</span>
+      </div>
+      {open && (
+        <div className={styles.storyItemBody}>
+          {story.text.split('\n\n').map((para, i) => (
+            <p key={i} className={styles.storyItemPara}>{para}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function NewbiePage() {
@@ -151,81 +269,48 @@ export default function NewbiePage() {
         <p className="hero-label">You just got admitted. Congratulations. Now read this.</p>
         <h1 className="hero-title">Welcome to DUET.<br />Try not to panic.</h1>
         <p className="hero-sub">
-          Everything a newbie needs, portals, emails, rules, perks, and the stuff nobody tells
+          Everything a newbie needs — portals, emails, rules, perks, and the stuff nobody tells
           you until it costs you. Written by a student who learned most of this the hard way,
           so you don't have to.
         </p>
       </div>
 
-      {/* FAQs — moved to top */}
-      <p className="section-label">FAQs, Read These First</p>
+      {/* ── Stories from the field ── */}
+      <p className="section-label">Things That Happened to Me So They Don't Happen to You</p>
+      <div className={styles.storyCard}>
+        <p className={styles.storyIntro}>
+          Real events. Real mistakes. Mildly traumatic. Fully preventable.<br />
+          Click any story to read it — consider it free tuition.
+        </p>
+        <div className={styles.storyTimeline}>
+          {STORIES.map((s, i) => (
+            <StoryItem key={i} story={s} />
+          ))}
+        </div>
+      </div>
+
+      {/* FAQs */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>FAQs — Read These First</p>
       <div className={styles.faqList}>
-        {FAQS.map((f, i) => (
-          <FaqItem key={i} q={f.q} a={f.a} />
-        ))}
+        {FAQS.map(f => <FaqItem key={f.q} q={f.q} a={f.a} />)}
       </div>
 
-      {/* Quick links */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Important Links</p>
-      <div className={styles.quickLinks}>
-        {QUICK_LINKS.map(l => (
-          <a key={l.label} href={l.url} target="_blank" rel="noreferrer" className={styles.quickLink}>
-            <span className={styles.quickIcon}>{l.icon}</span>
-            <div className={styles.quickInfo}>
-              <p className={styles.quickLabel}>{l.label}</p>
-              <p className={styles.quickNote}>{l.note}</p>
-            </div>
-            <span className={styles.quickArrow}>→</span>
-          </a>
-        ))}
-      </div>
-
-      {/* Contacts */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Who to Call When You're Lost</p>
-      <div className={styles.contactsGrid}>
-        {CONTACTS.map(c => (
-          <div key={c.name} className={styles.contactCard}>
-            <span className={styles.contactIcon}>{c.icon}</span>
-            <div>
-              <p className={styles.contactName}>{c.name}</p>
-              <p className={styles.contactRole}>{c.role}</p>
-              <p className={styles.contactDetail}>{c.contact}</p>
-              <p className={styles.contactVia}>via {c.via}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* University Email */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Your University Email</p>
+      {/* Azure Email Setup */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>Your University Email (Handle With Care)</p>
       <div className={styles.emailCard}>
-        <div className={styles.emailTop}>
-          <span className={styles.emailIcon}>✉️</span>
-          <div>
-            <p className={styles.emailTitle}>Microsoft Azure Account</p>
-            <p className={styles.emailSub}>Issued by DUET, Unlocks everything below</p>
-          </div>
-        </div>
         <div className={styles.emailFormat}>
-          <span className={styles.emailFormatLabel}>Format</span>
-          <code className={styles.emailCode}>Batch-Dept-Roll@students.duet.edu.pk</code>
+          <p className={styles.emailFormatLabel}>Your email format</p>
+          <p className={styles.emailFormatValue}>YY[Semester]-[Dept]-[Roll]@students.duet.edu.pk</p>
+          <p className={styles.emailFormatExample}>e.g. 25F-CY-102@students.duet.edu.pk</p>
         </div>
-        <div className={styles.emailExample}>
-          <span className={styles.emailExampleLabel}>Example</span>
-          <code className={styles.emailCode}>25F-CY-102@students.duet.edu.pk</code>
-        </div>
-
-        <div className={styles.warningBox}>
-          <span className={styles.warningIcon}>⚠️</span>
-          <div>
-            <p className={styles.warningTitle}>First Login Tips, Actually Read This</p>
-            <ul className={styles.warningList}>
-              <li>You'll get a <strong>temporary password</strong> from your class advisor.</li>
-              <li>Do your first login on a <strong>PC</strong>, not your phone. Trust the process.</li>
-              <li>Change your password and <strong>set up Microsoft Authenticator</strong> immediately.</li>
-              <li>Add a <strong>recovery email &amp; phone number</strong>. If you lose authenticator access, you will lock yourself out. I learned this the hard way so you don't have to.😬</li>
-            </ul>
-          </div>
+        <div className={styles.emailSteps}>
+          <p className={styles.emailStepsTitle}>First login checklist — in this exact order, or you'll regret it:</p>
+          <ul className={styles.emailStepsList}>
+            <li>You'll get a <strong>temporary password</strong> from your class advisor.</li>
+            <li>Do your first login on a <strong>PC</strong>, not your phone. Trust the process.</li>
+            <li>Change your password and <strong>set up Microsoft Authenticator</strong> immediately.</li>
+            <li>Add a <strong>recovery email &amp; phone number</strong>. If you skip this and lock yourself out, you'll be physically walking to the IT Department to break the authentication deadlock between Outlook and Authenticator, both demanding codes from each other like two confused bouncers. I know this because I did exactly that. On Day 1. 😬</li>
+          </ul>
         </div>
       </div>
 
@@ -355,7 +440,7 @@ export default function NewbiePage() {
       </div>
 
       {/* Recommended Apps */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Recommended Apps & Tools 🛠️</p>
+      <p className="section-label" style={{ marginTop: '3rem' }}>Recommended Apps &amp; Tools 🛠️</p>
       <div className={styles.perksGrid}>
         {APPS.map(a => (
           <div key={a.label} className={styles.perkCard}>
