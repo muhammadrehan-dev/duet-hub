@@ -96,7 +96,29 @@
 }
 
 @media (max-width: 600px) {
-  .nav { padding: 0 1rem; height: 54px; }
-  .link { font-size: 11px; padding: 5px 10px; }
-  .brandText { font-size: 13px; }
+  .nav { padding: 0 0.75rem; height: 52px; gap: 0.5rem; }
+  
+  .brand { gap: 0.25rem; }
+  .brandIcon { font-size: 16px; }
+  .brandText { font-size: 12px; }
+  
+  .links { gap: 0; }
+  .link { 
+    font-size: 10px; 
+    padding: 6px 8px; 
+    letter-spacing: 0.02em; 
+  }
+  
+  .activeDot { 
+    bottom: 3px; 
+    width: 3px; 
+    height: 3px; 
+  }
+}
+
+/* For extremely narrow screens */
+@media (max-width: 360px) {
+  .nav { padding: 0 0.5rem; }
+  .brandIcon { display: none; }
+  .link { padding: 6px 6px; }
 }

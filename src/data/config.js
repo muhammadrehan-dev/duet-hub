@@ -68,6 +68,16 @@ export const SEMESTERS = [
   // },
 ]
 
-
-
+// ─── Merit Lists — same repo, different root folder ──────────────────────────
+export const MERIT_LISTS = {
+  id: 'Merit Lists',
+  label: 'Merit Lists',
+  rootFolder: 'Merit Lists',
+  github: {
+    user: 'muhammadrehan-dev',
+    repo: 'subjects',
+    branch: 'main',
+    token: import.meta.env.VITE_GITHUB_TOKEN,
+  },
+}
 

@@ -1,9 +1,10 @@
 import styles from './Nav.module.css'
 
 const LINKS = [
-  { id: 'home',  label: 'Home' },
-  { id: 'newbie', label: 'Newbie' },
-  { id: 'about', label: 'About' },
+  { id: 'home',       label: 'Home' },
+  { id: 'admissions', label: 'Admissions' },
+  { id: 'newbie',     label: 'Newbie' },
+  { id: 'about',      label: 'About' },
 ]
 
 export default function Nav({ page, setPage }) {
