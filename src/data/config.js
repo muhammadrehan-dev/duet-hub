@@ -39,7 +39,7 @@ export const SEMESTERS = [
       user: 'muhammadrehan-dev',
       repo: 'subjects',
       branch: 'main',
-     token: import.meta.env.VITE_GITHUB_TOKEN ,
+      token: import.meta.env.VITE_GITHUB_TOKEN ,
     },
   },
     {
@@ -81,3 +81,15 @@ export const MERIT_LISTS = {
   },
 }
 
+// ─── Sample Papers — same repo, different root folder ────────────────────────
+export const SAMPLE_PAPERS = {
+  id: 'Sample Papers',
+  label: 'Sample Papers',
+  rootFolder: 'Sample Papers',
+  github: {
+    user: 'muhammadrehan-dev',
+    repo: 'subjects',
+    branch: 'main',
+    token: import.meta.env.VITE_GITHUB_TOKEN,
+  },
+}
