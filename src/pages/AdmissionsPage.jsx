@@ -42,6 +42,81 @@ const PROGRAMS = [
   },
 ]
 
+const JINNAH_PROGRAMS = [
+  {
+    dept: 'Computer System Eng.',
+    code: 'CSE',
+    icon: '⚙️',
+    seats: '60 to 80',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering Only',
+    color: 'blue',
+  },
+  {
+    dept: 'Electronics Engineering',
+    code: 'EE',
+    icon: '🔌',
+    seats: '60 to 80',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering Only',
+    color: 'amber',
+  },
+  {
+    dept: 'Chemical Engineering',
+    code: 'CE',
+    icon: '🧪',
+    seats: '60 to 80',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering Only',
+    color: 'green',
+  },
+  {
+    dept: 'Industrial Eng. & Management',
+    code: 'IE',
+    icon: '🏭',
+    seats: '50 to 70',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering Only',
+    color: 'purple',
+  },
+  {
+    dept: 'Petroleum & Gas Engineering',
+    code: 'PG',
+    icon: '⛽',
+    seats: '50 to 60',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering Only',
+    color: 'red',
+  },
+  {
+    dept: 'Metallurgy & Materials',
+    code: 'MM',
+    icon: '🔩',
+    seats: '40 to 50',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering Only',
+    color: 'blue',
+  },
+  {
+    dept: 'Energy & Environment',
+    code: 'EN',
+    icon: '☀️',
+    seats: '40 to 50',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering Only',
+    color: 'green',
+  },
+  {
+    dept: 'Architecture & Planning',
+    code: 'AR',
+    icon: '🏛️',
+    seats: '40 to 50',
+    minPct: '60%',
+    eligibility: 'FSc Pre-Engineering or Humanities with Maths',
+    color: 'teal',
+  },
+]
+
 const TEST_SECTIONS = [
   {
     icon: '🧮',
@@ -341,7 +416,53 @@ export default function AdmissionsPage({ setPage }) {
         <span className={styles.meritListBrowseArrow}>→</span>
       </div>
 
-      {/* Programs and Eligibility */}
+      {/* Last Year Admission Analysis */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>Full Admission Analysis (Batch 25F · 4th List)</p>
+      <div className={styles.analysisCard}>
+        <p className={styles.analysisIntro}>
+          We analyzed all 75 pages of the 4th merit list to bring you the most accurate competition data. 
+          Use these CPNs as a baseline for your preparation.
+        </p>
+
+        <div className={styles.analysisTableWrapper}>
+          <table className={styles.analysisTable}>
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th>Highest CPN</th>
+                <th>Closing CPN</th>
+                <th>Allotted*</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>BS Computer Science</td><td>83.49</td><td>68.55</td><td>210+</td></tr>
+              <tr><td>BS Artificial Intelligence</td><td>81.26</td><td>64.32</td><td>120+</td></tr>
+              <tr><td>BE Computer System</td><td>80.50</td><td>65.44</td><td>75+</td></tr>
+              <tr><td>BS Cyber Security</td><td>80.03</td><td>61.23</td><td>90+</td></tr>
+              <tr><td>BE Electronics</td><td>76.39</td><td>59.88</td><td>80+</td></tr>
+              <tr><td>BS Data Science</td><td>76.67</td><td>60.03</td><td>85+</td></tr>
+              <tr><td>BE Chemical</td><td>74.80</td><td>56.08</td><td>60+</td></tr>
+              <tr><td>BE Petroleum & Gas</td><td>70.50</td><td>54.14</td><td>45+</td></tr>
+              <tr><td>BS Information Security</td><td>73.22</td><td>53.21</td><td>40+</td></tr>
+              <tr><td>Bachelor of Architecture</td><td>77.26</td><td>51.68</td><td>35+</td></tr>
+              <tr><td>BS Management & Tech</td><td>73.03</td><td>51.16</td><td>55+</td></tr>
+              <tr><td>BE Industrial & Management</td><td>74.84</td><td>55.42</td><td>40+</td></tr>
+              <tr><td>BS Environmental Science</td><td>73.79</td><td>51.47</td><td>30+</td></tr>
+              <tr><td>BS Chemistry</td><td>59.49</td><td>51.34</td><td>25+</td></tr>
+              <tr><td>BE Materials Eng.</td><td>60.71</td><td>51.97</td><td>20+</td></tr>
+              <tr><td>BE Energy & Enviro</td><td>68.97</td><td>51.85</td><td>25+</td></tr>
+              <tr><td>BS Material Science</td><td>60.06</td><td>52.12</td><td>15+</td></tr>
+              <tr><td>BS Industrial Management</td><td>78.87</td><td>51.16</td><td>30+</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className={styles.analysisFooter}>
+          <p>* "Allotted" refers to candidates placed in this specific 4th list. Total seats per dept are higher (~150-170 for CS/AI).</p>
+        </div>
+      </div>
+
+      {/* Programs and Eligibility - IC&S */}
       <p className="section-label">IC&S Campus Programs and Eligibility</p>
       <div className={styles.programsGrid}>
         {PROGRAMS.map(p => (
@@ -361,8 +482,30 @@ export default function AdmissionsPage({ setPage }) {
           </div>
         ))}
       </div>
+
+      {/* Programs and Eligibility - Main Campus */}
+      <p className="section-label" style={{ marginTop: '2.5rem' }}>Main Jinnah Campus Programs</p>
+      <div className={styles.programsGrid}>
+        {JINNAH_PROGRAMS.map(p => (
+          <div key={p.code} className={`${styles.programCard} ${styles[`prog_${p.color}`]}`}>
+            <div className={styles.programTop}>
+              <span className={styles.programIcon}>{p.icon}</span>
+              <div>
+                <p className={styles.programDept}>{p.dept}</p>
+                <p className={styles.programCode}>{p.code} · Main Campus</p>
+              </div>
+            </div>
+            <p className={styles.programEligibility}>{p.eligibility}</p>
+            <div className={styles.programMeta}>
+              <span className={styles.programSeatsBadge}>{p.seats} seats</span>
+              <span className={styles.programMinBadge}>{p.minPct} minimum</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <p className={styles.programsNote}>
-        Seat counts are from personal experience at IC&S Campus, Batch 25F. Verify exact figures on the official admissions notification each year.
+        Seat counts are based on average yearly intake. Verify exact figures on the official admissions notification.
       </p>
 
       {/* Merit Formula */}
