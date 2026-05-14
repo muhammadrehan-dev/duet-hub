@@ -17,13 +17,13 @@
 
 export const SITE = {
   university: 'Dawood University of Engineering & Technology',
-  batch: 'Batch 25F · Cybersecurity A2',
+  batch: 'Current & Upcoming Batches',
 }
 
 export const DEVELOPER = {
   name: 'Muhammad Rehan',
   alias: 'CH4_EZIO',
-  bio: 'Write whatever you want here about yourself...',
+  bio: 'Cybersecurity Student | Aspiring Security Researcher. Passionate about Capture The Flag competitions, reverse engineering, and building secure systems.',
   github: 'https://github.com/muhammadrehan-dev',
   // add more links if you want
 }
