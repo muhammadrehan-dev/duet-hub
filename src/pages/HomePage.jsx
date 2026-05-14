@@ -29,7 +29,7 @@ export default function HomePage({ setPage }) {
   return (
     <div className="page">
       <div className="hero">
-        <p className="hero-label">25F Cybersecurity & Artificial Intelligence. </p>
+        <p className="hero-label">25F Cybersecurity & 24F Artificial Intelligence. </p>
         <h1 className="hero-title">{SITE.university}</h1>
         <p className="hero-sub">Browse course materials.</p>
       </div>
