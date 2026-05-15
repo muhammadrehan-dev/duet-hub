@@ -50,22 +50,22 @@ export default function PWAInstallPrompt() {
       left: '50%',
       transform: 'translateX(-50%)',
       zIndex: 1000,
-      background: 'rgba(13, 17, 23, 0.95)',
-      border: '1px solid #7FC4A0',
-      borderRadius: '12px',
+      background: '#ffffff',
+      border: 'none',
+      borderRadius: '0',
       padding: '12px 20px',
       display: 'flex',
       alignItems: 'center',
       gap: '15px',
-      boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
       backdropFilter: 'blur(8px)',
       width: 'max-content',
       maxWidth: '90vw'
     }}>
       <div style={{ fontSize: '20px' }}>📱</div>
       <div style={{ flex: 1 }}>
-        <p style={{ margin: 0, fontSize: '13px', fontWeight: '700', color: '#fff' }}>Install DUET Hub</p>
-        <p style={{ margin: 0, fontSize: '11px', color: '#8b949e' }}>Access resources faster from your home screen</p>
+        <p style={{ margin: 0, fontSize: '13px', fontWeight: '700', color: '#0d1117' }}>Install DUET Hub</p>
+        <p style={{ margin: 0, fontSize: '11px', color: '#4b5563' }}>Access resources faster from your home screen</p>
       </div>
       <button 
         onClick={handleInstallClick}
@@ -87,7 +87,7 @@ export default function PWAInstallPrompt() {
         style={{
           background: 'none',
           border: 'none',
-          color: '#8b949e',
+          color: '#4b5563',
           fontSize: '16px',
           cursor: 'pointer',
           padding: '0 5px'
