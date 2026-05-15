@@ -9,6 +9,7 @@ import BrowserPage from '@/pages/BrowserPage'
 import SemesterPage from '@/pages/SemesterPage'
 import NewBiePage from '@/pages/NewBiePage'
 import AdmissionsPage from '@/pages/AdmissionsPage'
+import PWAInstallPrompt from '@/components/PWAInstallPrompt'
 
 export default function App() {
   const [page, setPage] = useState({ id: 'home' })
@@ -57,6 +58,7 @@ export default function App() {
       <Nav page={page} setPage={setPage} />
       <main>{renderPage()}</main>
       <Footer />
+      <PWAInstallPrompt />
       <Analytics />
       <SpeedInsights />
     </>
