@@ -3,172 +3,114 @@ import { MERIT_LISTS, SAMPLE_PAPERS } from '@/data/config'
 import styles from './AdmissionsPage.module.css'
 
 
-const PROGRAMS = [
-  {
-    dept: 'Computer Science',
-    code: 'CS',
-    icon: '💻',
-    seats: '150 to 170',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering or ICS with Physics and Mathematics',
-    color: 'blue',
-  },
-  {
-    dept: 'Artificial Intelligence',
-    code: 'AI',
-    icon: '🤖',
-    seats: '150 to 170',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering or ICS with Physics and Mathematics',
-    color: 'purple',
-  },
-  {
-    dept: 'Cybersecurity',
-    code: 'CY',
-    icon: '🔐',
-    seats: '150 to 170',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering or ICS with Physics and Mathematics',
-    color: 'red',
-  },
-  {
-    dept: 'Data Science',
-    code: 'DS',
-    icon: '📊',
-    seats: '150 to 170',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering or ICS with Physics and Mathematics',
-    color: 'green',
-  },
-]
 
-const JINNAH_PROGRAMS = [
-  {
-    dept: 'Computer System Eng.',
-    code: 'CSE',
-    icon: '⚙️',
-    seats: '60 to 80',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering Only',
-    color: 'blue',
-  },
-  {
-    dept: 'Electronics Engineering',
-    code: 'EE',
-    icon: '🔌',
-    seats: '60 to 80',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering Only',
-    color: 'amber',
-  },
-  {
-    dept: 'Chemical Engineering',
-    code: 'CE',
-    icon: '🧪',
-    seats: '60 to 80',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering Only',
-    color: 'green',
-  },
-  {
-    dept: 'Industrial Eng. & Management',
-    code: 'IE',
-    icon: '🏭',
-    seats: '50 to 70',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering Only',
-    color: 'purple',
-  },
-  {
-    dept: 'Petroleum & Gas Engineering',
-    code: 'PG',
-    icon: '⛽',
-    seats: '50 to 60',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering Only',
-    color: 'red',
-  },
-  {
-    dept: 'Metallurgy & Materials',
-    code: 'MM',
-    icon: '🔩',
-    seats: '40 to 50',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering Only',
-    color: 'blue',
-  },
-  {
-    dept: 'Energy & Environment',
-    code: 'EN',
-    icon: '☀️',
-    seats: '40 to 50',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering Only',
-    color: 'green',
-  },
-  {
-    dept: 'Architecture & Planning',
-    code: 'AR',
-    icon: '🏛️',
-    seats: '40 to 50',
-    minPct: '60%',
-    eligibility: 'FSc Pre-Engineering or Humanities with Maths',
-    color: 'teal',
-  },
-]
-
-const TEST_SECTIONS = [
-  {
-    icon: '🧮',
-    title: 'Mathematics',
-    questions: 40,
-    topics: [
-      'Algebra and Functions',
-      'Matrices and Determinants',
-      'Sequences and Series',
-      'Calculus (differentiation basics)',
-      'Trigonometry',
-      'Probability and Statistics',
-    ],
-    tip: 'Straight from FSc Part 1 and 2. Focus on speed — you will know the method but the clock is the real enemy.',
-    color: 'blue',
-  },
-  {
-    icon: '⚗️',
-    title: 'Physics',
-    questions: 30,
-    topics: [
-      'Mechanics and Motion',
-      'Electricity and Magnetism',
-      'Waves, Sound and Optics',
-      'Thermodynamics',
-      'Modern Physics',
-      'Measurements and Vectors',
-    ],
-    tip: 'Numerical questions dominate. Pick the right formula fast, plug in numbers, move on. No time to derive from scratch.',
-    color: 'purple',
-  },
-  {
-    icon: '🧠',
-    title: 'English and IQ',
-    questions: 30,
-    topics: [
-      'Vocabulary and synonyms',
-      'Antonyms',
-      'Sentence completion',
-      'Reading comprehension',
-      'Logical and verbal reasoning',
-      'Pattern recognition and analogies',
-    ],
-    tip: 'This section surprises most students. It is not FSc English — it is closer to an aptitude test. Practice NTS and GAT style questions specifically.',
-    color: 'green',
-  },
-]
+const TEST_PATTERN_2026 = {
+  compulsory: [
+    { label: 'English', questions: 25, icon: '📖' },
+    { label: 'Analytical Reasoning', questions: 10, icon: '🧠' },
+    { label: 'General Knowledge', questions: 15, icon: '🌍' },
+  ],
+  optional: [
+    {
+      group: 'Pre-Engineering / Pre-Medical (with Addl Maths)',
+      subjects: [
+        { label: 'Physics', q: 20 },
+        { label: 'Chemistry', q: 10 },
+        { label: 'Maths', q: 20 },
+      ]
+    },
+    {
+      group: 'Computer Science / General Science',
+      subjects: [
+        { label: 'Physics / Statistics', q: 20 },
+        { label: 'Math', q: 10 },
+        { label: 'Computer', q: 20 },
+      ]
+    },
+    {
+      group: 'Pre-Medical',
+      subjects: [
+        { label: 'Physics', q: 20 },
+        { label: 'Chemistry', q: 10 },
+        { label: 'Biology', q: 20 },
+      ]
+    },
+    {
+      group: 'Commerce',
+      subjects: [
+        { label: 'Business Math', q: 20 },
+        { label: 'Economics', q: 10 },
+        { label: 'Accounting', q: 20 },
+      ]
+    },
+    {
+      group: 'Arts',
+      subjects: [
+        { label: 'English Comprehension', q: 25 },
+        { label: 'General Math', q: 25 },
+      ]
+    },
+  ]
+}
 
 const MERIT_FORMULA = [
   { label: 'Entry Test Score', weight: 60, color: 'blue' },
   { label: 'Intermediate Marks', weight: 30, color: 'green' },
   { label: 'Matric Marks', weight: 10, color: 'amber' },
+]
+
+const MERIT_DEDUCTION = [
+  { year: '1 Year Gap', deduction: '10% deduction from Intermediate marks' },
+  { year: '2+ Year Gap', deduction: '20% deduction from Intermediate marks' },
+]
+
+const APPLICATION_STEPS = [
+  {
+    title: 'Account Registration',
+    detail: 'Register at admission.duet.edu.pk. Use exact name spellings as per your Matric certificate. Provide a valid email to receive your password.',
+    icon: '👤'
+  },
+  {
+    title: 'Photo Upload',
+    detail: 'Upload a recent (last 6 months) passport photo with a blue background. Testing agencies may disallow entry if the photo does not match.',
+    icon: '📸'
+  },
+  {
+    title: 'Fee Payment',
+    detail: 'Pay at any selected bank branch. Allied Bank users can pay via App (Educational Payments). 1Bill is also available via your banking app.',
+    icon: '💳'
+  },
+  {
+    title: 'Verification Check',
+    detail: 'Log in within 3 days of payment to confirm photo verification. If unverified, re-upload a compliant photo immediately.',
+    icon: '✅'
+  },
+  {
+    title: 'Admit Card',
+    detail: 'Download your admit card once the deadline passes. Print it and bring it to the campus. Venue and schedule will be printed on the card.',
+    icon: '🎟️'
+  }
+]
+
+const CAMPUSES = [
+  {
+    name: 'Jinnah Campus (Main)',
+    location: 'New M.A. Jinnah Road, Karachi',
+    focus: 'Engineering, Architecture & Applied Sciences',
+    icon: '🏛️'
+  },
+  {
+    name: 'Gulberg Town Campus',
+    location: 'Dastagir Block 9, Federal B Area, Karachi',
+    focus: 'Computing Sciences (CS, AI, Cyber, Data Science)',
+    icon: '💡'
+  },
+  {
+    name: 'Rohri-Sukkur Campus (CEMENT)',
+    location: 'NH 5, Rohri, Sukkur',
+    focus: 'Computing & Management Programs',
+    icon: '🌉'
+  }
 ]
 
 const TIMELINE = [
@@ -306,6 +248,73 @@ const FAQS = [
   },
 ]
 
+const ELIGIBILITY_GROUPS = [
+  {
+    title: 'Engineering Programs',
+    minMarks: '60%',
+    ageLimit: '22 Years',
+    groups: [
+      'Pre-Engineering (Physics, Chemistry, Maths)',
+      'Pre-Medical (with Additional Mathematics)',
+      'General Science (Physics, Maths, CS)'
+    ],
+    note: 'For General Science, Chemistry is required as a remedial subject (except for Computer/Electronic/Telecom Engg).',
+    color: 'blue'
+  },
+  {
+    title: 'Sciences & B.Arch',
+    minMarks: '50%',
+    ageLimit: '25 Years (BS) / 22 Years (B.Arch)',
+    groups: [
+      'Pre-Engineering',
+      'Pre-Medical with Additional Mathematics',
+      'Pre-Medical (BS only, zero-credit Addl. Maths required in 1st year)',
+      'Computer Science (Maths, Physics, CS/Stats)'
+    ],
+    color: 'purple'
+  },
+  {
+    title: 'Management & Technology',
+    minMarks: '50% (HSC) / 60% (DAE)',
+    ageLimit: '25 Years',
+    groups: [
+      'Pre-Engineering / Pre-Medical',
+      'Computer Science / General Science',
+      'Arts / Commerce',
+      'DAE (Relevant technologies)',
+      'Added: BS Business Information System'
+    ],
+    color: 'green'
+  },
+  {
+    title: 'Material Science',
+    minMarks: '50% (HSC) / 60% (DAE)',
+    ageLimit: '25 Years',
+    groups: [
+      'Pre-Engineering / Pre-Medical (with Addl. Maths)',
+      'Computer Science',
+      'DAE (Relevant technologies)'
+    ],
+    color: 'amber'
+  }
+]
+
+const DAE_MAPPING = [
+  { tech: 'Electronics Engineering', fields: 'Automation, Avionics, Bio-Medical, Electrical, Electronics, Instrumentation, Mechatronics, Radar, Radio, Telecommunication' },
+  { tech: 'Chemical / Petroleum & Gas', fields: 'Chemical, Chemical Processing, Footwear, Glass, Ceramics, Leather, Petro Chemical, Petroleum' },
+  { tech: 'Industrial & Manufacturing', fields: 'Auto & Diesel, Automation, Cast Metal & Foundry, Mechanical, Production, Mechatronics, Vacuum' },
+  { tech: 'Computer / Software / System', fields: 'Automation, Computer, IT, Electrical, Electronics, Instrumentation, Radar, Radio, Software, Telecommunication' },
+  { tech: 'Architecture', fields: 'Architecture, Civil' },
+]
+
+const INELIGIBILITY = [
+  'Conviction by a court of law for an offense involving moral turpitude.',
+  'Failure to obtain IBCC equivalence certificate before the interview.',
+  'Applying for DAE reserved seats in a non-specified technology.',
+  'Found with tempered certificates (legal action will be taken).',
+  'Already holding admission elsewhere without a cancellation certificate.'
+]
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function FaqItem({ q, a }) {
@@ -339,6 +348,30 @@ function TimelineItem({ item, index }) {
   )
 }
 
+function ProgramEligibilityCard({ group }) {
+  return (
+    <div className={`${styles.programCard} ${styles[`prog_${group.color}`]}`}>
+      <div className={styles.programTop}>
+        <span className={styles.programIcon}>🎓</span>
+        <div>
+          <p className={styles.programDept}>{group.title}</p>
+          <div className={styles.programMeta}>
+            <span className={styles.programMinBadge}>Min {group.minMarks}</span>
+            <span className={styles.programSeatsBadge}>Age: {group.ageLimit}</span>
+          </div>
+        </div>
+      </div>
+      <div className={styles.programEligibility}>
+        <strong>Eligible Groups:</strong>
+        <ul style={{ paddingLeft: '1.2rem', marginTop: '0.4rem', marginBottom: '0.4rem' }}>
+          {group.groups.map(g => <li key={g}>{g}</li>)}
+        </ul>
+        {group.note && <p style={{ fontSize: '11px', fontStyle: 'italic', color: 'var(--text-muted)' }}>{group.note}</p>}
+      </div>
+    </div>
+  )
+}
+
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -348,16 +381,225 @@ export default function AdmissionsPage({ setPage }) {
 
       {/* Hero */}
       <div className="hero">
-        <p className="hero-label">Before the admission letter arrives, read this.</p>
-        <h1 className="hero-title">Getting Into DUET.<br />Here is Everything You Need to Know.</h1>
+        <p className="hero-label">Admission 2026 Guide • Updated Merit Policies</p>
+        <h1 className="hero-title">Getting Into DUET.<br />The Official 2026 Roadmap.</h1>
         <p className="hero-sub">
-          Eligibility, entry test breakdown, merit formula, past merit lists, sample papers, 
-          documents, timeline and tips that actually help. Written by a student who went through it.
+          Eligibility, revised entry test breakdown, merit formula, campus locations, 
+          step-by-step application guide and results-awaiting policy. Everything updated for Batch 26F.
         </p>
       </div>
 
+      {/* Application Guide */}
+      <p className="section-label" style={{ marginTop: '2rem' }}>Step-by-Step Application Guide</p>
+      <div className={styles.tipsGrid}>
+        {APPLICATION_STEPS.map((s, i) => (
+          <div key={i} className={styles.tipCard}>
+            <span className={styles.tipIcon}>{s.icon}</span>
+            <p className={styles.tipTitle}>Step {i + 1}: {s.title}</p>
+            <p className={styles.tipBody}>{s.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Campus Locations */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>DUET Campuses & Locations</p>
+      <div className={styles.docsGrid}>
+        {CAMPUSES.map(c => (
+          <div key={c.name} className={styles.docCard}>
+            <span className={styles.docIcon}>{c.icon}</span>
+            <div>
+              <p className={styles.docName}>{c.name}</p>
+              <p className={styles.docNote}>{c.location}</p>
+              <p style={{ fontSize: '11px', marginTop: '4px', color: 'var(--accent)' }}>{c.focus}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Last Year Admission Analysis */}
+      <p className="section-label" style={{ marginTop: '2rem' }}>Full Admission Analysis (Batch 25F · 4th List)</p>
+      <div className={styles.analysisCard}>
+        <p className={styles.analysisIntro}>
+          We analyzed all 75 pages of the 4th merit list to bring you the most accurate competition data. 
+          Use these CPNs as a baseline for your preparation.
+        </p>
+
+        <div className={styles.analysisTableWrapper}>
+          <table className={styles.analysisTable}>
+            <thead>
+              <tr>
+                <th>Department</th>
+                <th>Highest CPN</th>
+                <th>Closing CPN</th>
+                <th>Allotted*</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>BS Computer Science</td><td>83.49</td><td>68.55</td><td>210+</td></tr>
+              <tr><td>BS Artificial Intelligence</td><td>81.26</td><td>64.32</td><td>120+</td></tr>
+              <tr><td>BE Computer System</td><td>80.50</td><td>65.44</td><td>75+</td></tr>
+              <tr><td>BS Cyber Security</td><td>80.03</td><td>61.23</td><td>90+</td></tr>
+              <tr><td>BE Electronics</td><td>76.39</td><td>59.88</td><td>80+</td></tr>
+              <tr><td>BS Data Science</td><td>76.67</td><td>60.03</td><td>85+</td></tr>
+              <tr><td>BE Chemical</td><td>74.80</td><td>56.08</td><td>60+</td></tr>
+              <tr><td>BE Petroleum & Gas</td><td>70.50</td><td>54.14</td><td>45+</td></tr>
+              <tr><td>BS Information Security</td><td>73.22</td><td>53.21</td><td>40+</td></tr>
+              <tr><td>Bachelor of Architecture</td><td>77.26</td><td>51.68</td><td>35+</td></tr>
+              <tr><td>BS Management & Tech</td><td>73.03</td><td>51.16</td><td>55+</td></tr>
+              <tr><td>BE Industrial & Management</td><td>74.84</td><td>55.42</td><td>40+</td></tr>
+              <tr><td>BS Environmental Science</td><td>73.79</td><td>51.47</td><td>30+</td></tr>
+              <tr><td>BS Chemistry</td><td>59.49</td><td>51.34</td><td>25+</td></tr>
+              <tr><td>BE Materials Eng.</td><td>60.71</td><td>51.97</td><td>20+</td></tr>
+              <tr><td>BE Energy & Enviro</td><td>68.97</td><td>51.85</td><td>25+</td></tr>
+              <tr><td>BS Material Science</td><td>60.06</td><td>52.12</td><td>15+</td></tr>
+              <tr><td>BS Industrial Management</td><td>78.87</td><td>51.16</td><td>30+</td></tr>
+              <tr><td style={{ color: 'var(--text-muted)' }}>BE Telecommunication</td><td colSpan="3" style={{ fontSize: '11px', textAlign: 'center' }}>Discontinued from Fall-2025 onwards</td></tr>
+              <tr><td style={{ color: 'var(--accent)' }}>BS Business Information System</td><td colSpan="3" style={{ fontSize: '11px', textAlign: 'center' }}>New Program for 2026 Intake</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div className={styles.analysisFooter}>
+          <p>* "Allotted" refers to candidates placed in this specific 4th list. Total seats per dept are higher (~150-170 for CS/AI).</p>
+        </div>
+      </div>
+
+      {/* Program Eligibility */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>Program-specific Eligibility</p>
+      <div className={styles.programsGrid}>
+        {ELIGIBILITY_GROUPS.map(group => (
+          <ProgramEligibilityCard key={group.title} group={group} />
+        ))}
+      </div>
+
+      {/* DAE Mapping */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>DAE Accepted Technologies</p>
+      <div className={styles.analysisCard} style={{ padding: '0' }}>
+        <div className={styles.analysisTableWrapper}>
+          <table className={styles.analysisTable}>
+            <thead>
+              <tr>
+                <th>Target Engineering Program</th>
+                <th>Relevant DAE Fields</th>
+              </tr>
+            </thead>
+            <tbody>
+              {DAE_MAPPING.map(m => (
+                <tr key={m.tech}>
+                  <td style={{ fontWeight: '600' }}>{m.tech}</td>
+                  <td style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{m.fields}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Ineligibility */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>General Ineligibility Rules</p>
+      <div className={styles.docsWarning} style={{ display: 'block' }}>
+        <ul style={{ paddingLeft: '1.2rem' }}>
+          {INELIGIBILITY.map((text, i) => (
+            <li key={i} style={{ marginBottom: '0.5rem' }}>{text}</li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Merit Formula */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>How Merit Is Calculated</p>
+      <div className={styles.meritCard}>
+        <p className={styles.meritIntro}>
+          Your admission merit is a weighted score combining three factors. The entry test carries the most weight by far.
+        </p>
+        <div className={styles.meritBars}>
+          {MERIT_FORMULA.map(m => (
+            <div key={m.label} className={styles.meritRow}>
+              <div className={styles.meritRowLabel}>
+                <span className={styles.meritLabel}>{m.label}</span>
+                <span className={styles.meritWeight}>{m.weight}%</span>
+              </div>
+              <div className={styles.meritBarTrack}>
+                <div
+                  className={`${styles.meritBarFill} ${styles[`merit_${m.color}`]}`}
+                  style={{ width: `${m.weight}%` }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.meritNote}>
+          <span>💡</span>
+          <p>
+            <strong>Awaiting Results?</strong> You can apply! Enter 1st Year (Part-I) marks if 2nd Year exams 
+            were recently given. DAE students can enter combined 1st + 2nd Year marks.
+          </p>
+        </div>
+        <div className={styles.docsWarning} style={{ display: 'block', marginTop: '1rem' }}>
+          <p style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Gap Year Deduction Policy:</p>
+          <ul style={{ paddingLeft: '1.2rem', fontSize: '12px' }}>
+            {MERIT_DEDUCTION.map((d, i) => (
+              <li key={i} style={{ marginBottom: '4px' }}><strong>{d.year}:</strong> {d.deduction}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Entry Test Breakdown */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>2026 Entry Test Pattern</p>
+      <div className={styles.testMeta}>
+        <div className={styles.testMetaPill}>✏️ 100 MCQs</div>
+        <div className={styles.testMetaPill}>⏱️ 90 Minutes</div>
+        <div className={styles.testMetaPill}>✅ No Negative Marking</div>
+      </div>
+
+      <div className={styles.meritCard} style={{ gap: '2rem' }}>
+        <div>
+          <p style={{ fontWeight: '700', marginBottom: '1rem', fontSize: '14px' }}>Part 1: Compulsory Section (50 Marks)</p>
+          <div className={styles.testMeta} style={{ marginBottom: '0' }}>
+            {TEST_PATTERN_2026.compulsory.map(c => (
+              <div key={c.label} className={styles.testMetaPill} style={{ background: 'var(--accent-light)' }}>
+                {c.icon} {c.label}: {c.questions}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p style={{ fontWeight: '700', marginBottom: '1rem', fontSize: '14px' }}>Part 2: Optional Section (50 Marks)</p>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+            Questions are based on your academic background. Choose the correct group:
+          </p>
+          <div className={styles.analysisTableWrapper} style={{ border: 'none' }}>
+            <table className={styles.analysisTable}>
+              <thead>
+                <tr>
+                  <th>Academic Group</th>
+                  <th>Subject Breakdown</th>
+                </tr>
+              </thead>
+              <tbody>
+                {TEST_PATTERN_2026.optional.map(opt => (
+                  <tr key={opt.group}>
+                    <td style={{ fontSize: '12px', fontWeight: '600' }}>{opt.group}</td>
+                    <td>
+                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                        {opt.subjects.map(s => (
+                          <span key={s.label} style={{ fontSize: '11px', background: 'var(--surface-hover)', padding: '2px 8px', borderRadius: '4px' }}>
+                            {s.label}: {s.q}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       {/* Past Merit Lists */}
-      <p className="section-label" style={{ marginTop: '2rem' }}>Past Merit Lists</p>
+      <p className="section-label" style={{ marginTop: '3rem' }}>Past Merit Lists</p>
       <div className={styles.meritListsIntroBox}>
         <span>📊</span>
         <p>
@@ -414,159 +656,6 @@ export default function AdmissionsPage({ setPage }) {
           <p className={styles.meritListBrowseNote}>Official sample papers and community-sourced past questions</p>
         </div>
         <span className={styles.meritListBrowseArrow}>→</span>
-      </div>
-
-      {/* Last Year Admission Analysis */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Full Admission Analysis (Batch 25F · 4th List)</p>
-      <div className={styles.analysisCard}>
-        <p className={styles.analysisIntro}>
-          We analyzed all 75 pages of the 4th merit list to bring you the most accurate competition data. 
-          Use these CPNs as a baseline for your preparation.
-        </p>
-
-        <div className={styles.analysisTableWrapper}>
-          <table className={styles.analysisTable}>
-            <thead>
-              <tr>
-                <th>Department</th>
-                <th>Highest CPN</th>
-                <th>Closing CPN</th>
-                <th>Allotted*</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>BS Computer Science</td><td>83.49</td><td>68.55</td><td>210+</td></tr>
-              <tr><td>BS Artificial Intelligence</td><td>81.26</td><td>64.32</td><td>120+</td></tr>
-              <tr><td>BE Computer System</td><td>80.50</td><td>65.44</td><td>75+</td></tr>
-              <tr><td>BS Cyber Security</td><td>80.03</td><td>61.23</td><td>90+</td></tr>
-              <tr><td>BE Electronics</td><td>76.39</td><td>59.88</td><td>80+</td></tr>
-              <tr><td>BS Data Science</td><td>76.67</td><td>60.03</td><td>85+</td></tr>
-              <tr><td>BE Chemical</td><td>74.80</td><td>56.08</td><td>60+</td></tr>
-              <tr><td>BE Petroleum & Gas</td><td>70.50</td><td>54.14</td><td>45+</td></tr>
-              <tr><td>BS Information Security</td><td>73.22</td><td>53.21</td><td>40+</td></tr>
-              <tr><td>Bachelor of Architecture</td><td>77.26</td><td>51.68</td><td>35+</td></tr>
-              <tr><td>BS Management & Tech</td><td>73.03</td><td>51.16</td><td>55+</td></tr>
-              <tr><td>BE Industrial & Management</td><td>74.84</td><td>55.42</td><td>40+</td></tr>
-              <tr><td>BS Environmental Science</td><td>73.79</td><td>51.47</td><td>30+</td></tr>
-              <tr><td>BS Chemistry</td><td>59.49</td><td>51.34</td><td>25+</td></tr>
-              <tr><td>BE Materials Eng.</td><td>60.71</td><td>51.97</td><td>20+</td></tr>
-              <tr><td>BE Energy & Enviro</td><td>68.97</td><td>51.85</td><td>25+</td></tr>
-              <tr><td>BS Material Science</td><td>60.06</td><td>52.12</td><td>15+</td></tr>
-              <tr><td>BS Industrial Management</td><td>78.87</td><td>51.16</td><td>30+</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className={styles.analysisFooter}>
-          <p>* "Allotted" refers to candidates placed in this specific 4th list. Total seats per dept are higher (~150-170 for CS/AI).</p>
-        </div>
-      </div>
-
-      {/* Programs and Eligibility - IC&S */}
-      <p className="section-label">IC&S Campus Programs and Eligibility</p>
-      <div className={styles.programsGrid}>
-        {PROGRAMS.map(p => (
-          <div key={p.code} className={`${styles.programCard} ${styles[`prog_${p.color}`]}`}>
-            <div className={styles.programTop}>
-              <span className={styles.programIcon}>{p.icon}</span>
-              <div>
-                <p className={styles.programDept}>{p.dept}</p>
-                <p className={styles.programCode}>{p.code} · IC&S Campus</p>
-              </div>
-            </div>
-            <p className={styles.programEligibility}>{p.eligibility}</p>
-            <div className={styles.programMeta}>
-              <span className={styles.programSeatsBadge}>{p.seats} seats</span>
-              <span className={styles.programMinBadge}>{p.minPct} minimum</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Programs and Eligibility - Main Campus */}
-      <p className="section-label" style={{ marginTop: '2.5rem' }}>Main Jinnah Campus Programs</p>
-      <div className={styles.programsGrid}>
-        {JINNAH_PROGRAMS.map(p => (
-          <div key={p.code} className={`${styles.programCard} ${styles[`prog_${p.color}`]}`}>
-            <div className={styles.programTop}>
-              <span className={styles.programIcon}>{p.icon}</span>
-              <div>
-                <p className={styles.programDept}>{p.dept}</p>
-                <p className={styles.programCode}>{p.code} · Main Campus</p>
-              </div>
-            </div>
-            <p className={styles.programEligibility}>{p.eligibility}</p>
-            <div className={styles.programMeta}>
-              <span className={styles.programSeatsBadge}>{p.seats} seats</span>
-              <span className={styles.programMinBadge}>{p.minPct} minimum</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <p className={styles.programsNote}>
-        Seat counts are based on average yearly intake. Verify exact figures on the official admissions notification.
-      </p>
-
-      {/* Merit Formula */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>How Merit Is Calculated</p>
-      <div className={styles.meritCard}>
-        <p className={styles.meritIntro}>
-          Your admission merit is a weighted score combining three factors. The entry test carries the most weight by far.
-        </p>
-        <div className={styles.meritBars}>
-          {MERIT_FORMULA.map(m => (
-            <div key={m.label} className={styles.meritRow}>
-              <div className={styles.meritRowLabel}>
-                <span className={styles.meritLabel}>{m.label}</span>
-                <span className={styles.meritWeight}>{m.weight}%</span>
-              </div>
-              <div className={styles.meritBarTrack}>
-                <div
-                  className={`${styles.meritBarFill} ${styles[`merit_${m.color}`]}`}
-                  style={{ width: `${m.weight}%` }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.meritNote}>
-          <span>💡</span>
-          <p>
-            A strong entry test can compensate for average academic marks. Neither alone guarantees admission.
-            If your FSc percentage is moderate, put serious effort into the test preparation. That 50% is where
-            most students either win or lose their seat.
-          </p>
-        </div>
-      </div>
-
-      {/* Entry Test Breakdown */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Entry Test Breakdown</p>
-      <div className={styles.testMeta}>
-        <div className={styles.testMetaPill}>✏️ 100 MCQs</div>
-        <div className={styles.testMetaPill}>⏱️ 90 Minutes</div>
-        <div className={styles.testMetaPill}>✅ No Negative Marking</div>
-        <div className={styles.testMetaPill}>📍 DUET Campus, Karachi</div>
-      </div>
-      <div className={styles.sectionsGrid}>
-        {TEST_SECTIONS.map(s => (
-          <div key={s.title} className={`${styles.sectionCard} ${styles[`sec_${s.color}`]}`}>
-            <div className={styles.sectionTop}>
-              <span className={styles.sectionIcon}>{s.icon}</span>
-              <div>
-                <p className={styles.sectionTitle}>{s.title}</p>
-                <p className={styles.sectionWeight}>~{s.questions} questions</p>
-              </div>
-            </div>
-            <ul className={styles.sectionTopics}>
-              {s.topics.map(t => <li key={t}>{t}</li>)}
-            </ul>
-            <div className={styles.sectionTip}>
-              <span>💡</span>
-              <p>{s.tip}</p>
-            </div>
-          </div>
-        ))}
       </div>
 
       {/* Admission Timeline */}
