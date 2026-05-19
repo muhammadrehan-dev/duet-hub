@@ -2,11 +2,30 @@ import { useState } from 'react'
 import { useSubjectFiles } from '@/hooks/useSubjectFiles'
 import { getFileExt, formatFileSize, formatCategory, EXT_ICON } from '@/lib/files'
 import Spinner from '@/components/Spinner'
+import FilePreviewModal from '@/components/FilePreviewModal'
 import styles from './SubjectPage.module.css'
 
-function FileRow({ file }) {
+// ─── Previewable extensions ───────────────────────────────────────────────────
+const PREVIEWABLE_EXTS = [
+  'jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp', 'ico',
+  'pdf',
+  'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx',
+  'md', 'markdown',
+  'txt', 'csv', 'log', 'ini', 'cfg', 'env',
+  'py', 'java', 'cpp', 'c', 'h', 'js', 'jsx', 'ts', 'tsx',
+  'html', 'css', 'scss', 'json', 'xml', 'yaml', 'yml',
+  'sql', 'sh', 'bat', 'rb', 'php', 'go', 'rs', 'swift', 'kt', 'dart'
+]
+
+function isPreviewable(filename) {
+  const ext = filename.split('.').pop().toLowerCase()
+  return PREVIEWABLE_EXTS.includes(ext)
+}
+
+function FileRow({ file, onPreview }) {
   const ext = getFileExt(file.name)
   const icon = EXT_ICON[ext] || '📁'
+  const canPreview = isPreviewable(file.name)
 
   return (
     <div className={styles.fileRow}>
@@ -14,14 +33,25 @@ function FileRow({ file }) {
       <span className={styles.fileIcon}>{icon}</span>
       <span className={styles.name}>{file.name}</span>
       <span className={styles.size}>{formatFileSize(file.size)}</span>
-      <a href={file.download_url} className={styles.dlBtn} download target="_blank" rel="noreferrer">
-        ↓ Download
-      </a>
+      <div className={styles.fileActions}>
+        {canPreview && (
+          <button
+            className={styles.previewBtn}
+            onClick={() => onPreview(file)}
+            title="Preview file"
+          >
+            👁 Preview
+          </button>
+        )}
+        <a href={file.download_url} className={styles.dlBtn} download target="_blank" rel="noreferrer">
+          ↓ Download
+        </a>
+      </div>
     </div>
   )
 }
 
-function CategorySection({ category, files }) {
+function CategorySection({ category, files, onPreview }) {
   const [open, setOpen] = useState(true)
   return (
     <div className={styles.category}>
@@ -34,7 +64,7 @@ function CategorySection({ category, files }) {
       </button>
       {open && (
         <div className={styles.fileList}>
-          {files.map((f, i) => <FileRow key={i} file={f} />)}
+          {files.map((f, i) => <FileRow key={i} file={f} onPreview={onPreview} />)}
         </div>
       )}
     </div>
@@ -44,6 +74,7 @@ function CategorySection({ category, files }) {
 export default function SubjectPage({ semester, subject, setPage }) {
   const { data, loading, error } = useSubjectFiles(semester.github, subject.id)
   const [search, setSearch] = useState('')
+  const [previewFile, setPreviewFile] = useState(null)
 
   const categories = data
     ? Object.entries(data)
@@ -102,10 +133,18 @@ export default function SubjectPage({ semester, subject, setPage }) {
               </div>
             : <div className={styles.categories}>
                 {categories.map(([cat, files]) => (
-                  <CategorySection key={cat} category={cat} files={files} />
+                  <CategorySection key={cat} category={cat} files={files} onPreview={setPreviewFile} />
                 ))}
               </div>
       }
+
+      {/* ── File Preview Modal ── */}
+      {previewFile && (
+        <FilePreviewModal
+          file={previewFile}
+          onClose={() => setPreviewFile(null)}
+        />
+      )}
     </div>
   )
 }

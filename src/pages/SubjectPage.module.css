@@ -182,6 +182,32 @@
   text-align: right;
 }
 
+.fileActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.previewBtn {
+  padding: 4px 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-family: var(--font-ui);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.previewBtn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--blue-light);
+}
+
 .dlBtn {
   padding: 4px 12px;
   border-radius: var(--radius);
@@ -205,4 +231,5 @@
   .size { display: none; }
   .fileIcon { display: none; }
   .fileRow { gap: 0.5rem; padding: 0.6rem 1rem; }
+  .previewBtn span { display: none; }
 }

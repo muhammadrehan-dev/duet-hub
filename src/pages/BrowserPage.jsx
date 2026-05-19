@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useFolderContents } from '@/hooks/useFolderContents'
 import { getFileInfo, formatFileSize } from '@/lib/files'
 import Spinner from '@/components/Spinner'
+import FilePreviewModal from '@/components/FilePreviewModal'
 import styles from './BrowserPage.module.css'
 
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
@@ -35,12 +36,27 @@ function FolderRow({ item, onClick }) {
   )
 }
 
+// ─── Previewable extensions ───────────────────────────────────────────────────
+const PREVIEWABLE_EXTS = [
+  'jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp', 'ico',
+  'pdf',
+  'doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx',
+  'md', 'markdown',
+  'txt', 'csv', 'log', 'ini', 'cfg', 'env',
+  'py', 'java', 'cpp', 'c', 'h', 'js', 'jsx', 'ts', 'tsx',
+  'html', 'css', 'scss', 'json', 'xml', 'yaml', 'yml',
+  'sql', 'sh', 'bat', 'rb', 'php', 'go', 'rs', 'swift', 'kt', 'dart'
+]
+
+function isPreviewable(filename) {
+  const ext = filename.split('.').pop().toLowerCase()
+  return PREVIEWABLE_EXTS.includes(ext)
+}
+
 // ─── File row ─────────────────────────────────────────────────────────────────
-function FileRow({ item }) {
+function FileRow({ item, onPreview }) {
   const info = getFileInfo(item.name)
-  const isImage = ['jpg','jpeg','png','gif','svg'].includes(
-    item.name.split('.').pop().toLowerCase()
-  )
+  const canPreview = isPreviewable(item.name)
 
   return (
     <div className={styles.fileRow}>
@@ -54,15 +70,14 @@ function FileRow({ item }) {
       <span className={styles.fileName}>{item.name}</span>
       <span className={styles.fileSize}>{formatFileSize(item.size)}</span>
       <div className={styles.fileActions}>
-        {isImage && (
-          <a
-            href={item.download_url}
-            className={styles.viewBtn}
-            target="_blank"
-            rel="noreferrer"
+        {canPreview && (
+          <button
+            className={styles.previewBtn}
+            onClick={() => onPreview(item)}
+            title="Preview file"
           >
-            View
-          </a>
+            👁 Preview
+          </button>
         )}
         <a
           href={item.download_url}
@@ -70,6 +85,7 @@ function FileRow({ item }) {
           download
           target="_blank"
           rel="noreferrer"
+          title="Download file"
         >
           ↓
         </a>
@@ -79,7 +95,7 @@ function FileRow({ item }) {
 }
 
 // ─── Folder contents view ─────────────────────────────────────────────────────
-function FolderView({ github, path, onEnterFolder }) {
+function FolderView({ github, path, onEnterFolder, onPreview }) {
   const { items, loading, error } = useFolderContents(github, path)
   const [search, setSearch] = useState('')
 
@@ -159,7 +175,7 @@ function FolderView({ github, path, onEnterFolder }) {
           )}
           <div className={styles.fileList}>
             {filteredFiles.map(f => (
-              <FileRow key={f.path} item={f} />
+              <FileRow key={f.path} item={f} onPreview={onPreview} />
             ))}
           </div>
         </div>
@@ -176,6 +192,9 @@ export default function BrowserPage({ semester, initialPath, initialCrumbs, setP
     { label: semester.label, path: null },
   ])
   const currentPath = crumbs[crumbs.length - 1].path
+
+  // ── Preview state ──
+  const [previewFile, setPreviewFile] = useState(null)
 
   function enterFolder(folderItem) {
     setCrumbs(prev => [...prev, { label: folderItem.name, path: folderItem.path }])
@@ -209,7 +228,16 @@ export default function BrowserPage({ semester, initialPath, initialCrumbs, setP
         github={semester.github}
         path={currentPath ?? (semester.rootFolder || '')}
         onEnterFolder={enterFolder}
+        onPreview={setPreviewFile}
       />
+
+      {/* ── File Preview Modal ── */}
+      {previewFile && (
+        <FilePreviewModal
+          file={previewFile}
+          onClose={() => setPreviewFile(null)}
+        />
+      )}
     </div>
   )
 }

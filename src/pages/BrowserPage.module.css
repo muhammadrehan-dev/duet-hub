@@ -275,18 +275,24 @@
   flex-shrink: 0;
 }
 
-.viewBtn {
-  padding: 3px 10px;
+.previewBtn {
+  padding: 4px 12px;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text-secondary);
   font-size: 11px;
-  text-decoration: none;
   font-family: var(--font-ui);
-  transition: border-color 0.12s, color 0.12s;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
 }
-.viewBtn:hover { border-color: var(--border-strong); color: var(--text-primary); }
+.previewBtn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--blue-light);
+}
 
 .dlBtn {
   padding: 4px 10px;
