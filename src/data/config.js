@@ -53,7 +53,7 @@ export const SEMESTERS = [
       branch: 'main',
       token: import.meta.env.VITE_GITHUB_TOKEN ,
     },
-
+},
 {
     id: '25F Artificial Intelligence',
     label: '25F Artificial Intelligence',
