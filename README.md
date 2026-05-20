@@ -60,6 +60,19 @@ Developed and maintained by **Muhammad Rehan (CH4_EZIO)**, a Cybersecurity stude
 - **GitHub**: [@muhammadrehan-dev](https://github.com/muhammadrehan-dev)
 - **Bio**: Cybersecurity Student | Aspiring Security Researcher. Passionate about CTFs and building secure, helpful systems.
 
+## 🤝 Contributors
+
+Special thanks to the dedicated students who shared their department course drives and academic resources to help grow this hub:
+
+* **Syed Sheharyar Tariq (25F-AI-077)**: Leads and manages all course content and resources for **25F Artificial Intelligence**.
+  * [Instagram](https://www.instagram.com/syedsheharyartariq/) | [LinkedIn](https://www.linkedin.com/in/syed-sheharyar-tariq/)
+* **Abdul Hayy Khan (24F-AI-051)**: Manages and compiles the centralized university course drive for **24F-AI**.
+  * **Core Helper Team:**
+    * Mafazia Saqib (24F-AI-003)
+    * Muhammad Nihal Sheikh (24F-AI-029)
+    * Muhammad Amaan (24F-AI-030)
+    * Muskan Zahid (24F-AI-052)
+
 ## 📄 License
 
 This project is open-source. Feel free to contribute or adapt it for your own community.
