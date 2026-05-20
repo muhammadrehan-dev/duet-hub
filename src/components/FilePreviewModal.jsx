@@ -413,7 +413,7 @@ export default function FilePreviewModal({ file, onClose }) {
               className={styles.downloadBtn}
             >
               <span className={styles.downloadIcon}>↓</span>
-              <span>Download</span>
+              <span className={styles.downloadText}>Download</span>
             </a>
             <button className={styles.closeBtn} onClick={onClose} title="Close preview">
               ✕

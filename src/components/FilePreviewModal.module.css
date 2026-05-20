@@ -517,25 +517,39 @@
     font-size: 13px;
   }
 
-  .downloadBtn span {
+  .downloadText {
     display: none;
   }
 
   .downloadBtn {
-    padding: 6px 10px;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .downloadIcon {
+    font-size: 15px;
+    line-height: 1;
   }
 
   .textViewer,
   .codeViewer {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   .markdownContent,
   .textContent {
     padding: 1rem;
+    border-radius: var(--radius);
   }
 
   .imageViewer {
     padding: 0.75rem;
+  }
+
+  .imageViewer img {
+    max-height: calc(100vh - 80px);
   }
 }
