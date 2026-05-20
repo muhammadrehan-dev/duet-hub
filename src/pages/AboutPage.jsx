@@ -67,6 +67,41 @@ const PROJECTS = [
   },
 ]
 
+const CONTRIBUTORS = [
+  {
+    name: 'Syed Sheharyar Tariq',
+    avatar: 'ST',
+    roll: '25F-AI-077',
+    dept: 'Artificial Intelligence',
+    role: '25F AI Resource Maintainer',
+    bio: 'All course content of 25F Artificial Intelligence is maintained and managed by Syed Sheharyar Tariq. Dedicated to open knowledge and study aids.',
+    contacts: [
+      { label: 'Instagram', url: 'https://www.instagram.com/syedsheharyartariq/', icon: '📸' },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/syed-sheharyar-tariq/', icon: 'in' },
+      { label: 'WhatsApp', url: 'https://wa.me/923319712139', icon: '💬' },
+      { label: 'Email', url: 'mailto:syedsheharyarprofessional@gmail.com', icon: '✉' }
+    ]
+  },
+  {
+    name: 'Abdul Hayy Khan',
+    avatar: 'AK',
+    roll: '24F-AI-051',
+    dept: 'Artificial Intelligence',
+    role: '24F AI Central Drive Lead',
+    bio: 'Privately maintains and manages the centralized university course materials drive, ensuring batch-wide access to lecture notes, past papers, and solutions.',
+    contacts: [
+      { label: 'WhatsApp', url: 'https://wa.me/923198971870', icon: '💬' },
+      { label: 'Email', url: 'mailto:abdulhayykhan.1@gmail.com', icon: '✉' }
+    ],
+    helpers: [
+      { name: 'Mafazia Saqib', roll: '24F-AI-003' },
+      { name: 'Muhammad Nihal Sheikh', roll: '24F-AI-029' },
+      { name: 'Muhammad Amaan', roll: '24F-AI-030' },
+      { name: 'Muskan Zahid', roll: '24F-AI-052' }
+    ]
+  }
+]
+
 export default function AboutPage() {
   return (
     <div className="page">
@@ -168,6 +203,57 @@ export default function AboutPage() {
           </div>
           <p className={styles.contactNote}>Don't hesitate to reach out — happy to chat.</p>
         </div>
+      </div>
+
+      {/* Resource Contributors */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>Resource Contributors</p>
+      <p className={styles.contributorsIntro}>
+        Special thanks to the amazing students who shared their departments' drives, materials, and resources to help expand the DUET Resource Hub.
+      </p>
+      <div className={styles.contributorsGrid}>
+        {CONTRIBUTORS.map((c, i) => (
+          <div key={i} className={styles.contributorCard}>
+            <div className={styles.contributorHeader}>
+              <div className={styles.contributorAvatar}>{c.avatar}</div>
+              <div>
+                <p className={styles.contributorName}>{c.name}</p>
+                <p className={styles.contributorMeta}>
+                  {c.roll} · {c.dept}
+                </p>
+              </div>
+            </div>
+            
+            <span className={styles.contributorRole}>{c.role}</span>
+            <p className={styles.contributorBio}>{c.bio}</p>
+            
+            {c.helpers && (
+              <div className={styles.helpersSection}>
+                <p className={styles.helpersTitle}>Core Contributors / Helpers</p>
+                <div className={styles.helpersGrid}>
+                  {c.helpers.map((h, j) => (
+                    <span key={j} className={styles.helperChip}>
+                      {h.name} <span className={styles.helperRoll}>({h.roll})</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className={styles.contributorContacts}>
+              {c.contacts.map((contact, idx) => (
+                <a
+                  key={idx}
+                  href={contact.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.contactBtn}
+                >
+                  {contact.icon} {contact.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Skills */}

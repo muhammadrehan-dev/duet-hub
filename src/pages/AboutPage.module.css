@@ -411,6 +411,144 @@
   background: var(--surface-hover);
 }
 
+/* ─── Contributors ───────────────────────────────────────────────────────── */
+.contributorsIntro {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  margin-bottom: 1.25rem;
+  line-height: 1.55;
+  max-width: 720px;
+}
+
+.contributorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.contributorCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.contributorCard:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.contributorHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contributorAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.contributorName {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  line-height: 1.3;
+}
+
+.contributorMeta {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-top: 2px;
+}
+
+.contributorRole {
+  display: inline-block;
+  font-size: 11px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  color: var(--green);
+  background: var(--green-light);
+  border: 1px solid #B8D8C8;
+  padding: 3px 10px;
+  border-radius: 99px;
+  align-self: flex-start;
+  letter-spacing: 0.04em;
+}
+
+.contributorBio {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-family: var(--font-ui);
+}
+
+.helpersSection {
+  margin-top: 0.25rem;
+  border-top: 1px dashed var(--border);
+  padding-top: 0.85rem;
+}
+
+.helpersTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-family: var(--font-ui);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.helpersGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.helperChip {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  padding: 4px 10px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+}
+
+.helperRoll {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  font-size: 9px;
+  margin-left: 4px;
+}
+
+.contributorContacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
 /* ─── Responsive ──────────────────────────────────────────────────────────── */
 @media (max-width: 600px) {
   .devCard { flex-direction: column; }
@@ -420,4 +558,5 @@
   .hobbyGroup { flex-direction: column; gap: 0.5rem; }
   .hobbyGroupLabel { min-width: unset; }
   .projectsGrid { grid-template-columns: 1fr; }
+  .contributorsGrid { grid-template-columns: 1fr; }
 }
