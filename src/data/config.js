@@ -53,6 +53,19 @@ export const SEMESTERS = [
       branch: 'main',
       token: import.meta.env.VITE_GITHUB_TOKEN ,
     },
+
+{
+    id: '25F Artificial Intelligence',
+    label: '25F Artificial Intelligence',
+    // The root folder name inside the repo that holds all subjects
+    rootFolder: '25F Artificial Intelligence',
+   github: {
+      user: 'muhammadrehan-dev',
+     repo: 'subjects',
+      branch: 'main',
+      token: import.meta.env.VITE_GITHUB_TOKEN ,
+    },
+
   },
   // ── Add more semesters below ─────────────────────────────────────────────
   // {
