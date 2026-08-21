@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Smartphone } from 'lucide-react'
 
 export default function PWAInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState(null)
@@ -62,7 +63,7 @@ export default function PWAInstallPrompt() {
       width: 'max-content',
       maxWidth: '90vw'
     }}>
-      <div style={{ fontSize: '20px' }}>📱</div>
+      <Smartphone size={22} color="#0d1117" />
       <div style={{ flex: 1 }}>
         <p style={{ margin: 0, fontSize: '13px', fontWeight: '700', color: '#0d1117' }}>Install DUET Hub</p>
         <p style={{ margin: 0, fontSize: '11px', color: '#4b5563' }}>Access resources faster from your home screen</p>

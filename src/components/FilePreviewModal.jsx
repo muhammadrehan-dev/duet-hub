@@ -1,5 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
 import { getFileInfo, formatFileSize } from '@/lib/files'
+import { 
+  Image as ImageIcon, FileText, FileEdit, FileCode, Code2, 
+  Download, X, File, ExternalLink 
+} from 'lucide-react'
 import styles from './FilePreviewModal.module.css'
 
 // ─── File type classification ──────────────────────────────────────────────────
@@ -109,10 +113,10 @@ function ImageViewer({ url }) {
       )}
       {error ? (
         <div className={styles.error}>
-          <span className={styles.errorIcon}>🖼</span>
+          <span className={styles.errorIcon}><ImageIcon size={32} /></span>
           <p className={styles.errorText}>Failed to load image</p>
           <a href={url} target="_blank" rel="noreferrer" className={styles.errorFallback}>
-            Open in new tab ↗
+            Open in new tab <ExternalLink size={14} style={{ display: 'inline', verticalAlign: 'middle', marginLeft: '4px' }} />
           </a>
         </div>
       ) : (
@@ -150,10 +154,10 @@ function PDFViewer({ url }) {
       />
       {error && (
         <div className={styles.error}>
-          <span className={styles.errorIcon}>📄</span>
+          <span className={styles.errorIcon}><FileText size={32} /></span>
           <p className={styles.errorText}>PDF preview unavailable</p>
           <a href={url} target="_blank" rel="noreferrer" className={styles.errorFallback}>
-            Download PDF instead ↓
+            <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Download PDF instead
           </a>
         </div>
       )}
@@ -183,10 +187,10 @@ function OfficeViewer({ url }) {
       />
       {error && (
         <div className={styles.error}>
-          <span className={styles.errorIcon}>📝</span>
+          <span className={styles.errorIcon}><FileEdit size={32} /></span>
           <p className={styles.errorText}>Document preview unavailable</p>
           <a href={url} target="_blank" rel="noreferrer" className={styles.errorFallback}>
-            Download file instead ↓
+            <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Download file instead
           </a>
         </div>
       )}
@@ -217,10 +221,10 @@ function TextViewer({ url }) {
   )
   if (error) return (
     <div className={styles.error}>
-      <span className={styles.errorIcon}>📃</span>
+      <span className={styles.errorIcon}><FileText size={32} /></span>
       <p className={styles.errorText}>Could not load file content</p>
       <a href={url} target="_blank" rel="noreferrer" className={styles.errorFallback}>
-        Download file instead ↓
+        <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Download file instead
       </a>
     </div>
   )
@@ -255,10 +259,10 @@ function MarkdownViewer({ url }) {
   )
   if (error) return (
     <div className={styles.error}>
-      <span className={styles.errorIcon}>📓</span>
+      <span className={styles.errorIcon}><FileCode size={32} /></span>
       <p className={styles.errorText}>Could not load markdown</p>
       <a href={url} target="_blank" rel="noreferrer" className={styles.errorFallback}>
-        Download file instead ↓
+        <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Download file instead
       </a>
     </div>
   )
@@ -302,10 +306,10 @@ function CodeViewer({ url, filename }) {
   )
   if (error) return (
     <div className={styles.error}>
-      <span className={styles.errorIcon}>⚙</span>
+      <span className={styles.errorIcon}><Code2 size={32} /></span>
       <p className={styles.errorText}>Could not load source code</p>
       <a href={url} target="_blank" rel="noreferrer" className={styles.errorFallback}>
-        Download file instead ↓
+        <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Download file instead
       </a>
     </div>
   )
@@ -332,15 +336,16 @@ function CodeViewer({ url, filename }) {
 
 function UnsupportedViewer({ url, filename }) {
   const info = getFileInfo(filename)
+  const IconComp = info.icon || File
   return (
     <div className={styles.unsupported}>
-      <span className={styles.unsupportedIcon}>{info.icon}</span>
+      <span className={styles.unsupportedIcon}><IconComp size={32} /></span>
       <p className={styles.unsupportedText}>
         Preview is not available for <strong>.{getExt(filename)}</strong> files
       </p>
       <p className={styles.unsupportedHint}>You can download the file to view it locally</p>
       <a href={url} target="_blank" rel="noreferrer" className={styles.errorFallback} download>
-        ↓ Download file
+        <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Download file
       </a>
     </div>
   )
@@ -350,6 +355,7 @@ function UnsupportedViewer({ url, filename }) {
 
 export default function FilePreviewModal({ file, onClose }) {
   const info = getFileInfo(file.name)
+  const IconComp = info.icon || File
   const previewType = getPreviewType(file.name)
   const url = file.download_url
 
@@ -389,7 +395,7 @@ export default function FilePreviewModal({ file, onClose }) {
       <div className={styles.modal}>
         {/* ── Header ── */}
         <div className={styles.header}>
-          <span className={styles.headerIcon}>{info.icon}</span>
+          <span className={styles.headerIcon}><IconComp size={20} /></span>
           <div className={styles.headerInfo}>
             <div className={styles.headerName}>{file.name}</div>
             <div className={styles.headerMeta}>
@@ -412,11 +418,11 @@ export default function FilePreviewModal({ file, onClose }) {
               rel="noreferrer"
               className={styles.downloadBtn}
             >
-              <span className={styles.downloadIcon}>↓</span>
+              <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} />
               <span className={styles.downloadText}>Download</span>
             </a>
             <button className={styles.closeBtn} onClick={onClose} title="Close preview">
-              ✕
+              <X size={16} />
             </button>
           </div>
         </div>

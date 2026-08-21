@@ -1,3 +1,135 @@
+/* ─── Hero Banner for Admissions Page (Full 100vh Main Page Style) ────────── */
+.heroBanner {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 100vh;
+  min-height: 580px;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: -66px;
+  margin-bottom: 3.5rem;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.heroOverlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(9, 9, 11, 0.88) 0%,
+    rgba(9, 9, 11, 0.6) 40%,
+    rgba(9, 9, 11, 0.1) 75%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 850px;
+  margin: 0;
+  padding: 5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  color: #ffffff;
+}
+
+.heroTagline {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.heroTitle {
+  font-family: var(--font-sans);
+  font-size: 78px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.0;
+  margin: 0;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.9);
+}
+
+.heroDescription {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-ui);
+  line-height: 1.65;
+  max-width: 660px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.heroCreditBadge {
+  position: absolute;
+  bottom: 24px;
+  right: 2rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 768px) {
+  .heroBanner {
+    height: 100vh;
+    min-height: 540px;
+    margin-top: -60px;
+    margin-bottom: 2.5rem;
+  }
+  .heroContent {
+    padding: 5rem 1.25rem 3.5rem 1.25rem;
+    gap: 1rem;
+  }
+  .heroTitle {
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .heroTagline {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .heroDescription {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .heroCreditBadge {
+    bottom: 16px;
+    right: 1.25rem;
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+}
+
 /* ─── Programs Grid ───────────────────────────────────────────────────────── */
 .programsGrid {
   display: grid;
@@ -89,12 +221,313 @@
 .prog_brown  { border-top: 3px solid #A08060; }
 .prog_teal   { border-top: 3px solid #6DB8B0; }
 
-.programsNote {
+/* ─── Visual Roadmap Timeline ──────────────────────────────────────────────── */
+.roadmapContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  padding: 1rem 0;
+  margin-bottom: 3.5rem;
+}
+
+.roadmapLine {
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 34px;
+  width: 4px;
+  background: repeating-linear-gradient(
+    180deg,
+    #1A98D5 0px,
+    #1A98D5 12px,
+    transparent 12px,
+    transparent 20px
+  );
+  z-index: 1;
+}
+
+.roadmapStep {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.roadmapBadge {
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1A98D5 0%, #0F6B99 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26, 152, 213, 0.35);
+  border: 3px solid var(--bg);
+}
+
+.roadmapStepNum {
+  font-size: 16px;
+  font-weight: 900;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.roadmapCard {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.roadmapCard:hover {
+  transform: translateX(6px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.roadmapCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.roadmapTitle {
+  font-size: 17px;
+  font-weight: 800;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.roadmapDetail {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .roadmapLine { left: 24px; }
+  .roadmapBadge { width: 50px; height: 50px; border-radius: 14px; }
+  .roadmapStepNum { font-size: 13px; }
+  .roadmapStep { gap: 1rem; }
+  .roadmapCard { padding: 1.25rem; }
+}
+
+/* ─── Interactive Merit Calculator Card ─────────────────────────────────────── */
+.calculatorCard {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg-alt) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(26, 152, 213, 0.08);
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.calcHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.calcTitle {
+  font-size: 22px;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calcTag {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid rgba(26, 152, 213, 0.3);
+  padding: 4px 12px;
+  border-radius: 99px;
   font-size: 11px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.calcGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.calcInputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calcLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  display: flex;
+  justify-content: space-between;
+}
+
+.calcInput {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.calcInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.calcResultBox {
+  background: linear-gradient(135deg, #1A98D5 0%, #0F6B99 100%);
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  box-shadow: 0 8px 24px rgba(26, 152, 213, 0.3);
+}
+
+.calcScoreText {
+  font-size: 42px;
+  font-weight: 900;
+  font-family: var(--font-sans);
+  line-height: 1;
+  margin: 0;
+}
+
+.calcFeedback {
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 500px;
+  margin: 0;
+}
+
+/* ─── Campus Showcase Grid ─────────────────────────────────────────────────── */
+.campusGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.campusCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.campusCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.campusImgWrap {
+  position: relative;
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.campusImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.campusCard:hover .campusImg {
+  transform: scale(1.06);
+}
+
+.campusCreditBadge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.campusBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.campusName {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.campusLocation {
+  font-size: 12px;
   color: var(--text-muted);
   font-family: var(--font-ui);
-  margin-top: 0.75rem;
-  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.campusFocus {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* ─── Merit Card ──────────────────────────────────────────────────────────── */
@@ -441,6 +874,61 @@
   font-size: 11px;
   color: var(--text-muted);
   font-family: var(--font-ui);
+}
+
+/* ─── Campus Photo Cards ─────────────────────────────────────────────────── */
+.campusCardWithImage {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.campusCardWithImage:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.campusImageWrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--bg-alt);
+}
+
+.campusImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoCreditBadge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.campusContent {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .docsWarning {

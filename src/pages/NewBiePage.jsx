@@ -1,468 +1,265 @@
 import { useState } from 'react'
+import { 
+  Globe, ClipboardList, GraduationCap, Cloud, Phone, Laptop, 
+  Package, GitBranch, Bot, Gem, ShieldCheck, Zap, 
+  Brain, Printer, Key, Lightbulb, CheckCircle2, 
+  Building2, Camera, ChevronUp, ChevronDown, ArrowRight, BookOpen, Coffee, Clock, ShieldAlert, Award
+} from 'lucide-react'
 import styles from './Newbiepage.module.css'
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-
-const QUICK_LINKS = [
-  { label: 'DUET Website',       url: 'https://duet.edu.pk',                         icon: '🌐', note: 'Official site (when it\'s up)' },
-  { label: 'Admissions Portal',  url: 'https://admissions.duet.edu.pk',              icon: '📋', note: 'Apply & track admission' },
-  { label: 'QOBE Portal',        url: 'https://student.qualityobe.com/site/login',   icon: '🎓', note: 'Attendance, marks, courses — the one that matters' },
-  { label: 'Azure Proxy',        url: 'https://portal-duet.msappproxy.net/',         icon: '☁️', note: 'Challan download. That\'s literally it.' },
-]
-
-const CONTACTS = [
+const COMMANDMENTS = [
   {
-    name: 'M. Tameel Bhatti',
-    role: 'Admission Helpline',
-    contact: '0345 3656773',
-    via: 'Call or WhatsApp',
-    icon: '📞',
+    step: '01',
+    title: 'The 75% Attendance Rule is Sacred',
+    detail: '74.9% means an automatic exam ban on the QOBE portal. The portal algorithm has no heart and accepts zero excuses. Check your attendance weekly!',
+    icon: <ShieldAlert size={22} />
   },
   {
-    name: 'IT Support',
-    role: 'IT Department',
-    contact: 'itsupport@duet.edu.pk',
-    via: 'Email (and prayer)',
-    icon: '💻',
-  },
-]
-
-const FAQS = [
-  {
-    q: 'What email format will I get?',
-    a: 'Batch-Dept-Roll@students.duet.edu.pk — e.g. 25F-CY-102@students.duet.edu.pk. It\'s a Microsoft Azure account. Guard it with your life. It unlocks a shocking amount of free stuff that you\'ll probably never fully use.',
+    step: '02',
+    title: 'Setup Your University Email Day 1',
+    detail: 'Your @students.duet.edu.pk email unlocks free Microsoft Office 365, 1TB OneDrive storage, GitHub Student Developer Pack, and Azure credits. Claim them immediately!',
+    icon: <Cloud size={22} />
   },
   {
-    q: 'What is the minimum attendance to appear in exams?',
-    a: 'Exactly 75%. And yes, 74.9% means you are OUT. No mercy, no negotiating, no sad face exceptions. The system is automated and does not care about your feelings. Two of my friends found this out the hard way. Don\'t be them. 😅',
+    step: '03',
+    title: 'Master the QOBE Portal',
+    detail: 'QOBE is where your GPA, course outline, attendance, and mid/final marks live. First login via Microsoft, then set a memorable password.',
+    icon: <GraduationCap size={22} />
   },
   {
-    q: 'How do I pay the challan fee?',
-    a: 'Download your challan from the Azure Proxy portal using your university Azure ID, then pay at the bank or online. Simple — just don\'t lose the challan and pretend you never got it. That doesn\'t work.',
+    step: '04',
+    title: 'Befriend Seniors & Get Past Papers',
+    detail: 'Seniors hold the holy grail of past mid/final exam paper solutions, lab manual hints, and notes. Ask nicely and treat them to cafeteria chai!',
+    icon: <Coffee size={22} />
   },
   {
-    q: 'When are mids and finals?',
-    a: 'Mids: 8 weeks after session starts. Finals: 8 weeks after mids. Mark your calendar on Day 1, not Day 55 when you\'re already panicking.',
-  },
-  {
-    q: 'Is there a dress code?',
-    a: 'No formal dress code. Casual is fine. Just don\'t show up looking like you\'re at a beach. Keep it decent and nobody will say anything.',
-  },
-  {
-    q: 'What documents do I need to keep?',
-    a: 'Matric, Intermediate, Domicile, CNIC/B-Form, passport photos. Keep soft copies EVERYWHERE. QOBE will ask for them, then ask again, then ask one more time just to see if you\'re paying attention.',
-  },
-  {
-    q: 'Are DUET servers always up?',
-    a: 'LOL. No. The servers go down more often than my motivation on a Monday morning. Bookmark QOBE and Azure direct links and don\'t route through the main site every single time.',
-  },
-  {
-    q: 'Is there a fee waiver available?',
-    a: 'Yes — 100% tuition fee waiver for 300 eligible students. Check the admissions portal immediately. This is a genuinely massive opportunity and somehow most people don\'t even know it exists.',
-  },
-  {
-    q: 'What is the campus WiFi password?',
-    a: 'The network name is "Student". The password is one of duet@1234, Duet@1234, or DUET@1234. Nobody actually knows which one is correct at any given time — just try all three until one works. The WiFi itself is impressively fast, especially in the library. A true gem of modern infrastructure. 🙏',
-  },
-  {
-    q: 'Is there university transport?',
-    a: 'Yes! DUET runs several buses across Karachi. Go to the transport office at the main campus, register your pickup point, and you\'re set. Much better than bribing a rickshaw driver every morning.',
-  },
-  {
-    q: 'Is there a hostel?',
-    a: 'No official hostel. You\'re on your own. Start hunting for a nearby room or apartment early because Karachi waits for no one and neither does your landlord.',
-  },
-  {
-    q: 'When can I get an internship?',
-    a: 'The university officially arranges internships in your final year. Before that, you\'re expected to find one yourself. The good news is DUET has connections with some genuinely top tier industry names. The bad news is you have to survive until final year first. Start applying early anyway — nobody is stopping you.',
-  },
-  {
-    q: 'Is there a library and is it actually useful?',
-    a: 'Yes there is a library and yes it is useful, especially if you need a quiet place to sit and look productive. The WiFi is also at its best in there, which is honestly reason enough to go.',
-  },
+    step: '05',
+    title: 'Buy a Home Printer Early',
+    detail: 'Lab reports, assignment coversheets, attendance forms — you will print constantly. A basic home printer pays for itself by Week 3.',
+    icon: <Printer size={22} />
+  }
 ]
 
 const PERKS = [
-  { icon: '📦', label: 'All Microsoft Apps', desc: 'Word, Excel, Teams, OneDrive — free with your uni ID' },
-  { icon: '🐙', label: 'GitHub Pro', desc: 'Free with your .edu email — includes Copilot Pro' },
-  { icon: '🤖', label: 'Copilot Pro', desc: 'Via GitHub Pro — includes access to Claude models' },
-  { icon: '💎', label: 'Gemini Pro', desc: 'Sometimes available with university email (check Google)' },
-  { icon: '☁️', label: 'Azure Credits', desc: 'Microsoft Azure student credits for cloud projects' },
-]
-
-const CLUBS = [
-  { name: 'DLS',  full: 'Dawood Literary Society',      icon: '📚', color: 'purple' },
-  { name: 'WLWJ', full: 'WLWJ Society (Cybersecurity)', icon: '🔐', color: 'red' },
-  { name: 'ACM',  full: 'ACM Student Chapter',           icon: '⚙️', color: 'blue' },
-  { name: 'IEEE', full: 'IEEE Dawood Student Branch',    icon: '⚡', color: 'yellow' },
-]
-
-const APPS = [
-  { icon: '📦', label: 'MS Office Suite', desc: 'Word, Excel, PowerPoint — free with your uni ID. Use them for every assignment and pretend you didn\'t use AI to write it.' },
-  { icon: '🤖', label: 'ChatGPT', desc: 'Your unofficial teaching assistant. Great for understanding concepts, debugging logic, and explaining why your code doesn\'t work at 2am.' },
-  { icon: '🧠', label: 'Claude', desc: 'The other AI that actually reads your whole assignment brief before answering. Surprisingly useful for long form writing and structured thinking.' },
-  { icon: '🖨️', label: 'Buy a Printer', desc: 'Not an app, but more important than any app. Printing assignments per semester will cost you more than your tuition fee. A home printer pays for itself by Week 3.' },
+  { icon: <Package size={22} />, label: 'Free Microsoft 365', desc: 'Word, Excel, PowerPoint, Teams & 1TB OneDrive storage' },
+  { icon: <GitBranch size={22} />, label: 'GitHub Student Pack', desc: 'Free GitHub Pro, domain names & developer tools' },
+  { icon: <Bot size={22} />, label: 'Copilot Pro Access', desc: 'AI code assistant & research tools included with GitHub Pro' },
+  { icon: <Cloud size={22} />, label: 'Azure Cloud Credits', desc: 'Student cloud credits for hosting Web & AI projects' }
 ]
 
 const PORTALS = [
   {
+    name: 'QOBE Student Portal',
+    url: 'https://student.qualityobe.com/site/login',
+    icon: <GraduationCap size={24} />,
+    purpose: 'Attendance · Marks · Courses · Assignments',
+    login: 'Login via university Microsoft Azure email',
+    tip: 'Check your attendance every Friday! Don\'t wait for midterm week to realize you missed too many classes.',
+    color: 'blue'
+  },
+  {
     name: 'Azure Proxy Portal',
     url: 'https://portal-duet.msappproxy.net/',
-    icon: '☁️',
-    purpose: 'Challan download only',
-    login: 'Login with your university Azure ID & password',
-    tip: 'This portal does ONE thing — download your challan. That\'s it. Don\'t stare at it waiting for more features.',
-    color: 'blue',
-  },
-  {
-    name: 'QOBE Portal',
-    url: 'https://student.qualityobe.com/site/login',
-    icon: '🎓',
-    purpose: 'Attendance · Marks · Courses · Assignments · Documents',
-    login: 'First login via Microsoft university account, then set a QOBE password',
-    tip: 'Once you set your QOBE password, you can log in directly anywhere — great for library PCs when you\'re checking if you\'re still alive attendance-wise.',
-    color: 'green',
-  },
+    icon: <Cloud size={24} />,
+    purpose: 'Semester Fee Challan Download Only',
+    login: 'Login with your @students.duet.edu.pk Azure credentials',
+    tip: 'This portal does one specific job — downloading semester fee challans. Keep your credentials handy during fee week.',
+    color: 'green'
+  }
 ]
 
-// ─── Stories ──────────────────────────────────────────────────────────────────
-
-const STORIES = [
+const CAMPUS_PHOTOS = [
   {
-    icon: '☁️',
-    date: 'Day 1 — The Azure Incident',
-    title: 'I locked myself out of my university account before the semester even started.',
-    text: `Got my credentials. Logged in. Immediately changed the password to something clever. Immediately forgot what that was. Completely locked out of my own account in under 4 minutes.
-
-So I go to the IT Department to reset it. They say: "Sure, we'll send a code to your Authenticator app." I say: "Great." The Authenticator says: "First, verify your identity via the code we sent to your Outlook." I open Outlook. Outlook says: "Enter the OTP showing on your Authenticator."
-
-I stared at my phone for 30 seconds. The two apps were asking each other for verification codes like two security guards who both forgot their IDs. I had to physically walk to the IT office, explain the situation, and watch them also be confused for a few minutes before solving it.
-
-Lesson: Set up your recovery email and phone number THE MOMENT you first log in. Before you do anything else. Before you even blink.`,
+    title: 'Main Campus Lawns & Greenery',
+    image: '/main campus garden image by Sidra tul Muntaha.png',
+    credit: 'Sidra tul Muntaha'
   },
   {
-    icon: '📋',
-    date: 'Week 2 The QOBE',
-    title: 'I uploaded my documents. QOBE said "documents not uploaded." I uploaded again.',
-    text: `QOBE has a talent for making you feel like nothing you do is real. I uploaded my Matric certificate. Portal said okay and after a few said portal forgot that i uploaded it and asked me to upload again .
-
-Keep everything in a Google Drive folder: Matric, Intermediate, Domicile, CNIC, passport photos, and a spare soul. You'll need all of them at some point.`,
+    title: 'IC&S Gulberg Campus Courtyard',
+    image: '/gulber inside image by fozan.png',
+    credit: 'Fozan'
   },
   {
-    icon: '📊',
-    date: 'Mids Week  The Attendance Wake-Up Call',
-    title: 'They checked their attendance right before mids. That was a mistake.',
-    text: `There's a specific kind of panic that sets in when you open QOBE two days before midterms and realize you've been "casually skipping" one class a little too consistently.
-
-The 75% rule isn't a suggestion. The system doesn't do rounding in your favour. It doesn't care that you were tired, or sick, or that the class was at 8am and that's basically still night. Two people in my batch sat out of finals because of this. Don't let that be you.
-
-Check your attendance after every class (literally just once after each class) . Not every month. Every week. Make it a habit like checking your phone which you're already doing every 4 minutes anyway.`,
-  },
-  {
-    icon: '🖨️',
-    date: 'Month 1, The Print Shop Economy',
-    title: 'I spent more on printing in one month than I did on actual food.',
-    text: `Nobody prepares you for the sheer volume of things that need to be printed at a Pakistani university. Assignment coversheet. Lab file. Lab report. Attendance form. Challan. Another challan because you lost the first one.
-
-I was running to the print shop every other day like it was a second campus. By the time I did the math, I realised a basic home printer would have paid for itself in six weeks.
-
-Buy a printer. I don't care what anyone says. Buy a printer. This is the most practical advice on this entire page.`,
-  },
-  {
-    icon: '🎓',
-    date: 'Finals Week  The 75% Wake-Up Call',
-    title: 'One student in my class took attendance lightly. He reappeared in summer.',
-    text: `He wasn't the type to fail subjects. He understood the material fine just didn't understand that the portal doesn't care about that.
-
-When finals came, he was barred. One person, but it was a very visible lesson for the rest of us. No warning, no negotiation, no appeal that went anywhere. The system blocked him automatically. He had to register for the summer repeat semester and sit the exams again while everyone else moved forward.
-
-The 75% rule feels theoretical until it happens to someone you sit next to every day.
-
-Check your attendance on QOBE every week. Treat 80% as your personal floor — that buffer is for actual sick days and real emergencies, not for "I'll skip just this once."`,
-  },
-  {
-    icon: '🔐',
-    date: 'Semester 1 , The Authenticator Incident',
-    title: '10–15 students uninstalled the Authenticator app. Then needed it to log in.',
-    text: `The setup process asks you to install Microsoft Authenticator. A surprising number of students treated this as optional and uninstalled it later to free up space or because it felt unnecessary.
-
-Then came the day Azure required an OTP to log in. They reinstalled Authenticator. Authenticator said: "First set up via Outlook." They opened Outlook. Outlook said: "Enter the OTP from your Authenticator."
-
-The loop was complete. Neither app would move first without the other.
-
-Each of them had to go to the IT department individually to get their account manually recovered. IT handled it but it took time, trips, and a queue. The IT department sorted everyone out eventually, but it was entirely avoidable.
-
-Install Authenticator Day 1. Never uninstall it. If you change phones, migrate it before wiping. It is not decorative it is your key to everything Microsoft.`,
-  },
-  {
-    icon: '📶',
-    date: 'Every Day The WiFi Reality',
-    title: 'Campus WiFi: sometimes 200 Mbps, sometimes 500 Kbps. Plan accordingly.',
-    text: `The student network is called "Student". Password is one of duet@1234, Duet@1234, or DUET@1234 try all three, nobody consistently knows which one is active.
-
-Speed is genuinely unpredictable. Off-peak you can hit 40 Mbps comfortably, occasionally even 200 Mbps. During peak hours between classes, lunch break, exam season it can crawl to 1 Mbps or drop entirely.
-
-The library PCs run on the same provider as the student network but tend to hold up slightly better during peak hours. In reality it's marginal — faculty WiFi might be 800 Kbps when student is at 500 Kbps, but if more people start connecting to that network too, it drops to 100 Kbps just as fast.
-
-Honest advice: for anything that actually matters, use your brain insted of Wi-Fi , JK;) , must have a plan B like mobile data ready `,
-  },
-  {
-    icon: '🤖',
-    date: 'Semester 1 ,GitHub Student Pack & Copilot',
-    title: 'I got Copilot Pro free. Built agents with it. One wiped my data. Would do again.',
-    text: `Your university email qualifies you for the GitHub Student Developer Pack. This includes GitHub Copilot Pro and I mean actually useful, not the stripped-down version. I run it straight from the terminal.
-
-I've built multiple agents that handle tasks for me. It's genuinely powerful once you figure out what you're doing.
-
-One of them wiped my data during an early experiment. It said oops, let me restart from basics and then wiped the remaining data too. I did not have anything important on that machine, which is the only reason this is a funny story and not a tragedy.
-
-Lesson: do not run unsupervised AI agents on your main machine. Use a VM, a spare drive, or something you genuinely don't mind losing. Get the Student Pack anyway it's one of the best things your .edu email unlocks.`,
-  },
+    title: 'Main Auditorium Events & Celebrations',
+    image: '/main campus auditorium image by life as dawoodian.png',
+    credit: 'Life as Dawoodian'
+  }
 ]
 
-// ─── Sub-components ───────────────────────────────────────────────────────────
+const FAQS = [
+  {
+    q: 'What email format will I receive as a freshman?',
+    a: 'Your email follows the format: Batch-Dept-Roll@students.duet.edu.pk (e.g., 25F-CY-102@students.duet.edu.pk). It is powered by Microsoft Azure. Guard it with your life because it unlocks free Microsoft 365, GitHub Pro, and Azure credits!'
+  },
+  {
+    q: 'Is the 75% attendance rule really enforced strictly?',
+    a: 'YES! 74.9% means an automatic exam ban on the QOBE portal. There are no manual overrides or medical exceptions after the portal locks. Check QOBE weekly to maintain your attendance buffer!'
+  },
+  {
+    q: 'What is the Wi-Fi password on campus?',
+    a: 'Network name is "Student". The password is typically duet@1234, Duet@1234, or DUET@1234. Try all three! Speed in the library is fast and ideal for downloading lecture slides.'
+  },
+  {
+    q: 'How do I download my semester fee challan?',
+    a: 'Log into the Azure Proxy Portal (portal-duet.msappproxy.net) using your university Azure ID and click "Download Challan". Pay at any designated bank or via 1Bill on your mobile banking app.'
+  },
+  {
+    q: 'Are there student societies & tech clubs at DUET?',
+    a: 'Yes! DUET has active chapters including DLS (Dawood Literary Society), WLWJ Society (Cybersecurity), ACM Student Chapter, and IEEE Student Branch. Join early to build your network and resume!'
+  }
+]
 
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`${styles.faqItem} ${open ? styles.faqOpen : ''}`}>
-      <button className={styles.faqQ} onClick={() => setOpen(o => !o)}>
+    <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '14px', marginBottom: '10px', overflow: 'hidden' }}>
+      <button 
+        onClick={() => setOpen(o => !o)}
+        style={{ width: '100%', padding: '1.25rem 1.5rem', background: 'none', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', cursor: 'pointer', fontFamily: 'var(--font-ui)', fontWeight: 700, fontSize: '15px', color: 'var(--text-primary)' }}
+      >
         <span>{q}</span>
-        <span className={styles.faqChevron}>{open ? '▲' : '▼'}</span>
+        {open ? <ChevronUp size={18} style={{ color: 'var(--accent)', flexShrink: 0 }} /> : <ChevronDown size={18} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
       </button>
-      {open && <p className={styles.faqA}>{a}</p>}
-    </div>
-  )
-}
-
-function StoryItem({ story }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className={styles.storyItem} onClick={() => setOpen(o => !o)}>
-      <div className={styles.storyItemHeader}>
-        <span className={styles.storyItemDot}>{story.icon}</span>
-        <div className={styles.storyItemMeta}>
-          <p className={styles.storyItemDate}>{story.date}</p>
-          <p className={styles.storyItemTitle}>{story.title}</p>
-        </div>
-        <span className={styles.storyChevron}>{open ? '▲' : '▼'}</span>
-      </div>
       {open && (
-        <div className={styles.storyItemBody}>
-          {story.text.split('\n\n').map((para, i) => (
-            <p key={i} className={styles.storyItemPara}>{para}</p>
-          ))}
+        <div style={{ padding: '0 1.5rem 1.25rem 1.5rem', fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6, fontFamily: 'var(--font-ui)', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+          {a}
         </div>
       )}
     </div>
   )
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
-export default function NewbiePage() {
+export default function NewBiePage() {
   return (
     <div className="page">
-
-      {/* Hero */}
-      <div className="hero">
-        <p className="hero-label">You just got admitted. Congratulations. Now read this.</p>
-        <h1 className="hero-title">Welcome to DUET.<br />Try not to panic.</h1>
-        <p className="hero-sub">
-          Everything a newbie needs — portals, emails, rules, perks, and the stuff nobody tells
-          you until it costs you. Written by a student who learned most of this the hard way,
-          so you don't have to.
-        </p>
+      {/* Hero Banner */}
+      <div 
+        className={styles.heroBanner}
+        style={{ backgroundImage: `url("/main campus garden image by Sidra tul Muntaha.png")` }}
+      >
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
+          <p className={styles.heroTagline}>FRESHMAN SURVIVAL GUIDE</p>
+          <h1 className={styles.heroTitle}>WELCOME TO DUET (TRY NOT TO PANIC)</h1>
+          <p className={styles.heroDescription}>
+            The unofficial survival manual for new Dawoodians — 75% attendance rules, QOBE portal setup, free Microsoft &amp; GitHub perks, cafeteria chai culture, and 1st semester pro-tips.
+          </p>
+        </div>
+        <span className={styles.heroCreditBadge}>
+          <Camera size={12} /> Image by Sidra tul Muntaha
+        </span>
       </div>
 
-      {/* ── Stories from the field ── */}
-      <p className="section-label">Things That Happened to Me So They Don't Happen to You</p>
-      <div className={styles.storyCard}>
-        <p className={styles.storyIntro}>
-          Real events. Real mistakes. Mildly traumatic. Fully preventable.<br />
-          Click any story to read it — consider it free tuition.
-        </p>
-        <div className={styles.storyTimeline}>
-          {STORIES.map((s, i) => (
-            <StoryItem key={i} story={s} />
+      {/* Freshman 5 Commandments Roadmap */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Freshman Survival Roadmap</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>The 5 Commandments for Freshmen</h2>
+
+        <div className={styles.roadmapContainer}>
+          <div className={styles.roadmapLine} />
+          {COMMANDMENTS.map(cmd => (
+            <div key={cmd.step} className={styles.roadmapStep}>
+              <div className={styles.roadmapBadge}>
+                {cmd.icon}
+                <span className={styles.roadmapStepNum}>{cmd.step}</span>
+              </div>
+              <div className={styles.roadmapCard}>
+                <h3 className={styles.roadmapTitle}>{cmd.title}</h3>
+                <p className={styles.roadmapDetail}>{cmd.detail}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* FAQs */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>FAQs — Read These First</p>
-      <div className={styles.faqList}>
-        {FAQS.map(f => <FaqItem key={f.q} q={f.q} a={f.a} />)}
-      </div>
+      {/* Free Student Perks & Benefits */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Student Perks</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Free Software Perks With Your Uni ID</h2>
 
-      {/* Azure Email Setup */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Your University Email (Handle With Care)</p>
-      <div className={styles.emailCard}>
-        <div className={styles.emailFormat}>
-          <p className={styles.emailFormatLabel}>Your email format</p>
-          <p className={styles.emailFormatValue}>YY[Semester]-[Dept]-[Roll]@students.duet.edu.pk</p>
-          <p className={styles.emailFormatExample}>e.g. 25F-CY-102@students.duet.edu.pk</p>
-        </div>
-        <div className={styles.emailSteps}>
-          <p className={styles.emailStepsTitle}>First login checklist — in this exact order, or you'll regret it:</p>
-          <ul className={styles.emailStepsList}>
-            <li>You'll get a <strong>temporary password</strong> from your class advisor.</li>
-            <li>Do your first login on a <strong>PC</strong>, not your phone. Trust the process.</li>
-            <li>Change your password and <strong>set up Microsoft Authenticator</strong> immediately.</li>
-            <li>Add a <strong>recovery email &amp; phone number</strong>. If you skip this and lock yourself out, you'll be physically walking to the IT Department to break the authentication deadlock between Outlook and Authenticator, both demanding codes from each other like two confused bouncers. I know this because I did exactly that. On Day 1. 😬</li>
-          </ul>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.25rem' }}>
+          {PERKS.map((perk, i) => (
+            <div key={i} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--accent-light)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {perk.icon}
+              </div>
+              <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, color: 'var(--text-primary)', fontFamily: 'var(--font-ui)' }}>{perk.label}</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5, fontFamily: 'var(--font-ui)' }}>{perk.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Portals */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>The Two Portals (Know Them)</p>
-      <div className={styles.portalsGrid}>
-        {PORTALS.map(p => (
-          <div key={p.name} className={`${styles.portalCard} ${styles[`portal_${p.color}`]}`}>
-            <div className={styles.portalTop}>
-              <span className={styles.portalIcon}>{p.icon}</span>
-              <div>
-                <p className={styles.portalName}>{p.name}</p>
-                <p className={styles.portalPurpose}>{p.purpose}</p>
+      {/* Official Portals Guide */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Essential Student Portals</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Portals You Will Use Every Week</h2>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.5rem' }}>
+          {PORTALS.map((portal, i) => (
+            <div key={i} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '18px', padding: '1.75rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ width: '46px', height: '46px', borderRadius: '12px', background: 'var(--accent-light)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {portal.icon}
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '18px', fontWeight: 800, margin: 0, fontFamily: 'var(--font-ui)' }}>{portal.name}</h3>
+                  <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--accent)', background: 'var(--accent-light)', padding: '2px 8px', borderRadius: '99px', display: 'inline-block', marginTop: '4px' }}>
+                    {portal.purpose}
+                  </span>
+                </div>
+              </div>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6, fontFamily: 'var(--font-ui)' }}>
+                <strong>Login:</strong> {portal.login}
+              </p>
+              <div style={{ background: 'var(--bg-alt)', border: '1px solid var(--border)', padding: '10px 14px', borderRadius: '10px', fontSize: '12px', color: 'var(--text-muted)', fontFamily: 'var(--font-ui)' }}>
+                💡 <strong>Pro Tip:</strong> {portal.tip}
+              </div>
+              <a 
+                href={portal.url} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="btn btn-primary"
+                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none', padding: '10px 18px', fontSize: '13px', fontWeight: 700, marginTop: 'auto' }}
+              >
+                Open {portal.name} <ArrowRight size={15} />
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Campus Photos Showcase */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Campus Life</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Life as a Dawoodian</h2>
+
+        <div className={styles.photoShowcaseGrid}>
+          {CAMPUS_PHOTOS.map((photo, idx) => (
+            <div key={idx} className={styles.photoCard}>
+              <div className={styles.photoImageWrap}>
+                <img src={photo.image} alt={photo.title} className={styles.photoImage} />
+                <span className={styles.photoCreditBadge}>
+                  <Camera size={11} /> Image by {photo.credit}
+                </span>
+              </div>
+              <div className={styles.photoMeta}>
+                <p className={styles.photoTitle}>{photo.title}</p>
               </div>
             </div>
-            <p className={styles.portalLogin}>🔑 {p.login}</p>
-            <div className={styles.portalTip}>
-              <span className={styles.portalTipIcon}>💡</span>
-              <p>{p.tip}</p>
-            </div>
-            <a href={p.url} target="_blank" rel="noreferrer" className={styles.portalBtn}>
-              Open Portal →
-            </a>
-          </div>
-        ))}
-      </div>
-
-      {/* QOBE warning */}
-      <div className={styles.qobeWarning}>
-        <span className={styles.qobeWarningIcon}>📂</span>
-        <div>
-          <p className={styles.qobeWarningTitle}>Keep your documents uploaded on QOBE</p>
-          <p className={styles.qobeWarningText}>
-            QOBE will ask for your documents, and may ask again later just to keep you on your toes.
-            If you don't upload them, your portal gets blocked. You'll usually get 2–3 days notice.
-            Keep soft copies of everything (Matric, Intermediate, Domicile, CNIC) in a Google Drive
-            folder and thank yourself later.
-          </p>
+          ))}
         </div>
       </div>
 
-      {/* Attendance warning */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>The 75% Rule (Non-Negotiable)</p>
-      <div className={styles.attendanceCard}>
-        <div className={styles.attendanceVisual}>
-          <div className={styles.attendanceDanger}>
-            <span className={styles.attendancePct}>74.9%</span>
-            <span className={styles.attendanceVerdict}>❌ Barred</span>
-          </div>
-          <div className={styles.attendanceDivider}>vs</div>
-          <div className={styles.attendanceSafe}>
-            <span className={styles.attendancePct}>75.0%</span>
-            <span className={styles.attendanceVerdict}>✅ You're in</span>
-          </div>
-        </div>
-        <p className={styles.attendanceText}>
-          The system is automated and has no empathy whatsoever. It will block you at 74.9%
-          without blinking. Two students in my batch got stopped from appearing in finals over this.
-          Attend your classes. No, seriously. 🙏
-        </p>
-      </div>
+      {/* Relatable Freshman FAQs */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Freshman FAQs</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Frequently Asked Questions</h2>
 
-      {/* Perks */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Free Stuff With Your Uni ID 🎁</p>
-      <div className={styles.perksGrid}>
-        {PERKS.map(p => (
-          <div key={p.label} className={styles.perkCard}>
-            <span className={styles.perkIcon}>{p.icon}</span>
-            <p className={styles.perkLabel}>{p.label}</p>
-            <p className={styles.perkDesc}>{p.desc}</p>
-          </div>
+        {FAQS.map((faq, i) => (
+          <FaqItem key={i} q={faq.q} a={faq.a} />
         ))}
       </div>
-      <p className={styles.perksNote}>
-        This list will grow. A .edu email is genuinely powerful, more than most students realize. Use it before you graduate and lose it forever.
-      </p>
-
-      {/* Clubs */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Student Societies</p>
-      <div className={styles.clubsGrid}>
-        {CLUBS.map(c => (
-          <div key={c.name} className={`${styles.clubCard} ${styles[`club_${c.color}`]}`}>
-            <span className={styles.clubIcon}>{c.icon}</span>
-            <p className={styles.clubName}>{c.name}</p>
-            <p className={styles.clubFull}>{c.full}</p>
-          </div>
-        ))}
-      </div>
-      <div className={styles.clubsNote}>
-        <span>🌟</span>
-        <p>
-          Join a society. Seriously. The people, events, and chaos will make university actually
-          worth remembering. Studying alone in your room every day is a valid choice — it's just
-          a boring one you'll regret.
-          <strong> From personal experience: say yes to things.</strong>
-        </p>
-      </div>
-
-      {/* Campuses */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Campuses in Karachi</p>
-      <div className={styles.campusesGrid}>
-        <div className={styles.campusCard}>
-          <span className={styles.campusIcon}>🏛️</span>
-          <p className={styles.campusName}>Engineering Campus</p>
-          <p className={styles.campusDesc}>Main campus · Engineering departments</p>
-        </div>
-        <div className={styles.campusCard}>
-          <span className={styles.campusIcon}>💡</span>
-          <p className={styles.campusName}>IC&amp;S Campus</p>
-          <p className={styles.campusDesc}>CS · AI · Cybersecurity · Data Science</p>
-        </div>
-      </div>
-
-      {/* Fee Waiver */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>100% Tuition Fee Waiver</p>
-      <div className={styles.waiverCard}>
-        <div className={styles.waiverBadge}>💰 Big Opportunity</div>
-        <p className={styles.waiverText}>
-          DUET offers a <strong>100% tuition fee waiver</strong> to 300 students who meet
-          the eligibility requirements. Most people don't even know this exists.
-          Check the admissions portal the moment you're admitted and apply if you qualify.
-          Don't sleep on free money.
-        </p>
-        <a href="https://admissions.duet.edu.pk" target="_blank" rel="noreferrer" className={styles.waiverBtn}>
-          Check Admissions Portal →
-        </a>
-      </div>
-
-      {/* Recommended Apps */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Recommended Apps &amp; Tools 🛠️</p>
-      <div className={styles.perksGrid}>
-        {APPS.map(a => (
-          <div key={a.label} className={styles.perkCard}>
-            <span className={styles.perkIcon}>{a.icon}</span>
-            <p className={styles.perkLabel}>{a.label}</p>
-            <p className={styles.perkDesc}>{a.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Final tip */}
-      <div className={styles.finalTip}>
-        <p className={styles.finalTipTitle}>One last thing 👋</p>
-        <p className={styles.finalTipText}>
-          University goes fast, embarrassingly fast. Don't spend four years just chasing
-          grades and going home. Explore, break things, join stuff, make friends, attend events,
-          and enjoy the mess. You're in Karachi, studying at DUET, with access to cool technology
-          and actual interesting people. Make it count.
-        </p>
-        <p className={styles.finalTipSig}>— Muhammad Rehan (CH4_EZIO), Batch 25F</p>
-      </div>
-
     </div>
   )
 }

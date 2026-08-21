@@ -1,4 +1,5 @@
 import { SITE } from '@/data/config'
+import { Heart } from 'lucide-react'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -11,7 +12,7 @@ export default function Footer() {
         </div>
         <div className={styles.right}>
           <p className={styles.credit}>
-            Built with ♥ by{' '}
+            Built with <Heart size={14} fill="#e74c3c" color="#e74c3c" style={{ display: 'inline', verticalAlign: 'middle', margin: '0 2px' }} /> by{' '}
             <a
               href="https://github.com/muhammadrehan-dev"
               target="_blank"

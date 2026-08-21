@@ -1,62 +1,340 @@
-/* ─── Story / Timeline ────────────────────────────────────────────────────── */
-.storyCard {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 1.75rem 2rem;
+/* ─── Hero Banner for About Page (Full 100vh Main Page Style) ──────────── */
+.heroBanner {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 100vh;
+  min-height: 580px;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: -66px;
+  margin-bottom: 3.5rem;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
-.storyTimeline {
+.heroOverlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(9, 9, 11, 0.88) 0%,
+    rgba(9, 9, 11, 0.6) 40%,
+    rgba(9, 9, 11, 0.1) 75%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 850px;
+  margin: 0;
+  padding: 5rem 2.5rem;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  color: #ffffff;
 }
 
-.timelineItem {
-  display: flex;
-  gap: 1.25rem;
-  padding-bottom: 1.75rem;
-  position: relative;
+.heroTagline {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
-.timelineItem:last-child { padding-bottom: 0; }
 
-.timelineItem:not(:last-child)::after {
-  content: '';
+.heroTitle {
+  font-family: var(--font-sans);
+  font-size: 78px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.0;
+  margin: 0;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.9);
+}
+
+.heroDescription {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-ui);
+  line-height: 1.65;
+  max-width: 660px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.heroCreditBadge {
   position: absolute;
-  left: 5px;
-  top: 14px;
-  bottom: 0;
-  width: 1px;
-  background: var(--border);
+  bottom: 24px;
+  right: 2rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.timelineDot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--bg);
-  outline: 1px solid var(--border-strong);
-  flex-shrink: 0;
-  margin-top: 4px;
+@media (max-width: 768px) {
+  .heroBanner {
+    height: 100vh;
+    min-height: 540px;
+    margin-top: -60px;
+    margin-bottom: 2.5rem;
+  }
+  .heroContent {
+    padding: 5rem 1.25rem 3.5rem 1.25rem;
+    gap: 1rem;
+  }
+  .heroTitle {
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .heroTagline {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .heroDescription {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .heroCreditBadge {
+    bottom: 16px;
+    right: 1.25rem;
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+}
+
+/* ─── Story / Connected Roadmap ─────────────────────────────────────────── */
+.storyContainer {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  padding: 1rem 0;
+  margin-bottom: 3.5rem;
+}
+
+.storyLine {
+  position: absolute;
+  top: 40px;
+  bottom: 40px;
+  left: 34px;
+  width: 4px;
+  background: repeating-linear-gradient(
+    180deg,
+    #1A98D5 0px,
+    #1A98D5 12px,
+    transparent 12px,
+    transparent 20px
+  );
   z-index: 1;
 }
 
-.timelineDate {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-family: var(--font-ui);
-  margin-bottom: 0.4rem;
+.storyStep {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
 
-.timelineText {
+.storyBadge {
+  width: 68px;
+  height: 68px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #1A98D5 0%, #0F6B99 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26, 152, 213, 0.35);
+  border: 3px solid var(--bg);
+}
+
+.storyCard {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.storyCard:hover {
+  transform: translateX(6px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.storyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.storyDate {
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 3px 10px;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.storyTitle {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.storyText {
   font-size: 14px;
   color: var(--text-secondary);
-  line-height: 1.65;
   font-family: var(--font-ui);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.quoteBox {
+  background: linear-gradient(135deg, rgba(26, 152, 213, 0.1) 0%, rgba(15, 107, 153, 0.04) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.quoteText {
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+  line-height: 1.6;
+}
+
+.quoteAuthor {
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Photo Showcase Grid */
+.photoShowcaseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.photoCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+.photoCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.photoImageWrap {
+  position: relative;
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.photoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.photoCard:hover .photoImage {
+  transform: scale(1.06);
+}
+
+.photoCreditBadge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.photoMeta {
+  padding: 1.25rem 1.5rem;
+}
+
+.photoTitle {
+  font-size: 16px;
+  font-weight: 800;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .storyLine { left: 24px; }
+  .storyBadge { width: 50px; height: 50px; border-radius: 14px; }
+  .storyStep { gap: 1rem; }
+  .storyCard { padding: 1.25rem; }
 }
 
 /* ─── Developer card ──────────────────────────────────────────────────────── */
@@ -559,4 +837,64 @@
   .hobbyGroupLabel { min-width: unset; }
   .projectsGrid { grid-template-columns: 1fr; }
   .contributorsGrid { grid-template-columns: 1fr; }
+}
+
+/* ─── Photo Showcase ────────────────────────────────────────────────────── */
+.photoShowcaseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.photoCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.photoImageWrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: var(--bg-alt);
+}
+
+.photoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photoCreditBadge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.photoMeta {
+  padding: 1rem 1.25rem;
+}
+
+.photoTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
 }

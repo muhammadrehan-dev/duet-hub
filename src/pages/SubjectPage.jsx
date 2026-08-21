@@ -3,6 +3,7 @@ import { useSubjectFiles } from '@/hooks/useSubjectFiles'
 import { getFileExt, formatFileSize, formatCategory, EXT_ICON } from '@/lib/files'
 import Spinner from '@/components/Spinner'
 import FilePreviewModal from '@/components/FilePreviewModal'
+import { Eye, Download, ChevronUp, ChevronDown, Search, X, File } from 'lucide-react'
 import styles from './SubjectPage.module.css'
 
 // ─── Previewable extensions ───────────────────────────────────────────────────
@@ -24,13 +25,13 @@ function isPreviewable(filename) {
 
 function FileRow({ file, onPreview }) {
   const ext = getFileExt(file.name)
-  const icon = EXT_ICON[ext] || '📁'
+  const IconComp = EXT_ICON[ext] || File
   const canPreview = isPreviewable(file.name)
 
   return (
     <div className={styles.fileRow}>
       <span className={styles.extBadge}>{ext}</span>
-      <span className={styles.fileIcon}>{icon}</span>
+      <span className={styles.fileIcon}><IconComp size={18} /></span>
       <span className={styles.name}>{file.name}</span>
       <span className={styles.size}>{formatFileSize(file.size)}</span>
       <div className={styles.fileActions}>
@@ -40,11 +41,11 @@ function FileRow({ file, onPreview }) {
             onClick={() => onPreview(file)}
             title="Preview file"
           >
-            👁 Preview
+            <Eye size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Preview
           </button>
         )}
         <a href={file.download_url} className={styles.dlBtn} download target="_blank" rel="noreferrer">
-          ↓ Download
+          <Download size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Download
         </a>
       </div>
     </div>
@@ -59,7 +60,7 @@ function CategorySection({ category, files, onPreview }) {
         <span className={styles.categoryLabel}>{formatCategory(category)}</span>
         <span className={styles.categoryMeta}>
           {files.length} {files.length === 1 ? 'file' : 'files'}
-          <span className={styles.chevron}>{open ? '▲' : '▼'}</span>
+          <span className={styles.chevron}>{open ? <ChevronUp size={16} /> : <ChevronDown size={16} />}</span>
         </span>
       </button>
       {open && (
@@ -102,7 +103,7 @@ export default function SubjectPage({ semester, subject, setPage }) {
       </div>
 
       <div className="hero">
-        <p className="hero-label">{subject.icon} {subject.label}</p>
+        <p className="hero-label">{subject.label}</p>
         <h1 className="hero-title" style={{ fontSize: '28px' }}>{subject.desc}</h1>
         {!loading && data && (
           <p className="hero-sub">{totalFiles} file{totalFiles !== 1 ? 's' : ''} across {Object.keys(data).length} categories</p>
@@ -110,7 +111,7 @@ export default function SubjectPage({ semester, subject, setPage }) {
       </div>
 
       <div className={styles.searchWrapper}>
-        <span className={styles.searchIcon}>⌕</span>
+        <span className={styles.searchIcon}><Search size={16} /></span>
         <input
           className={styles.search}
           type="text"
@@ -119,7 +120,9 @@ export default function SubjectPage({ semester, subject, setPage }) {
           onChange={e => setSearch(e.target.value)}
         />
         {search && (
-          <button className={styles.clearSearch} onClick={() => setSearch('')}>✕</button>
+          <button className={styles.clearSearch} onClick={() => setSearch('')}>
+            <X size={14} />
+          </button>
         )}
       </div>
 

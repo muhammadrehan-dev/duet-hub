@@ -1,743 +1,394 @@
 import { useState } from 'react'
 import { MERIT_LISTS, SAMPLE_PAPERS } from '@/data/config'
+import FilePreviewModal from '@/components/FilePreviewModal'
+import { 
+  BookOpen, Brain, Globe, UserCheck, Camera, CreditCard, 
+  CheckCircle2, Ticket, Building2, Lightbulb, MapPin, 
+  Megaphone, FileText, Edit3, ClipboardList, GraduationCap, 
+  FileCheck, IdCard, Home, HardDrive, Calendar, Clock, 
+  FolderKanban, Target, Coins, BarChart3, AlertTriangle, 
+  ArrowRight, ExternalLink, ChevronUp, ChevronDown, Calculator, Sparkles, Download, Eye
+} from 'lucide-react'
 import styles from './AdmissionsPage.module.css'
 
-
-
-const TEST_PATTERN_2026 = {
-  compulsory: [
-    { label: 'English', questions: 25, icon: '📖' },
-    { label: 'Analytical Reasoning', questions: 10, icon: '🧠' },
-    { label: 'General Knowledge', questions: 15, icon: '🌍' },
-  ],
-  optional: [
-    {
-      group: 'Pre-Engineering / Pre-Medical (with Addl Maths)',
-      subjects: [
-        { label: 'Physics', q: 20 },
-        { label: 'Chemistry', q: 10 },
-        { label: 'Maths', q: 20 },
-      ]
-    },
-    {
-      group: 'Computer Science / General Science',
-      subjects: [
-        { label: 'Physics / Statistics', q: 20 },
-        { label: 'Math', q: 10 },
-        { label: 'Computer', q: 20 },
-      ]
-    },
-    {
-      group: 'Pre-Medical',
-      subjects: [
-        { label: 'Physics', q: 20 },
-        { label: 'Chemistry', q: 10 },
-        { label: 'Biology', q: 20 },
-      ]
-    },
-    {
-      group: 'Commerce',
-      subjects: [
-        { label: 'Business Math', q: 20 },
-        { label: 'Economics', q: 10 },
-        { label: 'Accounting', q: 20 },
-      ]
-    },
-    {
-      group: 'Arts',
-      subjects: [
-        { label: 'English Comprehension', q: 25 },
-        { label: 'General Math', q: 25 },
-      ]
-    },
-  ]
-}
-
-const MERIT_FORMULA = [
-  { label: 'Entry Test Score', weight: 60, color: 'blue' },
-  { label: 'Intermediate Marks', weight: 30, color: 'green' },
-  { label: 'Matric Marks', weight: 10, color: 'amber' },
-]
-
-const MERIT_DEDUCTION = [
-  { year: '1 Year Gap', deduction: '10% deduction from Intermediate marks' },
-  { year: '2+ Year Gap', deduction: '20% deduction from Intermediate marks' },
+const CAMPUSES = [
+  {
+    name: 'Main Campus (New M.A. Jinnah Road)',
+    location: 'New M.A. Jinnah Road, Karachi',
+    focus: 'Home of Chemical, Metallurgy, Petroleum, Electronics & Civil Engineering Departments.',
+    image: '/main campus main gate image by Faheem Bozdar.png',
+    credit: 'Faheem Bozdar',
+    tag: 'Main Hub',
+  },
+  {
+    name: 'Gulberg Town IC&S Campus',
+    location: 'Dastagir Block 9, Federal B Area, Karachi',
+    focus: 'Home of Computer Science, AI, Cybersecurity, Data Science & AR/VR Research Labs.',
+    image: '/gulberg campus academic block image by Syed Shayan.png',
+    credit: 'Syed Shayan',
+    tag: 'Tech Hub',
+  },
+  {
+    name: 'CEMET Rohri-Sukkur Campus',
+    location: 'NH 5, Rohri, Sukkur',
+    focus: 'Center of Excellence in Modern Engineering & Computing Technologies.',
+    image: '/cemet campus ariel view image by official facebook page.png',
+    credit: 'Official Facebook Page',
+    tag: 'Interior Sindh Hub',
+  }
 ]
 
 const APPLICATION_STEPS = [
   {
+    step: '01',
     title: 'Account Registration',
-    detail: 'Register at admission.duet.edu.pk. Use exact name spellings as per your Matric certificate. Provide a valid email to receive your password.',
-    icon: '👤'
+    detail: 'Register on admissions.duet.edu.pk. Type your name EXACTLY as printed on your Matric certificate (unless you want a typo on your degree for 4 years).',
+    icon: <UserCheck size={22} />
   },
   {
-    title: 'Photo Upload',
-    detail: 'Upload a recent (last 6 months) passport photo with a blue background. Testing agencies may disallow entry if the photo does not match.',
-    icon: '📸'
+    step: '02',
+    title: 'Photo Upload (No Filters!)',
+    detail: 'Upload a clear passport photo with a blue background. The security uncle at the gate will compare it to your face, so save Instagram filters for later.',
+    icon: <Camera size={22} />
   },
   {
-    title: 'Fee Payment',
-    detail: 'Pay at any selected bank branch. Allied Bank users can pay via App (Educational Payments). 1Bill is also available via your banking app.',
-    icon: '💳'
+    step: '03',
+    title: 'Bank Challan Payment',
+    detail: 'Pay the application fee at any Allied Bank branch or via 1Bill. Keep the original paid slip safe like your gold medal.',
+    icon: <CreditCard size={22} />
   },
   {
-    title: 'Verification Check',
-    detail: 'Log in within 3 days of payment to confirm photo verification. If unverified, re-upload a compliant photo immediately.',
-    icon: '✅'
+    step: '04',
+    title: 'Entry Test Day Panic',
+    detail: '100 MCQs in 90 minutes. 54 seconds per question. Bring 2 black ballpoint pens, your admit card, and your original CNIC or B-Form.',
+    icon: <Edit3 size={22} />
   },
   {
-    title: 'Admit Card',
-    detail: 'Download your admit card once the deadline passes. Print it and bring it to the campus. Venue and schedule will be printed on the card.',
-    icon: '🎟️'
+    step: '05',
+    title: 'Merit List Refreshing at 2 AM',
+    detail: 'The merit lists drop online when you least expect it. Keep refreshing the portal and check where your name stands.',
+    icon: <ClipboardList size={22} />
+  },
+  {
+    step: '06',
+    title: 'Fee Deposit & Welcome to DUET!',
+    detail: 'Pay your tuition fee before the strict deadline. Congratulations! You are officially a Dawoodian. Time to celebrate with cafeteria chai!',
+    icon: <GraduationCap size={22} />
   }
-]
-
-const CAMPUSES = [
-  {
-    name: 'Jinnah Campus (Main)',
-    location: 'New M.A. Jinnah Road, Karachi',
-    focus: 'Engineering, Architecture & Applied Sciences',
-    icon: '🏛️'
-  },
-  {
-    name: 'Gulberg Town Campus',
-    location: 'Dastagir Block 9, Federal B Area, Karachi',
-    focus: 'Computing Sciences (CS, AI, Cyber, Data Science)',
-    icon: '💡'
-  },
-  {
-    name: 'Rohri-Sukkur Campus (CEMENT)',
-    location: 'NH 5, Rohri, Sukkur',
-    focus: 'Computing & Management Programs',
-    icon: '🌉'
-  }
-]
-
-const TIMELINE = [
-  {
-    icon: '📢',
-    period: 'April to May',
-    event: 'Admissions Open',
-    detail: 'DUET officially announces undergraduate admissions. Watch the official website and your school notice boards. The window is typically 3 to 4 weeks and closes without warning.',
-  },
-  {
-    icon: '📝',
-    period: 'May to June',
-    event: 'Online Application Submission',
-    detail: 'Fill the form on admissions.duet.edu.pk. Upload scanned documents. Pay the application challan at any branch of the designated bank. Triple-check your matric and intermediate marks before submitting.',
-  },
-  {
-    icon: '🎟️',
-    period: 'June',
-    event: 'Admit Card Download',
-    detail: 'Download your roll number slip from the admissions portal. Print it. Bring it to the test centre. A phone screenshot is a backup only. The physical copy is what they check.',
-  },
-  {
-    icon: '✏️',
-    period: 'June to July',
-    event: 'Entry Test at DUET Campus',
-    detail: 'MCQ paper held on campus. 100 questions in 90 minutes. Bring your admit card and original CNIC or B-Form. No original documents means no entry. No exceptions whatsoever.',
-  },
-  {
-    icon: '📋',
-    period: 'July',
-    event: 'Merit List Published',
-    detail: 'Results are displayed on the admissions portal. Multiple merit lists are released as seats are filled. Keep checking. Students who miss their enrollment window free up seats that go to the next batch on the list.',
-  },
-  {
-    icon: '✅',
-    period: 'July to August',
-    event: 'Fee Deposit and Enrollment',
-    detail: 'If your name appears on the merit list, deposit the admission fee within the given deadline. Missing this by even one day cancels your seat. Treat this deadline exactly like an exam.',
-  },
-  {
-    icon: '🎓',
-    period: 'August to September',
-    event: 'Orientation and Classes Begin',
-    detail: 'Attend orientation. It covers things you actually need to know. Collect your university ID. Set up your Azure email on Day 1 and do not skip the Microsoft Authenticator setup.',
-  },
 ]
 
 const DOCS_REQUIRED = [
-  { icon: '📄', name: 'Matric Certificate and DMC',         note: 'Original plus 2 attested copies' },
-  { icon: '📄', name: 'Intermediate Certificate and DMC',   note: 'Original plus 2 attested copies' },
-  { icon: '🆔', name: 'CNIC or B-Form',                     note: 'Original plus 2 attested copies' },
-  { icon: '🏠', name: 'Domicile Certificate',               note: 'Karachi or Sindh domicile required' },
-  { icon: '📸', name: 'Passport Photos',                    note: '4 to 6 recent photos on white or blue background' },
-  { icon: '📋', name: 'Character Certificate',              note: 'Issued by your previous institution' },
-  { icon: '💾', name: 'Scanned copies of everything above', note: 'Keep in Google Drive. QOBE will ask for them more than once.' },
-]
-
-const TIPS = [
-  {
-    icon: '📅',
-    title: 'Apply on Day 1',
-    body: 'The portal opens for a limited time only. The moment admissions go live, submit your application. Late submissions are not accepted for any reason.',
-  },
-  {
-    icon: '📖',
-    title: 'Your Syllabus Is FSc, Not School',
-    body: 'The entry test covers FSc Part 1 and Part 2 content. If you have not opened those books since exams, open them now. The test is not matric level.',
-  },
-  {
-    icon: '⏱️',
-    title: 'Practice Under Time Pressure',
-    body: '100 questions in 90 minutes is 54 seconds per question. Speed is half the battle. Solve timed MCQ sets regularly, not casually.',
-  },
-  {
-    icon: '🗂️',
-    title: 'Get Documents Attested Early',
-    body: 'Attestation from a Gazetted Officer takes time. There are queues. Get everything attested before the portal even opens so you are not scrambling on the last day.',
-  },
-  {
-    icon: '🎯',
-    title: 'Rank Your Departments Carefully',
-    body: 'You choose departments in order of preference during application. Your first choice is processed first. Put what you actually want at the top. You cannot change this after submitting.',
-  },
-  {
-    icon: '💰',
-    title: 'Apply for the Fee Waiver',
-    body: 'DUET offers a full 100% tuition fee waiver to around 300 eligible students. Almost nobody applies for it. It takes a few minutes. Do it the same day you submit your application.',
-  },
+  { icon: <FileCheck size={20} />, name: 'Matric Certificate & Marksheet (DMC)', note: 'Original + 2 attested copies' },
+  { icon: <FileCheck size={20} />, name: 'Intermediate Marksheet / Admit Card', note: 'Original + 2 attested copies' },
+  { icon: <IdCard size={20} />, name: 'CNIC or B-Form', note: 'Original + 2 attested copies' },
+  { icon: <Home size={20} />, name: 'Domicile & PRC (Form C)', note: 'Karachi or Sindh Domicile' },
+  { icon: <Camera size={20} />, name: 'Passport Photos (Blue BG)', note: '6 recent passport size photos' },
+  { icon: <ClipboardList size={20} />, name: 'Character Certificate', note: 'Issued by your college principal' }
 ]
 
 const FAQS = [
   {
-    q: 'What is the minimum FSc percentage required to apply?',
-    a: 'The official minimum is 60% in FSc or equivalent. In reality, for competitive departments like CS and AI, the final merit cut-off is usually between 75% and 90% depending on the year. 60% qualifies you to apply, not necessarily to get in. Download the past merit lists on this page and check the actual cut-offs for each department.',
+    q: 'What is the minimum FSc percentage required to apply for CS / AI?',
+    a: 'The official minimum eligibility is 60% in FSc Pre-Engineering or ICS. However, for competitive computing fields (CS, AI, Cyber, Data Science), the actual merit cut-off usually lands between 76% and 88% aggregate. Apply early and score high on the entry test!'
   },
   {
-    q: 'Is ICS with Physics and Maths accepted for CS, AI, Cybersecurity and Data Science?',
-    a: 'Yes. For all four IC&S Campus programs, ICS with Physics and Mathematics is accepted as equivalent to FSc Pre-Engineering. Both qualify.',
+    q: 'How is the DUET Merit Aggregate calculated?',
+    a: 'Merit formula: 60% Entry Test Score + 30% Intermediate Marks + 10% Matric Marks. You can use our live Aggregate Calculator above to calculate your exact merit percentage!'
   },
   {
-    q: 'How is merit calculated?',
-    a: 'Merit is a weighted combination of three scores: 60% from your entry test result, 30% from your intermediate marks, and 10% from your matric marks. A strong entry test performance can lift a moderate academic percentage. Neither alone is enough.',
+    q: 'Is there negative marking in the DUET Entry Test?',
+    a: 'NO! There is ZERO negative marking. Attempt all 100 questions. Never leave an answer blank — smart guessing is strongly encouraged!'
   },
   {
-    q: 'Is there negative marking in the entry test?',
-    a: 'No. There is no negative marking. Attempt every single question. Leaving anything blank is a guaranteed zero on that question. Guess intelligently if you are unsure.',
+    q: 'Can pre-medical students apply for Engineering & CS?',
+    a: 'Yes! Pre-medical students who took or are taking Additional Mathematics can apply for all Engineering & Computing programs. Pre-medical students can also apply for BS programs with a 0-credit Math course in 1st year.'
   },
   {
-    q: 'How many questions are in each section of the test?',
-    a: 'The test has 100 MCQs in total across three sections. Approximately 40 questions from Mathematics, 30 from Physics, and 30 from English and IQ or reasoning. Total time is 90 minutes.',
-  },
-  {
-    q: 'Where can I find past papers for the DUET entry test?',
-    a: 'DUET does not officially publish past papers. Community-sourced papers circulate on Facebook groups (search DUET Admissions followed by the year) and on Telegram (search DUET Entry Test). Your actual preparation base should be FSc Part 1 and Part 2 textbooks. Any past paper you find is practice under format, not a shortcut.',
-  },
-  {
-    q: 'Can I apply to multiple departments?',
-    a: 'Yes. During the application you rank departments by preference. If your merit qualifies for your first choice you get it. If not, it moves to your second choice, then third. Rank honestly in order of what you actually want.',
-  },
-  {
-    q: 'Is there a fee waiver available?',
-    a: 'Yes. DUET offers a 100% tuition fee waiver to approximately 300 eligible students per intake. Most people who qualify never apply for it because they do not know it exists. Apply for it on the same day you submit your admission form.',
-  },
-  {
-    q: 'What happens if I miss the fee deposit deadline after being selected?',
-    a: 'Your seat is cancelled automatically. No grace period. No extension. No negotiation. The next student on the merit list takes your seat immediately. Treat the fee deadline the same way you would treat an exam date.',
-  },
-  {
-    q: 'Is there an age limit for applying?',
-    a: 'No official age limit is enforced. Students with a gap year or those reapplying are still eligible. Just ensure all documents are current and in order.',
-  },
-  {
-    q: 'Can students from other provinces apply?',
-    a: 'DUET is a Sindh province university and Sindh domicile is the standard requirement. Students from other provinces should check the official admissions notification each year as the rules around open merit and reserved seats can change.',
-  },
-]
-
-const ELIGIBILITY_GROUPS = [
-  {
-    title: 'Engineering Programs',
-    minMarks: '60%',
-    ageLimit: '22 Years',
-    groups: [
-      'Pre-Engineering (Physics, Chemistry, Maths)',
-      'Pre-Medical (with Additional Mathematics)',
-      'General Science (Physics, Maths, CS)'
-    ],
-    note: 'For General Science, Chemistry is required as a remedial subject (except for Computer/Electronic/Telecom Engg).',
-    color: 'blue'
-  },
-  {
-    title: 'Sciences & B.Arch',
-    minMarks: '50%',
-    ageLimit: '25 Years (BS) / 22 Years (B.Arch)',
-    groups: [
-      'Pre-Engineering',
-      'Pre-Medical with Additional Mathematics',
-      'Pre-Medical (BS only, zero-credit Addl. Maths required in 1st year)',
-      'Computer Science (Maths, Physics, CS/Stats)'
-    ],
-    color: 'purple'
-  },
-  {
-    title: 'Management & Technology',
-    minMarks: '50% (HSC) / 60% (DAE)',
-    ageLimit: '25 Years',
-    groups: [
-      'Pre-Engineering / Pre-Medical',
-      'Computer Science / General Science',
-      'Arts / Commerce',
-      'DAE (Relevant technologies)',
-      'Added: BS Business Information System'
-    ],
-    color: 'green'
-  },
-  {
-    title: 'Material Science',
-    minMarks: '50% (HSC) / 60% (DAE)',
-    ageLimit: '25 Years',
-    groups: [
-      'Pre-Engineering / Pre-Medical (with Addl. Maths)',
-      'Computer Science',
-      'DAE (Relevant technologies)'
-    ],
-    color: 'amber'
+    q: 'What happens if I miss the fee deposit deadline after appearing on the merit list?',
+    a: 'Your seat is automatically cancelled and offered to the next candidate on the waiting list. Treat the fee deposit deadline as strictly as an exam date!'
   }
 ]
 
-const DAE_MAPPING = [
-  { tech: 'Electronics Engineering', fields: 'Automation, Avionics, Bio-Medical, Electrical, Electronics, Instrumentation, Mechatronics, Radar, Radio, Telecommunication' },
-  { tech: 'Chemical / Petroleum & Gas', fields: 'Chemical, Chemical Processing, Footwear, Glass, Ceramics, Leather, Petro Chemical, Petroleum' },
-  { tech: 'Industrial & Manufacturing', fields: 'Auto & Diesel, Automation, Cast Metal & Foundry, Mechanical, Production, Mechatronics, Vacuum' },
-  { tech: 'Computer / Software / System', fields: 'Automation, Computer, IT, Electrical, Electronics, Instrumentation, Radar, Radio, Software, Telecommunication' },
-  { tech: 'Architecture', fields: 'Architecture, Civil' },
-]
+// ─── Subcomponents ───────────────────────────────────────────────────────────
+function MeritCalculator() {
+  const [matric, setMatric] = useState('950')
+  const [inter, setInter] = useState('850')
+  const [testScore, setTestScore] = useState('72')
 
-const INELIGIBILITY = [
-  'Conviction by a court of law for an offense involving moral turpitude.',
-  'Failure to obtain IBCC equivalence certificate before the interview.',
-  'Applying for DAE reserved seats in a non-specified technology.',
-  'Found with tempered certificates (legal action will be taken).',
-  'Already holding admission elsewhere without a cancellation certificate.'
-]
+  const matricNum = Math.min(Math.max(parseFloat(matric) || 0, 0), 1100)
+  const interNum = Math.min(Math.max(parseFloat(inter) || 0, 0), 1100)
+  const testNum = Math.min(Math.max(parseFloat(testScore) || 0, 0), 100)
 
-// ─── Sub-components ───────────────────────────────────────────────────────────
+  const matricPct = (matricNum / 1100) * 10
+  const interPct = (interNum / 1100) * 30
+  const testPct = (testNum / 100) * 60
+
+  const aggregate = (matricPct + interPct + testPct).toFixed(2)
+
+  let feedback = ''
+  if (aggregate >= 80) {
+    feedback = "Māshā’Allāh! Outstanding score! You are basically guaranteed a seat in CS, AI, or Cyber! Time to get ready for 8 AM labs!"
+  } else if (aggregate >= 72) {
+    feedback = "Great aggregate! Excellent chances for Chemical, Electronics, Metallurgy, or CS 2nd list!"
+  } else if (aggregate >= 60) {
+    feedback = "Solid! You qualify for Petroleum, Industrial, Energy, or Civil Engineering. Keep an eye on subsequent merit lists!"
+  } else {
+    feedback = "Borderline. Make sure to check open merit reserved quotas and stay updated with late lists!"
+  }
+
+  return (
+    <div className={styles.calculatorCard}>
+      <div className={styles.calcHeader}>
+        <h2 className={styles.calcTitle}>
+          <Calculator size={24} style={{ color: '#1A98D5' }} /> DUET Merit Aggregate Calculator
+        </h2>
+        <span className={styles.calcTag}>Formula: 60% Test + 30% Inter + 10% Matric</span>
+      </div>
+
+      <div className={styles.calcGrid}>
+        <div className={styles.calcInputGroup}>
+          <label className={styles.calcLabel}>
+            <span>Matric Marks</span>
+            <span style={{ color: 'var(--text-muted)' }}>out of 1100</span>
+          </label>
+          <input 
+            type="number" 
+            className={styles.calcInput} 
+            value={matric} 
+            onChange={e => setMatric(e.target.value)}
+            placeholder="e.g. 950" 
+          />
+        </div>
+
+        <div className={styles.calcInputGroup}>
+          <label className={styles.calcLabel}>
+            <span>Intermediate Marks</span>
+            <span style={{ color: 'var(--text-muted)' }}>out of 1100</span>
+          </label>
+          <input 
+            type="number" 
+            className={styles.calcInput} 
+            value={inter} 
+            onChange={e => setInter(e.target.value)}
+            placeholder="e.g. 850" 
+          />
+        </div>
+
+        <div className={styles.calcInputGroup}>
+          <label className={styles.calcLabel}>
+            <span>Entry Test Score</span>
+            <span style={{ color: 'var(--text-muted)' }}>out of 100</span>
+          </label>
+          <input 
+            type="number" 
+            className={styles.calcInput} 
+            value={testScore} 
+            onChange={e => setTestScore(e.target.value)}
+            placeholder="e.g. 72" 
+          />
+        </div>
+      </div>
+
+      <div className={styles.calcResultBox}>
+        <div>
+          <p style={{ fontSize: '12px', opacity: 0.85, margin: 0, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Calculated Merit Aggregate</p>
+          <h3 className={styles.calcScoreText}>{aggregate}%</h3>
+        </div>
+        <p className={styles.calcFeedback}>{feedback}</p>
+      </div>
+    </div>
+  )
+}
 
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`${styles.faqItem} ${open ? styles.faqOpen : ''}`}>
-      <button className={styles.faqQ} onClick={() => setOpen(o => !o)}>
+    <div className={`${styles.faqItem} ${open ? styles.faqOpen : ''}`} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '14px', marginBottom: '10px', overflow: 'hidden' }}>
+      <button 
+        onClick={() => setOpen(o => !o)}
+        style={{ width: '100%', padding: '1.25rem 1.5rem', background: 'none', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left', cursor: 'pointer', fontFamily: 'var(--font-ui)', fontWeight: 700, fontSize: '15px', color: 'var(--text-primary)' }}
+      >
         <span>{q}</span>
-        <span className={styles.faqChevron}>{open ? '▲' : '▼'}</span>
+        {open ? <ChevronUp size={18} style={{ color: 'var(--accent)', flexShrink: 0 }} /> : <ChevronDown size={18} style={{ color: 'var(--text-muted)', flexShrink: 0 }} />}
       </button>
-      {open && <p className={styles.faqA}>{a}</p>}
-    </div>
-  )
-}
-
-function TimelineItem({ item, index }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div className={styles.timelineItem} onClick={() => setOpen(o => !o)}>
-      <div className={styles.timelineLeft}>
-        <div className={styles.timelineDot}>{item.icon}</div>
-        {index < TIMELINE.length - 1 && <div className={styles.timelineLine} />}
-      </div>
-      <div className={styles.timelineContent}>
-        <p className={styles.timelinePeriod}>{item.period}</p>
-        <p className={styles.timelineEvent}>{item.event}</p>
-        {open && <p className={styles.timelineDetail}>{item.detail}</p>}
-        <button className={styles.timelineToggle}>{open ? 'Show less ▲' : 'Details ▼'}</button>
-      </div>
-    </div>
-  )
-}
-
-function ProgramEligibilityCard({ group }) {
-  return (
-    <div className={`${styles.programCard} ${styles[`prog_${group.color}`]}`}>
-      <div className={styles.programTop}>
-        <span className={styles.programIcon}>🎓</span>
-        <div>
-          <p className={styles.programDept}>{group.title}</p>
-          <div className={styles.programMeta}>
-            <span className={styles.programMinBadge}>Min {group.minMarks}</span>
-            <span className={styles.programSeatsBadge}>Age: {group.ageLimit}</span>
-          </div>
+      {open && (
+        <div style={{ padding: '0 1.5rem 1.25rem 1.5rem', fontSize: '14px', color: 'var(--text-secondary)', lineHeight: 1.6, fontFamily: 'var(--font-ui)', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+          {a}
         </div>
-      </div>
-      <div className={styles.programEligibility}>
-        <strong>Eligible Groups:</strong>
-        <ul style={{ paddingLeft: '1.2rem', marginTop: '0.4rem', marginBottom: '0.4rem' }}>
-          {group.groups.map(g => <li key={g}>{g}</li>)}
-        </ul>
-        {group.note && <p style={{ fontSize: '11px', fontStyle: 'italic', color: 'var(--text-muted)' }}>{group.note}</p>}
-      </div>
+      )}
     </div>
   )
 }
 
+export default function AdmissionsPage() {
+  const [previewFile, setPreviewFile] = useState(null)
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
-export default function AdmissionsPage({ setPage }) {
   return (
     <div className="page">
-
-      {/* Hero */}
-      <div className="hero">
-        <p className="hero-label">Admission 2026 Guide • Updated Merit Policies</p>
-        <h1 className="hero-title">Getting Into DUET.<br />The Official 2026 Roadmap.</h1>
-        <p className="hero-sub">
-          Eligibility, revised entry test breakdown, merit formula, campus locations, 
-          step-by-step application guide and results-awaiting policy. Everything updated for Batch 26F.
-        </p>
-      </div>
-
-      {/* Application Guide */}
-      <p className="section-label" style={{ marginTop: '2rem' }}>Step-by-Step Application Guide</p>
-      <div className={styles.tipsGrid}>
-        {APPLICATION_STEPS.map((s, i) => (
-          <div key={i} className={styles.tipCard}>
-            <span className={styles.tipIcon}>{s.icon}</span>
-            <p className={styles.tipTitle}>Step {i + 1}: {s.title}</p>
-            <p className={styles.tipBody}>{s.detail}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Campus Locations */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>DUET Campuses & Locations</p>
-      <div className={styles.docsGrid}>
-        {CAMPUSES.map(c => (
-          <div key={c.name} className={styles.docCard}>
-            <span className={styles.docIcon}>{c.icon}</span>
-            <div>
-              <p className={styles.docName}>{c.name}</p>
-              <p className={styles.docNote}>{c.location}</p>
-              <p style={{ fontSize: '11px', marginTop: '4px', color: 'var(--accent)' }}>{c.focus}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Last Year Admission Analysis */}
-      <p className="section-label" style={{ marginTop: '2rem' }}>Full Admission Analysis (Batch 25F · 4th List)</p>
-      <div className={styles.analysisCard}>
-        <p className={styles.analysisIntro}>
-          We analyzed all 75 pages of the 4th merit list to bring you the most accurate competition data. 
-          Use these CPNs as a baseline for your preparation.
-        </p>
-
-        <div className={styles.analysisTableWrapper}>
-          <table className={styles.analysisTable}>
-            <thead>
-              <tr>
-                <th>Department</th>
-                <th>Highest CPN</th>
-                <th>Closing CPN</th>
-                <th>Allotted*</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>BS Computer Science</td><td>83.49</td><td>68.55</td><td>210+</td></tr>
-              <tr><td>BS Artificial Intelligence</td><td>81.26</td><td>64.32</td><td>120+</td></tr>
-              <tr><td>BE Computer System</td><td>80.50</td><td>65.44</td><td>75+</td></tr>
-              <tr><td>BS Cyber Security</td><td>80.03</td><td>61.23</td><td>90+</td></tr>
-              <tr><td>BE Electronics</td><td>76.39</td><td>59.88</td><td>80+</td></tr>
-              <tr><td>BS Data Science</td><td>76.67</td><td>60.03</td><td>85+</td></tr>
-              <tr><td>BE Chemical</td><td>74.80</td><td>56.08</td><td>60+</td></tr>
-              <tr><td>BE Petroleum & Gas</td><td>70.50</td><td>54.14</td><td>45+</td></tr>
-              <tr><td>BS Information Security</td><td>73.22</td><td>53.21</td><td>40+</td></tr>
-              <tr><td>Bachelor of Architecture</td><td>77.26</td><td>51.68</td><td>35+</td></tr>
-              <tr><td>BS Management & Tech</td><td>73.03</td><td>51.16</td><td>55+</td></tr>
-              <tr><td>BE Industrial & Management</td><td>74.84</td><td>55.42</td><td>40+</td></tr>
-              <tr><td>BS Environmental Science</td><td>73.79</td><td>51.47</td><td>30+</td></tr>
-              <tr><td>BS Chemistry</td><td>59.49</td><td>51.34</td><td>25+</td></tr>
-              <tr><td>BE Materials Eng.</td><td>60.71</td><td>51.97</td><td>20+</td></tr>
-              <tr><td>BE Energy & Enviro</td><td>68.97</td><td>51.85</td><td>25+</td></tr>
-              <tr><td>BS Material Science</td><td>60.06</td><td>52.12</td><td>15+</td></tr>
-              <tr><td>BS Industrial Management</td><td>78.87</td><td>51.16</td><td>30+</td></tr>
-              <tr><td style={{ color: 'var(--text-muted)' }}>BE Telecommunication</td><td colSpan="3" style={{ fontSize: '11px', textAlign: 'center' }}>Discontinued from Fall-2025 onwards</td></tr>
-              <tr><td style={{ color: 'var(--accent)' }}>BS Business Information System</td><td colSpan="3" style={{ fontSize: '11px', textAlign: 'center' }}>New Program for 2026 Intake</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className={styles.analysisFooter}>
-          <p>* "Allotted" refers to candidates placed in this specific 4th list. Total seats per dept are higher (~150-170 for CS/AI).</p>
-        </div>
-      </div>
-
-      {/* Program Eligibility */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Program-specific Eligibility</p>
-      <div className={styles.programsGrid}>
-        {ELIGIBILITY_GROUPS.map(group => (
-          <ProgramEligibilityCard key={group.title} group={group} />
-        ))}
-      </div>
-
-      {/* DAE Mapping */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>DAE Accepted Technologies</p>
-      <div className={styles.analysisCard} style={{ padding: '0' }}>
-        <div className={styles.analysisTableWrapper}>
-          <table className={styles.analysisTable}>
-            <thead>
-              <tr>
-                <th>Target Engineering Program</th>
-                <th>Relevant DAE Fields</th>
-              </tr>
-            </thead>
-            <tbody>
-              {DAE_MAPPING.map(m => (
-                <tr key={m.tech}>
-                  <td style={{ fontWeight: '600' }}>{m.tech}</td>
-                  <td style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{m.fields}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Ineligibility */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>General Ineligibility Rules</p>
-      <div className={styles.docsWarning} style={{ display: 'block' }}>
-        <ul style={{ paddingLeft: '1.2rem' }}>
-          {INELIGIBILITY.map((text, i) => (
-            <li key={i} style={{ marginBottom: '0.5rem' }}>{text}</li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Merit Formula */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>How Merit Is Calculated</p>
-      <div className={styles.meritCard}>
-        <p className={styles.meritIntro}>
-          Your admission merit is a weighted score combining three factors. The entry test carries the most weight by far.
-        </p>
-        <div className={styles.meritBars}>
-          {MERIT_FORMULA.map(m => (
-            <div key={m.label} className={styles.meritRow}>
-              <div className={styles.meritRowLabel}>
-                <span className={styles.meritLabel}>{m.label}</span>
-                <span className={styles.meritWeight}>{m.weight}%</span>
-              </div>
-              <div className={styles.meritBarTrack}>
-                <div
-                  className={`${styles.meritBarFill} ${styles[`merit_${m.color}`]}`}
-                  style={{ width: `${m.weight}%` }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.meritNote}>
-          <span>💡</span>
-          <p>
-            <strong>Awaiting Results?</strong> You can apply! Enter 1st Year (Part-I) marks if 2nd Year exams 
-            were recently given. DAE students can enter combined 1st + 2nd Year marks.
+      {/* Hero Banner */}
+      <div 
+        className={styles.heroBanner}
+        style={{ backgroundImage: `url("/main campus main gate image by Faheem Bozdar.png")` }}
+      >
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
+          <p className={styles.heroTagline}>DAWOODIAN ADMISSIONS 2026 SURVIVAL GUIDE</p>
+          <h1 className={styles.heroTitle}>GETTING INTO DUET</h1>
+          <p className={styles.heroDescription}>
+            Everything you need to secure your seat without losing your sanity — merit formulas, entry test patterns, campus photo tours, document checklists, and past merit archives.
           </p>
         </div>
-        <div className={styles.docsWarning} style={{ display: 'block', marginTop: '1rem' }}>
-          <p style={{ fontWeight: '700', marginBottom: '0.5rem' }}>Gap Year Deduction Policy:</p>
-          <ul style={{ paddingLeft: '1.2rem', fontSize: '12px' }}>
-            {MERIT_DEDUCTION.map((d, i) => (
-              <li key={i} style={{ marginBottom: '4px' }}><strong>{d.year}:</strong> {d.deduction}</li>
-            ))}
-          </ul>
-        </div>
+        <span className={styles.heroCreditBadge}>
+          <Camera size={12} /> Image by Faheem Bozdar
+        </span>
       </div>
 
-      {/* Entry Test Breakdown */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>2026 Entry Test Pattern</p>
-      <div className={styles.testMeta}>
-        <div className={styles.testMetaPill}>✏️ 100 MCQs</div>
-        <div className={styles.testMetaPill}>⏱️ 90 Minutes</div>
-        <div className={styles.testMetaPill}>✅ No Negative Marking</div>
-      </div>
+      {/* Interactive Aggregate Calculator */}
+      <MeritCalculator />
 
-      <div className={styles.meritCard} style={{ gap: '2rem' }}>
-        <div>
-          <p style={{ fontWeight: '700', marginBottom: '1rem', fontSize: '14px' }}>Part 1: Compulsory Section (50 Marks)</p>
-          <div className={styles.testMeta} style={{ marginBottom: '0' }}>
-            {TEST_PATTERN_2026.compulsory.map(c => (
-              <div key={c.label} className={styles.testMetaPill} style={{ background: 'var(--accent-light)' }}>
-                {c.icon} {c.label}: {c.questions}
+      {/* Campus Showcase Section */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">DUET Campuses &amp; Academic Hubs</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Explore Our 3 University Campuses</h2>
+        
+        <div className={styles.campusGrid}>
+          {CAMPUSES.map((campus, idx) => (
+            <div key={idx} className={styles.campusCard}>
+              <div className={styles.campusImgWrap}>
+                <img src={campus.image} alt={campus.name} className={styles.campusImg} />
+                <span className={styles.campusCreditBadge}>
+                  <Camera size={11} /> Image by {campus.credit}
+                </span>
               </div>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <p style={{ fontWeight: '700', marginBottom: '1rem', fontSize: '14px' }}>Part 2: Optional Section (50 Marks)</p>
-          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-            Questions are based on your academic background. Choose the correct group:
-          </p>
-          <div className={styles.analysisTableWrapper} style={{ border: 'none' }}>
-            <table className={styles.analysisTable}>
-              <thead>
-                <tr>
-                  <th>Academic Group</th>
-                  <th>Subject Breakdown</th>
-                </tr>
-              </thead>
-              <tbody>
-                {TEST_PATTERN_2026.optional.map(opt => (
-                  <tr key={opt.group}>
-                    <td style={{ fontSize: '12px', fontWeight: '600' }}>{opt.group}</td>
-                    <td>
-                      <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                        {opt.subjects.map(s => (
-                          <span key={s.label} style={{ fontSize: '11px', background: 'var(--surface-hover)', padding: '2px 8px', borderRadius: '4px' }}>
-                            {s.label}: {s.q}
-                          </span>
-                        ))}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      {/* Past Merit Lists */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Past Merit Lists</p>
-      <div className={styles.meritListsIntroBox}>
-        <span>📊</span>
-        <p>
-          The most reliable way to know if you have a realistic chance is to look at actual
-          cut-off scores from past years. Browse the merit list PDFs below, organized by year
-          and department. Compare multiple years to spot the trend.
-        </p>
-      </div>
-      <div
-        className={styles.meritListBrowseCard}
-        onClick={() => setPage({
-          id: 'browser',
-          semester: MERIT_LISTS,
-          initialPath: MERIT_LISTS.rootFolder,
-          initialCrumbs: [
-            { label: 'Admissions', path: null },
-            { label: 'Merit Lists', path: MERIT_LISTS.rootFolder },
-          ],
-        })}
-      >
-        <span className={styles.meritListBrowseIcon}>🗂</span>
-        <div className={styles.meritListBrowseInfo}>
-          <p className={styles.meritListBrowseLabel}>Browse Merit Lists</p>
-          <p className={styles.meritListBrowseNote}>Past merit list PDFs organized by year and department</p>
-        </div>
-        <span className={styles.meritListBrowseArrow}>→</span>
-      </div>
-
-      {/* Sample Papers */}
-      <p className="section-label" style={{ marginTop: '2.5rem' }}>Entry Test Sample Papers</p>
-      <div className={styles.meritListsIntroBox}>
-        <span>📝</span>
-        <p>
-          Practice is key to clearing the entry test. We have collected sample papers and 
-          past question patterns to help you understand the difficulty level and the 
-          type of questions asked in Mathematics, Physics, and English.
-        </p>
-      </div>
-      <div
-        className={styles.meritListBrowseCard}
-        onClick={() => setPage({
-          id: 'browser',
-          semester: SAMPLE_PAPERS,
-          initialPath: SAMPLE_PAPERS.rootFolder,
-          initialCrumbs: [
-            { label: 'Admissions', path: null },
-            { label: 'Sample Papers', path: SAMPLE_PAPERS.rootFolder },
-          ],
-        })}
-      >
-        <span className={styles.meritListBrowseIcon}>📚</span>
-        <div className={styles.meritListBrowseInfo}>
-          <p className={styles.meritListBrowseLabel}>Browse Sample Papers</p>
-          <p className={styles.meritListBrowseNote}>Official sample papers and community-sourced past questions</p>
-        </div>
-        <span className={styles.meritListBrowseArrow}>→</span>
-      </div>
-
-      {/* Admission Timeline */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Admission Timeline</p>
-      <div className={styles.timelineCard}>
-        <p className={styles.timelineIntro}>
-          Every step below has a hard deadline. Miss one and you lose your seat. Click any step to read details.
-        </p>
-        <div className={styles.timeline}>
-          {TIMELINE.map((item, i) => (
-            <TimelineItem key={i} item={item} index={i} />
+              <div className={styles.campusBody}>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--accent)', background: 'var(--accent-light)', padding: '3px 10px', borderRadius: '99px', alignSelf: 'flex-start' }}>
+                  {campus.tag}
+                </span>
+                <h3 className={styles.campusName}>{campus.name}</h3>
+                <p className={styles.campusLocation}>
+                  <MapPin size={13} style={{ color: 'var(--accent)' }} /> {campus.location}
+                </p>
+                <p className={styles.campusFocus}>{campus.focus}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Documents */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Documents You Will Need</p>
-      <div className={styles.docsGrid}>
-        {DOCS_REQUIRED.map(d => (
-          <div key={d.name} className={styles.docCard}>
-            <span className={styles.docIcon}>{d.icon}</span>
-            <div>
-              <p className={styles.docName}>{d.name}</p>
-              <p className={styles.docNote}>{d.note}</p>
+      {/* 6-Step Admission Journey Roadmap */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Interactive Student Roadmap</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>The 6-Step DUET Admission Roadmap</h2>
+        
+        <div className={styles.roadmapContainer}>
+          <div className={styles.roadmapLine} />
+          {APPLICATION_STEPS.map(step => (
+            <div key={step.step} className={styles.roadmapStep}>
+              <div className={styles.roadmapBadge}>
+                {step.icon}
+                <span className={styles.roadmapStepNum}>{step.step}</span>
+              </div>
+              <div className={styles.roadmapCard}>
+                <div className={styles.roadmapCardHeader}>
+                  <h3 className={styles.roadmapTitle}>{step.title}</h3>
+                </div>
+                <p className={styles.roadmapDetail}>{step.detail}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className={styles.docsWarning}>
-        <span>⚠️</span>
-        <p>
-          Get everything attested <strong>before</strong> the portal opens. Attestation from a Gazetted Officer has
-          queues and takes more time than you expect. Do not start this process on the last day of admissions.
-        </p>
-      </div>
-
-      {/* Tips */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Tips That Actually Help</p>
-      <div className={styles.tipsGrid}>
-        {TIPS.map(t => (
-          <div key={t.title} className={styles.tipCard}>
-            <span className={styles.tipIcon}>{t.icon}</span>
-            <p className={styles.tipTitle}>{t.title}</p>
-            <p className={styles.tipBody}>{t.body}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* FAQs */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Admissions FAQs</p>
-      <div className={styles.faqList}>
-        {FAQS.map(f => <FaqItem key={f.q} q={f.q} a={f.a} />)}
-      </div>
-
-      {/* CTA */}
-      <div className={styles.ctaCard}>
-        <p className={styles.ctaTitle}>Ready to apply?</p>
-        <p className={styles.ctaText}>
-          The admissions portal opens seasonally. Bookmark it, check it daily once announced,
-          and submit the moment it goes live. Do not be the person who found out admissions
-          closed yesterday.
-        </p>
-        <div className={styles.ctaButtons}>
-          <a
-            href="https://admissions.duet.edu.pk"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.ctaBtnPrimary}
-          >
-            Admissions Portal ↗
-          </a>
-          <a
-            href="https://duet.edu.pk"
-            target="_blank"
-            rel="noreferrer"
-            className={styles.ctaBtnSecondary}
-          >
-            DUET Official Website ↗
-          </a>
+          ))}
         </div>
       </div>
 
+      {/* Required Documents Checklist */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Document Checklist</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Documents Needed Before Form Deadline</h2>
+        
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+          {DOCS_REQUIRED.map((doc, i) => (
+            <div key={i} style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '14px', padding: '1.25rem', display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'var(--accent-light)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                {doc.icon}
+              </div>
+              <div>
+                <p style={{ fontSize: '14px', fontWeight: 700, margin: '0 0 4px 0', color: 'var(--text-primary)', fontFamily: 'var(--font-ui)' }}>{doc.name}</p>
+                <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: 0, fontFamily: 'var(--font-ui)' }}>{doc.note}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Downloadable Merit Archives & Sample Papers */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Official Archives &amp; Practice Materials</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Download Merit Lists &amp; Entry Test Sample Papers</h2>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.25rem' }}>
+          {/* Merit Lists Archive Card */}
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '18px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--accent-light)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <FileText size={22} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, fontFamily: 'var(--font-ui)' }}>{MERIT_LISTS.label}</h3>
+                <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '2px 0 0 0' }}>Official Merit Archives</p>
+              </div>
+            </div>
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+              View cut-off percentages and rank archives across Computer Science, Cyber, Chemical, Petroleum, Electronics &amp; Civil Engineering.
+            </p>
+            <a 
+              href={`/browser/${encodeURIComponent(MERIT_LISTS.id)}`}
+              className="btn btn-primary"
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none', padding: '10px 18px', fontSize: '13px', fontWeight: 700 }}
+            >
+              Browse Merit Lists <ArrowRight size={15} />
+            </a>
+          </div>
+
+          {/* Sample Papers Card */}
+          <div style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '18px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div style={{ width: '44px', height: '44px', borderRadius: '12px', background: 'var(--accent-light)', color: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <BookOpen size={22} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, margin: 0, fontFamily: 'var(--font-ui)' }}>{SAMPLE_PAPERS.label}</h3>
+                <p style={{ fontSize: '12px', color: 'var(--text-muted)', margin: '2px 0 0 0' }}>Pre-Engineering &amp; Computer Science</p>
+              </div>
+            </div>
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.5 }}>
+              Practice real entry test paper patterns, sample MCQs, and subject breakdowns for Physics, Chemistry, Maths &amp; English.
+            </p>
+            <a 
+              href={`/browser/${encodeURIComponent(SAMPLE_PAPERS.id)}`}
+              className="btn btn-primary"
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', textDecoration: 'none', padding: '10px 18px', fontSize: '13px', fontWeight: 700 }}
+            >
+              Browse Sample Papers <ArrowRight size={15} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* Relatable Admissions FAQ */}
+      <div style={{ marginBottom: '3.5rem' }}>
+        <p className="section-label">Aspirant FAQs</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Frequently Asked Questions</h2>
+        {FAQS.map((faq, i) => (
+          <FaqItem key={i} q={faq.q} a={faq.a} />
+        ))}
+      </div>
+
+      {/* File Preview Modal */}
+      {previewFile && (
+        <FilePreviewModal
+          file={previewFile}
+          onClose={() => setPreviewFile(null)}
+        />
+      )}
     </div>
   )
 }

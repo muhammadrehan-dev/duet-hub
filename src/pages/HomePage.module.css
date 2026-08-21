@@ -1,3 +1,178 @@
+/* ─── Hero Banner & Carousel (100vh Full Screen Style) ─────────────────── */
+.heroBanner {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 100vh;
+  min-height: 580px;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: -66px;
+  margin-bottom: 3.5rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  background: #09090B;
+}
+
+.heroSlidesTrack {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroSlide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out, transform 8s ease-out;
+  transform: scale(1.03);
+}
+
+.activeSlide {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Localized soft radial black fade at bottom-left for perfect text contrast */
+.heroOverlay {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at bottom left,
+    rgba(9, 9, 11, 0.88) 0%,
+    rgba(9, 9, 11, 0.6) 40%,
+    rgba(9, 9, 11, 0.1) 75%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 850px;
+  margin: 0;
+  padding: 5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  color: #ffffff;
+}
+
+.heroTagline {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  max-width: 650px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.heroTitle {
+  font-family: var(--font-sans);
+  font-size: 78px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.0;
+  margin: 0;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.9);
+}
+
+.heroDescription {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-ui);
+  line-height: 1.65;
+  max-width: 660px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.heroActions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+
+.heroBtnPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 34px;
+  background: #1A98D5; /* Official DUET #1A98D5 Blue */
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 18px rgba(26, 152, 213, 0.45);
+}
+.heroBtnPrimary:hover {
+  background: #1480B6;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(26, 152, 213, 0.6);
+}
+
+.heroBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.heroBtnSecondary:hover {
+  background: rgba(0, 0, 0, 0.65);
+  border-color: rgba(255, 255, 255, 0.75);
+  transform: translateY(-1px);
+}
+
+.heroCreditBadge {
+  position: absolute;
+  bottom: 24px;
+  right: 2rem;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
 /* ─── Semester cards ──────────────────────────────────────────────────────── */
 .semestersGrid {
   display: grid;
@@ -55,6 +230,437 @@
   color: var(--text-secondary);
 }
 
+/* ─── Stats Bar ──────────────────────────────────────────────────────────── */
+.statsBar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.statCard {
+  background: var(--surface);
+  border: none;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statValue {
+  font-size: 22px;
+  font-weight: 900;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  margin: 2px 0 0 0;
+}
+
+/* ─── 3 Separate Feature Sections (Image + Text 2-Column Split) ────────────── */
+.featureSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 3.5rem;
+  background: var(--surface);
+  border: none;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.featureImageWrap {
+  position: relative;
+  height: 340px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.featureImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.featureSection:hover .featureImg {
+  transform: scale(1.05);
+}
+
+.featureBody {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.featureTitle {
+  font-size: 26px;
+  font-weight: 800;
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.featureText {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .featureSection {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .featureImageWrap {
+    height: 240px;
+  }
+  .featureBody {
+    padding: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .semestersGrid { grid-template-columns: 1fr; }
+  .heroBanner {
+    height: 100vh;
+    min-height: 540px;
+    margin-top: -60px;
+    margin-bottom: 2.5rem;
+  }
+  .heroContent {
+    padding: 3.5rem 1.25rem 3.5rem 1.25rem;
+    gap: 1rem;
+  }
+  .heroTitle {
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .heroTagline {
+    font-size: 13px;
+  }
+  .heroDescription {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .heroActions {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .heroBtnPrimary,
+  .heroBtnSecondary {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+    font-size: 14px;
+  }
+  .heroCreditBadge {
+    bottom: 12px;
+    right: 1.25rem;
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+  .semestersGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Bento Grid Collage (Sunlink Solar Event Gallery Style) ───────────────── */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 240px;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.bentoCard {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.bentoCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.bentoCardTall {
+  grid-row: span 2;
+}
+
+.bentoCardWide {
+  grid-column: span 2;
+}
+
+.bentoStatCard {
+  background: linear-gradient(135deg, #1A98D5 0%, #0F6B99 100%);
+  color: #ffffff;
+  padding: 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(26, 152, 213, 0.3);
+}
+
+.bentoImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.bentoCard:hover .bentoImg {
+  transform: scale(1.06);
+}
+
+.bentoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(9, 9, 11, 0.9) 0%,
+    rgba(9, 9, 11, 0.4) 50%,
+    rgba(9, 9, 11, 0.05) 100%
+  );
+  z-index: 1;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.bentoContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.bentoArrow {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  z-index: 3;
+  transition: background 0.2s, transform 0.25s, border-color 0.2s;
+}
+
+.bentoCard:hover .bentoArrow {
+  background: #1A98D5;
+  border-color: #1A98D5;
+  transform: scale(1.1) rotate(45deg);
+}
+
+.photoCreditBadge {
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--font-ui);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Image & Study Contribution Cards Grid ────────────────────────────────── */
+.contributeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.contributeCard {
+  background: var(--surface);
+  border: none;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.contributeCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.contributeImgWrap {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.contributeImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.contributeCard:hover .contributeImg {
+  transform: scale(1.06);
+}
+
+.contributeBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.contributeTitle {
+  font-size: 18px;
+  font-weight: 800;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.contributeDesc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contributeBtnGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.contactBadgeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.contactBadgeBtn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroBanner {
+    height: 100vh;
+    min-height: 540px;
+    margin-top: -60px;
+    margin-bottom: 2.5rem;
+  }
+  .heroContent {
+    padding: 5rem 1.25rem 3.5rem 1.25rem;
+    gap: 1rem;
+  }
+  .heroTitle {
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .heroTagline {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .heroDescription {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .heroBtnPrimary,
+  .heroBtnSecondary {
+    padding: 14px 24px;
+    font-size: 14px;
+    width: 100%;
+    justify-content: center;
+  }
+  .heroCreditBadge {
+    bottom: 16px;
+    right: 1.25rem;
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bentoGrid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 240px;
+  }
+  .bentoCardTall,
+  .bentoCardWide {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
 }

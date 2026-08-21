@@ -1,8 +1,14 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useFolderContents } from '@/hooks/useFolderContents'
 import { getFileInfo, formatFileSize } from '@/lib/files'
 import Spinner from '@/components/Spinner'
 import FilePreviewModal from '@/components/FilePreviewModal'
+import { 
+  Folder, ArrowRight, Eye, Download, FileText, 
+  Search, X, FolderArchive, BookOpen, ChevronLeft,
+  LayoutGrid, List, HardDrive, CornerUpLeft
+} from 'lucide-react'
 import styles from './BrowserPage.module.css'
 
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
@@ -25,17 +31,6 @@ function Breadcrumb({ crumbs, onNavigate }) {
   )
 }
 
-// ─── Folder row ───────────────────────────────────────────────────────────────
-function FolderRow({ item, onClick }) {
-  return (
-    <div className={styles.folderRow} onClick={onClick}>
-      <span className={styles.folderIcon}>📂</span>
-      <span className={styles.folderName}>{item.name}</span>
-      <span className={styles.folderArrow}>→</span>
-    </div>
-  )
-}
-
 // ─── Previewable extensions ───────────────────────────────────────────────────
 const PREVIEWABLE_EXTS = [
   'jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp', 'ico',
@@ -53,18 +48,18 @@ function isPreviewable(filename) {
   return PREVIEWABLE_EXTS.includes(ext)
 }
 
-// ─── File row ─────────────────────────────────────────────────────────────────
+// ─── File row / card ──────────────────────────────────────────────────────────
 function FileRow({ item, onPreview }) {
   const info = getFileInfo(item.name)
+  const IconComp = info.icon || FileText
   const canPreview = isPreviewable(item.name)
 
   return (
     <div className={styles.fileRow}>
-      <span className={styles.fileEmoji}>{info.icon}</span>
-      <span
-        className={styles.extBadge}
-        style={{ '--ext-color': info.color }}
-      >
+      <div className={styles.fileIconWrap}>
+        <IconComp size={18} />
+      </div>
+      <span className={styles.extBadge} style={{ '--ext-color': info.color }}>
         {info.label}
       </span>
       <span className={styles.fileName}>{item.name}</span>
@@ -76,7 +71,7 @@ function FileRow({ item, onPreview }) {
             onClick={() => onPreview(item)}
             title="Preview file"
           >
-            👁 Preview
+            <Eye size={13} /> Preview
           </button>
         )}
         <a
@@ -87,24 +82,25 @@ function FileRow({ item, onPreview }) {
           rel="noreferrer"
           title="Download file"
         >
-          ↓
+          <Download size={15} />
         </a>
       </div>
     </div>
   )
 }
 
-// ─── Folder contents view ─────────────────────────────────────────────────────
+// ─── Folder View Component ────────────────────────────────────────────────────
 function FolderView({ github, path, onEnterFolder, onPreview }) {
   const { items, loading, error } = useFolderContents(github, path)
   const [search, setSearch] = useState('')
+  const [viewMode, setViewMode] = useState('list') // 'list' or 'grid'
 
   useEffect(() => { setSearch('') }, [path])
 
-  if (loading) return <div className="empty-state"><Spinner /></div>
-  if (error)   return <div className="empty-state" style={{ color: 'var(--red)' }}>Error: {error}</div>
+  if (loading) return <div className="empty-state" style={{ padding: '4rem 0' }}><Spinner /></div>
+  if (error)   return <div className="empty-state" style={{ color: 'var(--red)', padding: '3rem 0' }}>Error loading folder: {error}</div>
   if (!items || items.length === 0)
-    return <div className="empty-state">This folder is empty.</div>
+    return <div className="empty-state" style={{ padding: '3rem 0' }}>This folder is empty.</div>
 
   const folders = items.filter(i => i.type === 'dir')
   const files   = items.filter(i => i.type === 'file')
@@ -120,60 +116,84 @@ function FolderView({ github, path, onEnterFolder, onPreview }) {
 
   return (
     <div>
-      {/* Stats bar */}
-      <div className={styles.statsBar}>
-        {folders.length > 0 && (
-          <span className={styles.statChip}>📂 {folders.length} folder{folders.length !== 1 ? 's' : ''}</span>
-        )}
-        {files.length > 0 && (
-          <span className={styles.statChip}>📄 {files.length} file{files.length !== 1 ? 's' : ''}</span>
-        )}
-      </div>
-
-      {/* Search */}
-      {items.length > 5 && (
+      {/* Control Bar: Search & Filter & View Mode */}
+      <div className={styles.controlBar}>
         <div className={styles.searchWrapper}>
-          <span className={styles.searchIcon}>⌕</span>
+          <Search size={16} className={styles.searchIcon} />
           <input
             className={styles.search}
             type="text"
-            placeholder="Filter files and folders…"
+            placeholder="Search files and subfolders..."
             value={search}
             onChange={e => setSearch(e.target.value)}
           />
           {search && (
-            <button className={styles.clearSearch} onClick={() => setSearch('')}>✕</button>
+            <button className={styles.clearSearch} onClick={() => setSearch('')}>
+              <X size={14} />
+            </button>
           )}
         </div>
-      )}
+
+        <div className={styles.controlsRight}>
+          <div className={styles.statsBar}>
+            {folders.length > 0 && (
+              <span className={styles.statChip}>
+                <Folder size={14} /> {folders.length} folder{folders.length !== 1 ? 's' : ''}
+              </span>
+            )}
+            {files.length > 0 && (
+              <span className={styles.statChip}>
+                <FileText size={14} /> {files.length} file{files.length !== 1 ? 's' : ''}
+              </span>
+            )}
+          </div>
+
+          <div className={styles.viewModeGroup}>
+            <button 
+              className={`${styles.viewModeBtn} ${viewMode === 'list' ? styles.activeViewMode : ''}`}
+              onClick={() => setViewMode('list')}
+              title="List View"
+            >
+              <List size={16} />
+            </button>
+            <button 
+              className={`${styles.viewModeBtn} ${viewMode === 'grid' ? styles.activeViewMode : ''}`}
+              onClick={() => setViewMode('grid')}
+              title="Grid Cards View"
+            >
+              <LayoutGrid size={16} />
+            </button>
+          </div>
+        </div>
+      </div>
 
       {!hasResults && (
-        <div className="empty-state">Nothing matches "{search}"</div>
+        <div className="empty-state" style={{ padding: '3rem 0' }}>Nothing matches "{search}"</div>
       )}
 
-      {/* Folders */}
+      {/* Subfolders Grid */}
       {filteredFolders.length > 0 && (
-        <div className={styles.section}>
-          {filteredFolders.length < folders.length && (
-            <p className={styles.sectionLabel}>Folders ({filteredFolders.length} shown)</p>
-          )}
-          <div className={styles.folderList}>
+        <div style={{ marginBottom: '2rem' }}>
+          <p className={styles.sectionLabel}>Directories ({filteredFolders.length})</p>
+          <div className={styles.folderGrid}>
             {filteredFolders.map(f => (
-              <FolderRow key={f.path} item={f} onClick={() => onEnterFolder(f)} />
+              <div key={f.path} className={styles.folderCard} onClick={() => onEnterFolder(f)}>
+                <div className={styles.folderCardIcon}>
+                  <Folder size={20} />
+                </div>
+                <span className={styles.folderCardName}>{f.name}</span>
+                <ArrowRight size={16} className={styles.folderCardArrow} />
+              </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Files */}
+      {/* Files Table */}
       {filteredFiles.length > 0 && (
-        <div className={styles.section}>
-          {folders.length > 0 && filteredFiles.length > 0 && (
-            <p className={styles.sectionLabel}>
-              Files{filteredFiles.length < files.length ? ` (${filteredFiles.length} shown)` : ''}
-            </p>
-          )}
-          <div className={styles.fileList}>
+        <div>
+          <p className={styles.sectionLabel}>Files ({filteredFiles.length})</p>
+          <div className={styles.fileListTable}>
             {filteredFiles.map(f => (
               <FileRow key={f.path} item={f} onPreview={onPreview} />
             ))}
@@ -184,46 +204,67 @@ function FolderView({ github, path, onEnterFolder, onPreview }) {
   )
 }
 
-// ─── Main BrowserPage ─────────────────────────────────────────────────────────
-export default function BrowserPage({ semester, initialPath, initialCrumbs, setPage }) {
-  // crumbs: [{ label, path }]
+// ─── Main BrowserPage Component ───────────────────────────────────────────────
+export default function BrowserPage({ semester, initialPath, initialCrumbs }) {
+  const navigate = useNavigate()
   const [crumbs, setCrumbs] = useState(initialCrumbs || [
     { label: 'Home', path: null },
     { label: semester.label, path: null },
   ])
-  const currentPath = crumbs[crumbs.length - 1].path
-
-  // ── Preview state ──
   const [previewFile, setPreviewFile] = useState(null)
+
+  const currentPath = crumbs[crumbs.length - 1].path
+  const pageTitle = crumbs[crumbs.length - 1].label
 
   function enterFolder(folderItem) {
     setCrumbs(prev => [...prev, { label: folderItem.name, path: folderItem.path }])
   }
 
   function navigateToCrumb(index) {
+    if (index === 0) {
+      navigate('/resources')
+      return
+    }
     setCrumbs(prev => prev.slice(0, index + 1))
   }
 
-  // Determine what to show as page title
-  const pageTitle = crumbs[crumbs.length - 1].label
-  const pageDepth = crumbs.length
+  function goBackOneLevel() {
+    if (crumbs.length > 1) {
+      navigateToCrumb(crumbs.length - 2)
+    } else {
+      navigate('/resources')
+    }
+  }
 
   return (
-    <div className="page">
-      <Breadcrumb crumbs={crumbs} onNavigate={navigateToCrumb} />
-
-      <div className={styles.pageHeader}>
-        <div className={styles.pageHeaderIcon}>
-          {pageDepth <= 2 ? '🗂' : pageDepth === 3 ? '📚' : '📂'}
+    <div className="page" style={{ paddingTop: '80px' }}>
+      {/* Directory Header Card */}
+      <div className={styles.headerCard}>
+        <div className={styles.topBar}>
+          <button className={styles.backBtn} onClick={goBackOneLevel}>
+            <CornerUpLeft size={15} /> Go Up Level
+          </button>
+          <span className={styles.repoBadge}>
+            <HardDrive size={13} /> {semester.github?.repo || 'DUET Repository'}
+          </span>
         </div>
-        <div>
-          <h1 className={styles.pageTitle}>{pageTitle}</h1>
-          {currentPath && (
-            <p className={styles.pagePath}>{currentPath}</p>
-          )}
+
+        <Breadcrumb crumbs={crumbs} onNavigate={navigateToCrumb} />
+
+        <div className={styles.headerMain}>
+          <div className={styles.folderBigIcon}>
+            <FolderArchive size={28} />
+          </div>
+          <div>
+            <h1 className={styles.pageTitle}>{pageTitle}</h1>
+            <p className={styles.pagePath}>
+              {currentPath || semester.rootFolder || 'Root Directory'}
+            </p>
+          </div>
         </div>
       </div>
 
+      {/* Directory Contents */}
       <FolderView
         github={semester.github}
         path={currentPath ?? (semester.rootFolder || '')}
@@ -231,7 +272,7 @@ export default function BrowserPage({ semester, initialPath, initialCrumbs, setP
         onPreview={setPreviewFile}
       />
 
-      {/* ── File Preview Modal ── */}
+      {/* File Preview Modal */}
       {previewFile && (
         <FilePreviewModal
           file={previewFile}
