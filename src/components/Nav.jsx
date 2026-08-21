@@ -39,7 +39,8 @@ export default function Nav() {
     }
   }
 
-  const isTransparent = isHomePage && !scrolled
+  const isBrowserPage = location.pathname.startsWith('/browser')
+  const isTransparent = !isBrowserPage && !scrolled
 
   return (
     <nav className={`${styles.nav} ${isTransparent ? styles.transparentNav : styles.solidNav}`}>
