@@ -240,15 +240,19 @@ export default function GalleryPage() {
 
   return (
     <div className="page">
-      {/* Header Bar */}
-      <div className={styles.galleryHeaderBar}>
-        <div>
-          <span className={styles.categoryBadge}>PINTEREST STYLE CAMPUS GALLERY</span>
-          <h1 className={styles.galleryTitle}>CAMPUS GALLERY</h1>
-          <p className={styles.gallerySubtext}>
-            Click any photo to view in full screen with caption, location, and photo credit.
+      {/* Hero Banner (Full 100vh Screen Height) */}
+      <div className={styles.heroBanner}>
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
+          <p className={styles.heroTagline}>CAMPUS PHOTO SHOWCASE</p>
+          <h1 className={styles.heroTitle}>CAMPUS EVENT GALLERY</h1>
+          <p className={styles.heroDescription}>
+            A visual chronicle of Dawood University of Engineering &amp; Technology — capturing main campus landmarks, IC&amp;S Gulberg departments, CEMET Sukkur facilities, and student celebrations.
           </p>
         </div>
+        <span className={styles.heroCreditBadge}>
+          <Camera size={12} /> Image by Official Facebook Page
+        </span>
       </div>
 
       {/* Search & Category Controls */}
