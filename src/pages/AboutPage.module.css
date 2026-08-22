@@ -232,32 +232,315 @@
   margin: 0;
 }
 
-.quoteBox {
-  background: linear-gradient(135deg, rgba(26, 152, 213, 0.1) 0%, rgba(15, 107, 153, 0.04) 100%);
-  border: 1px solid var(--accent);
-  border-radius: 16px;
-  padding: 1.5rem 2rem;
-  margin-bottom: 3rem;
-  position: relative;
+/* ─── Open Source Quotes Section ────────────────────────────────────────── */
+.quotesSectionContainer {
+  margin: 3.5rem 0 3.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.quoteText {
-  font-size: 16px;
-  font-weight: 600;
-  font-style: italic;
-  font-family: var(--font-ui);
+.quotesSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.quotesControlBtns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quoteCtrlBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
   color: var(--text-primary);
-  margin: 0 0 8px 0;
-  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+}
+.quoteCtrlBtn:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  transform: scale(1.05);
 }
 
-.quoteAuthor {
+.quoteCounterBadge {
   font-size: 12px;
   font-weight: 800;
   font-family: var(--font-mono);
   color: var(--accent);
+  background: var(--accent-light);
+  padding: 6px 14px;
+  border-radius: 99px;
+}
+
+.quoteShuffleBtn,
+.quoteToggleGridBtn {
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.quoteShuffleBtn:hover,
+.quoteToggleGridBtn:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+/* Featured Main Quote Box */
+.featuredQuoteBox {
+  background: linear-gradient(135deg, rgba(26, 152, 213, 0.12) 0%, rgba(15, 107, 153, 0.04) 100%);
+  border: 1px solid var(--accent);
+  border-radius: 24px;
+  padding: 2.25rem;
+  display: flex;
+  gap: 1.5rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.quoteIconBadge {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: var(--accent);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(26, 152, 213, 0.3);
+}
+
+.quoteContentGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.quoteMetaHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quoteTagPill {
+  background: var(--accent);
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.quoteCategoryPill {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.featuredQuoteText {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+  font-family: var(--font-ui);
+  color: var(--text-primary);
+  line-height: 1.6;
   margin: 0;
-  text-transform: uppercase;
+}
+
+.quoteFooterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(26, 152, 213, 0.2);
+  padding-top: 1rem;
+}
+
+.featuredQuoteAuthor {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  font-family: var(--font-ui);
+}
+
+.copyQuoteBtn {
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.copyQuoteBtn:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+}
+
+/* Expandable Grid of All 22 Quotes */
+.allQuotesExpandSection {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.quoteFilterTabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.quoteFilterBtn {
+  padding: 6px 14px;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.quoteFilterBtn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.activeQuoteFilter {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.quotesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 800px) {
+  .quotesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quoteCardItem {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.quoteCardItem:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.quoteCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.quoteNumberPill {
+  font-size: 11px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 2px 8px;
+  border-radius: 99px;
+}
+
+.quoteTagPillSmall {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.cardQuoteBody {
+  font-size: 14px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.cardQuoteFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.cardAuthorName {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.cardCopyBtn {
+  background: transparent;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.15s;
+}
+
+.cardCopyBtn:hover {
+  color: var(--accent);
 }
 
 /* Photo Showcase Grid */
@@ -340,11 +623,33 @@
 /* ─── Developer card ──────────────────────────────────────────────────────── */
 .devCard {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 1.25rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 1.75rem;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.devHeader {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.devNameRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.devRole {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 2px 0 0 0;
+  font-weight: 500;
 }
 
 .devAvatarWrap {
@@ -366,29 +671,30 @@
   font-family: var(--font-mono);
   font-size: 16px;
   font-weight: 700;
-  color: var(--bg);
+  color: #ffffff;
   letter-spacing: 0.05em;
+  box-shadow: 0 4px 14px rgba(26, 152, 213, 0.3);
 }
 
 .devBadge {
-  font-size: 10px;
+  font-size: 11px;
   font-family: var(--font-ui);
-  font-weight: 600;
-  color: var(--text-muted);
+  font-weight: 700;
+  color: var(--accent);
   background: var(--accent-light);
   border: 1px solid var(--border);
-  padding: 2px 8px;
+  padding: 3px 10px;
   border-radius: 99px;
   white-space: nowrap;
   letter-spacing: 0.04em;
 }
 
 .devName {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
   color: var(--text-primary);
   font-family: var(--font-ui);
-  margin-bottom: 2px;
+  margin: 0;
 }
 
 .devAlias {
@@ -399,17 +705,51 @@
 }
 
 .devBio {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  line-height: 1.65;
+  margin: 0;
 }
 
-.devContacts {
+.subLabel {
+  font-size: 12px;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.interestsGrid {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.6rem;
+  gap: 8px;
+}
+
+.interestItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.hobbiesWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.linksRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .contactBtn {

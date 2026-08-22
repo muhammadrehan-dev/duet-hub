@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { 
   Terminal, ShieldCheck, Zap, Globe, Code2, GitBranch, 
   Cat, Box, Cpu, Shield, Database, Activity, 
   MessageSquare, Mail, 
   BookOpen, Feather, Leaf, Laptop, ArrowRight, Camera,
-  GraduationCap, AlertTriangle, Sparkles
+  GraduationCap, AlertTriangle, Sparkles, Quote, RefreshCw,
+  Copy, Check, ChevronLeft, ChevronRight, Grid
 } from 'lucide-react'
+import { QUOTES } from '@/data/quotes'
 import styles from './AboutPage.module.css'
 
 function InstagramIcon({ size = 14, className, style }) {
@@ -36,7 +39,7 @@ function GithubIcon({ size = 14, className, style }) {
   )
 }
 
-const SKILLS = [
+const INTERESTS = [
   { label: 'Linux', icon: <Terminal size={18} /> },
   { label: 'Cybersecurity', icon: <ShieldCheck size={18} /> },
   { label: 'Open Source', icon: <Zap size={18} /> },
@@ -138,6 +141,18 @@ const CONTRIBUTORS = [
 ]
 
 export default function AboutPage() {
+  const [currentQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length))
+  const [copiedQuoteId, setCopiedQuoteId] = useState(null)
+
+  const currentQuote = QUOTES[currentQuoteIndex]
+
+  const handleCopyQuote = (quoteObj) => {
+    const text = `"${quoteObj.quote}" — ${quoteObj.author} (${quoteObj.category})`
+    navigator.clipboard.writeText(text)
+    setCopiedQuoteId(quoteObj.id)
+    setTimeout(() => setCopiedQuoteId(null), 2000)
+  }
+
   return (
     <div className="page">
 
@@ -228,12 +243,48 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Linus Torvalds Inspired Quote Box */}
-        <div className={styles.quoteBox}>
-          <p className={styles.quoteText}>
-            "Talk is cheap. Show me the code. We built DUET Hub so high-quality academic resources remain 100% free, open, and accessible for every student forever."
-          </p>
-          <p className={styles.quoteAuthor}>— Inspired by Linus Torvalds &amp; Open Source Ethics</p>
+        {/* Dynamic Open Source Quotes Section (Randomly Picks 1 of 22 Quotes on Visit) */}
+        <div className={styles.quotesSectionContainer}>
+          <div className={styles.quotesSectionHeader}>
+            <div>
+              <p className="hero-label" style={{ color: 'var(--accent)', fontWeight: 700, margin: 0 }}>WORDS TO CODE BY</p>
+              <h2 style={{ fontSize: '26px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '4px 0 0 0' }}>
+                Open Source &amp; Engineering Wisdom
+              </h2>
+            </div>
+          </div>
+
+          {/* Main Random Quote Box */}
+          <div className={styles.featuredQuoteBox}>
+            <div className={styles.quoteIconBadge}>
+              <Quote size={28} />
+            </div>
+
+            <div className={styles.quoteContentGroup}>
+              <div className={styles.quoteMetaHeader}>
+                <span className={styles.quoteTagPill}>{currentQuote.tag}</span>
+                <span className={styles.quoteCategoryPill}>{currentQuote.category}</span>
+              </div>
+
+              <p className={styles.featuredQuoteText}>
+                "{currentQuote.quote}"
+              </p>
+
+              <div className={styles.quoteFooterRow}>
+                <p className={styles.featuredQuoteAuthor}>
+                  — Inspired by <strong>{currentQuote.author}</strong>
+                </p>
+
+                <button 
+                  className={styles.copyQuoteBtn}
+                  onClick={() => handleCopyQuote(currentQuote)}
+                >
+                  {copiedQuoteId === currentQuote.id ? <Check size={14} color="#10B981" /> : <Copy size={14} />}
+                  <span>{copiedQuoteId === currentQuote.id ? 'Copied!' : 'Copy Quote'}</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -268,232 +319,134 @@ export default function AboutPage() {
       {/* Developer */}
       <p className="section-label" style={{ marginTop: '3rem' }}>The Developer</p>
       <div className={styles.devCard}>
-        <div className={styles.devAvatarWrap}>
-          <div className={styles.devAvatar}>CH</div>
-          <div className={styles.devBadge}>Batch 25F</div>
-        </div>
-        <div className={styles.devInfo}>
-          <p className={styles.devName}>Muhammad Rehan</p>
-          <p className={styles.devAlias}>@CH4_EZIO · Cybersecurity A2</p>
-          <p className={styles.devBio}>
-            Cybersecurity student at DUET, Linux enthusiast, open-source believer.
-            I spend way too much time in the terminal and not enough time sleeping.
-            I read Kafka in the day and break Linux installs at night.
-            If it runs on Linux, I'm probably already interested.
-          </p>
-          <div className={styles.devContacts}>
-            <a href="mailto:CH4_Ezio@proton.me" className={styles.contactBtn}>
-              <Mail size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> CH4_Ezio@proton.me
-            </a>
-            <a
-              href="https://wa.me/923229680603"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.contactBtn}
-            >
-              <MessageSquare size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> WhatsApp
-            </a>
-            <a
-              href="https://linkedin.com/in/muhammad-rehanriaz"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.contactBtn}
-            >
-              <LinkedinIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> LinkedIn
-            </a>
-            <a
-              href="https://github.com/muhammadrehan-dev"
-              target="_blank"
-              rel="noreferrer"
-              className={styles.contactBtn}
-            >
-              <GithubIcon size={14} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> GitHub
-            </a>
+        <div className={styles.devHeader}>
+          <div className={styles.devAvatar}>
+            MR
           </div>
-          <p className={styles.contactNote}>Don't hesitate to reach out — happy to chat.</p>
+          <div>
+            <div className={styles.devNameRow}>
+              <h2 className={styles.devName}>Muhammad Rehan</h2>
+              <span className={styles.devBadge}>Cybersecurity '25F</span>
+            </div>
+            <p className={styles.devRole}>Creator &amp; Maintainer of DUET Resource Hub</p>
+          </div>
+        </div>
+
+        <p className={styles.devBio}>
+          Sophomore Cybersecurity student at Dawood University of Engineering &amp; Technology (Batch 25F). 
+          Passionate about CTFs, reverse engineering, Linux administration, open-source culture, and building tools that make academic life easier for every Dawoodian.
+        </p>
+
+        <p className={styles.subLabel}>Core Interests</p>
+        <div className={styles.interestsGrid}>
+          {INTERESTS.map((item, index) => (
+            <div key={index} className={styles.interestItem}>
+              {item.icon}
+              <span>{item.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <p className={styles.subLabel} style={{ marginTop: '1.5rem' }}>Tech &amp; Animal Analogies</p>
+        <div className={styles.interestsGrid}>
+          {ANIMALS.map((item, index) => (
+            <div key={index} className={styles.interestItem}>
+              {item.icon}
+              <span>{item.animal} = {item.tech}</span>
+            </div>
+          ))}
+        </div>
+
+        <p className={styles.subLabel} style={{ marginTop: '1.5rem' }}>Authors, Urdu Literature &amp; Hobbies</p>
+        <div className={styles.hobbiesWrap}>
+          {HOBBIES.map((h, i) => (
+            <span key={i} className={`${styles.hobbyTag} ${HOBBY_COLORS[h.group]}`}>
+              {h.label}
+            </span>
+          ))}
+        </div>
+
+        <p className={styles.subLabel} style={{ marginTop: '1.5rem' }}>Connect with Developer</p>
+        <div className={styles.linksRow}>
+          <a href="https://github.com/muhammadrehan-dev" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
+            <GithubIcon size={14} /> GitHub
+          </a>
+          <a href="https://linkedin.com/in/muhammadrehan-dev" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
+            <LinkedinIcon size={14} /> LinkedIn
+          </a>
+          <a href="https://instagram.com/ch4_ezio" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
+            <InstagramIcon size={14} /> Instagram
+          </a>
+          <a href="mailto:contact@rehan.dev" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
+            <Mail size={14} /> Email
+          </a>
         </div>
       </div>
 
-      {/* Resource Contributors */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Resource Contributors</p>
-      <p className={styles.contributorsIntro}>
-        Special thanks to the amazing students who shared their departments' drives, materials, and resources to help expand the DUET Resource Hub.
-      </p>
+      {/* Projects */}
+      <p className="section-label" style={{ marginTop: '3rem' }}>Other Projects by Developer</p>
+      <div className={styles.projectsGrid}>
+        {PROJECTS.map((proj, index) => (
+          <a key={index} href={proj.url} target="_blank" rel="noreferrer" className={styles.projectCard}>
+            <div className={styles.projectTop}>
+              <h3 className={styles.projectName}>{proj.name}</h3>
+              <span className={styles.projectBadge}>{proj.badge}</span>
+            </div>
+            <p className={styles.projectDesc}>{proj.desc}</p>
+          </a>
+        ))}
+      </div>
+
+      {/* Key Contributors */}
+      <p className="section-label" style={{ marginTop: '3.5rem' }}>Key Contributors &amp; Resource Managers</p>
+      <h2 style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-sans)', margin: '0 0 1.5rem 0' }}>Community Leadership</h2>
+
       <div className={styles.contributorsGrid}>
         {CONTRIBUTORS.map((c, i) => (
           <div key={i} className={styles.contributorCard}>
             <div className={styles.contributorHeader}>
               <div className={styles.contributorAvatar}>{c.avatar}</div>
               <div>
-                <p className={styles.contributorName}>{c.name}</p>
-                <p className={styles.contributorMeta}>
-                  {c.roll} · {c.dept}
-                </p>
+                <h3 className={styles.contributorName}>{c.name}</h3>
+                <span className={styles.contributorRole}>{c.role}</span>
               </div>
             </div>
-            
-            <span className={styles.contributorRole}>{c.role}</span>
+
+            <div className={styles.contributorMeta}>
+              <span>{c.dept}</span> • <span>Roll: {c.roll}</span>
+            </div>
+
             <p className={styles.contributorBio}>{c.bio}</p>
-            
+
             {c.helpers && (
               <div className={styles.helpersSection}>
-                <p className={styles.helpersTitle}>Core Contributors / Helpers</p>
-                <div className={styles.helpersGrid}>
-                  {c.helpers.map((h, j) => (
-                    <span key={j} className={styles.helperChip}>
-                      {h.name} <span className={styles.helperRoll}>({h.roll})</span>
+                <p className={styles.helpersTitle}>Core Team Helpers:</p>
+                <div className={styles.helpersList}>
+                  {c.helpers.map((h, idx) => (
+                    <span key={idx} className={styles.helperPill}>
+                      {h.name} ({h.roll})
                     </span>
                   ))}
                 </div>
               </div>
             )}
 
-            <div className={styles.contributorContacts}>
+            <div className={styles.contactsRow}>
               {c.contacts.map((contact, idx) => (
-                <a
-                  key={idx}
-                  href={contact.url}
-                  target="_blank"
-                  rel="noreferrer"
+                <a 
+                  key={idx} 
+                  href={contact.url} 
+                  target="_blank" 
+                  rel="noreferrer" 
                   className={styles.contactBtn}
                 >
-                  {contact.icon} {contact.label}
+                  {contact.icon}
+                  <span>{contact.label}</span>
                 </a>
               ))}
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Skills */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Skills &amp; Interests</p>
-      <div className={styles.skillsGrid}>
-        {SKILLS.map(s => (
-          <div key={s.label} className={styles.skillChip}>
-            <span>{s.icon}</span>
-            <span>{s.label}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Favourite Animals (tech mascots) */}
-      <p className="section-label" style={{ marginTop: '2.5rem' }}>Favourite Animals <span className={styles.sectionNote}></span></p>
-      <div className={styles.animalsGrid}>
-        {ANIMALS.map((a, i) => (
-          <div key={i} className={styles.animalChip}>
-            <span className={styles.animalIcon}>{a.icon}</span>
-            <div>
-              <p className={styles.animalName}>{a.animal}</p>
-              <p className={styles.animalTech}>{a.tech}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Hobbies */}
-      <p className="section-label" style={{ marginTop: '2.5rem' }}>Outside of Class</p>
-      <div className={styles.hobbyGroups}>
-        <div className={styles.hobbyGroup}>
-          <p className={styles.hobbyGroupLabel}>
-            <BookOpen size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} /> Books
-          </p>
-          <div className={styles.hobbiesList}>
-            {HOBBIES.filter(h => h.group === 'books').map(h => (
-              <span key={h.label} className={`${styles.hobbyTag} ${HOBBY_COLORS[h.group]}`}>{h.label}</span>
-            ))}
-          </div>
-        </div>
-        <div className={styles.hobbyGroup}>
-          <p className={styles.hobbyGroupLabel}>
-            <Feather size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} /> Urdu Literature
-          </p>
-          <div className={styles.hobbiesList}>
-            {HOBBIES.filter(h => h.group === 'urdu').map(h => (
-              <span key={h.label} className={`${styles.hobbyTag} ${HOBBY_COLORS[h.group]}`}>{h.label}</span>
-            ))}
-          </div>
-        </div>
-        <div className={styles.hobbyGroup}>
-          <p className={styles.hobbyGroupLabel}>
-            <Leaf size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} /> Life
-          </p>
-          <div className={styles.hobbiesList}>
-            {HOBBIES.filter(h => h.group === 'life').map(h => (
-              <span key={h.label} className={`${styles.hobbyTag} ${HOBBY_COLORS[h.group]}`}>{h.label}</span>
-            ))}
-          </div>
-        </div>
-        <div className={styles.hobbyGroup}>
-          <p className={styles.hobbyGroupLabel}>
-            <Laptop size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '6px' }} /> Tech
-          </p>
-          <div className={styles.hobbiesList}>
-            {HOBBIES.filter(h => h.group === 'tech').map(h => (
-              <span key={h.label} className={`${styles.hobbyTag} ${HOBBY_COLORS[h.group]}`}>{h.label}</span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Projects */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Projects</p>
-      <div className={styles.projectsGrid}>
-        {PROJECTS.map(p => (
-          <a
-            key={p.name}
-            href={p.url}
-            target="_blank"
-            rel="noreferrer"
-            className={styles.projectCard}
-          >
-            <div className={styles.projectTop}>
-              <p className={styles.projectName}>{p.name}</p>
-              <span className={styles.projectBadge}>{p.badge}</span>
-            </div>
-            <p className={styles.projectDesc}>{p.desc}</p>
-            <p className={styles.projectUrl}>{p.url.replace('https://', '')}</p>
-          </a>
-        ))}
-      </div>
-
-      {/* Contribute */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Contribute</p>
-      <div className={styles.contributeCard}>
-        <p className={styles.contributeIntro}>
-          Have notes, assignments, or past papers? Upload them — they'll show up here
-          automatically for everyone. No account needed beyond GitHub.
-        </p>
-        <div className={styles.steps}>
-          <div className={styles.step}>
-            <span className={styles.stepNum}>1</span>
-            <div>
-              <p className={styles.stepTitle}>Fork the repository</p>
-              <p className={styles.stepDesc}>Open it on GitHub and hit Fork</p>
-            </div>
-          </div>
-          <div className={styles.step}>
-            <span className={styles.stepNum}>2</span>
-            <div>
-              <p className={styles.stepTitle}>Upload your files</p>
-              <p className={styles.stepDesc}>Drop them in the correct semester &amp; subject folder</p>
-            </div>
-          </div>
-          <div className={styles.step}>
-            <span className={styles.stepNum}>3</span>
-            <div>
-              <p className={styles.stepTitle}>Open a pull request</p>
-              <p className={styles.stepDesc}>It'll be reviewed and merged — your files go live</p>
-            </div>
-          </div>
-        </div>
-        <a
-          href="https://github.com/muhammadrehan-dev/subjects"
-          target="_blank"
-          rel="noreferrer"
-          className={styles.repoBtn}
-        >
-          View Repository on GitHub →
-        </a>
       </div>
 
     </div>

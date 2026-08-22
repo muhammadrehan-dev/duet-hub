@@ -5,7 +5,7 @@ import {
   FolderArchive, ArrowRight, Camera, ArrowUpRight, 
   BookOpen, GraduationCap, Users, ShieldCheck, Zap, 
   FileText, Sparkles, Layers, Globe, Code2, Heart,
-  Mail, MessageSquare, UploadCloud
+  Mail, MessageSquare, UploadCloud, Pin, MapPin
 } from 'lucide-react'
 import styles from './HomePage.module.css'
 
@@ -60,7 +60,10 @@ const GALLERY_PHOTOS = [
     location: 'Main Campus, New M.A. Jinnah Road',
     image: '/main campus main gate on independence day image by aheer.png',
     credit: 'Aheer',
-    layout: 'tall',
+    avatar: 'A',
+    avatarBg: '#E60023',
+    category: 'MAIN',
+    pinsCount: 142,
   },
   {
     id: 2,
@@ -68,7 +71,10 @@ const GALLERY_PHOTOS = [
     location: 'Gulberg Town Campus',
     image: '/gulber inside image by fozan.png',
     credit: 'Fozan',
-    layout: 'wide',
+    avatar: 'F',
+    avatarBg: '#1A98D5',
+    category: 'GULBERG',
+    pinsCount: 98,
   },
   {
     id: 3,
@@ -76,7 +82,10 @@ const GALLERY_PHOTOS = [
     location: 'Main Campus',
     image: '/main campus image from chemical dept image by Aftab Ullah.png',
     credit: 'Aftab Ullah',
-    layout: 'normal',
+    avatar: 'A',
+    avatarBg: '#10B981',
+    category: 'MAIN',
+    pinsCount: 87,
   },
   {
     id: 5,
@@ -84,7 +93,10 @@ const GALLERY_PHOTOS = [
     location: '14th August Celebrations',
     image: '/duet auditorium night view 14 aug celebration image by official facebook.png',
     credit: 'Official Facebook Page',
-    layout: 'normal',
+    avatar: 'D',
+    avatarBg: '#F59E0B',
+    category: 'CELEBRATIONS',
+    pinsCount: 165,
   },
   {
     id: 6,
@@ -92,7 +104,10 @@ const GALLERY_PHOTOS = [
     location: 'Main Campus',
     image: '/main campus garden image by Sidra tul Muntaha.png',
     credit: 'Sidra tul Muntaha',
-    layout: 'wide',
+    avatar: 'S',
+    avatarBg: '#EC4899',
+    category: 'MAIN',
+    pinsCount: 119,
   },
   {
     id: 7,
@@ -100,7 +115,10 @@ const GALLERY_PHOTOS = [
     location: 'Main Entrance',
     image: '/main campus main gate image by Faheem Bozdar.png',
     credit: 'Faheem Bozdar',
-    layout: 'normal',
+    avatar: 'F',
+    avatarBg: '#6366F1',
+    category: 'MAIN',
+    pinsCount: 76,
   },
 ]
 
@@ -402,35 +420,19 @@ export default function HomePage() {
           </button>
         </div>
 
-        <div className={styles.bentoGrid}>
-          {GALLERY_PHOTOS.map(item => {
-            let layoutClass = styles.bentoCardNormal
-            if (item.layout === 'tall') layoutClass = styles.bentoCardTall
-            if (item.layout === 'wide') layoutClass = styles.bentoCardWide
-
-            return (
-              <div 
-                key={item.id} 
-                className={`${styles.bentoCard} ${layoutClass}`}
-                onClick={() => navigate('/gallery')}
-              >
-                <img src={item.image} alt={item.title} className={styles.bentoImg} />
-                <div className={styles.bentoOverlay} />
-                
-                <div className={styles.bentoArrow}>
-                  <ArrowUpRight size={18} />
-                </div>
-
-                <div className={styles.bentoContent}>
-                  <p style={{ fontSize: '16px', fontWeight: 800, margin: 0, lineHeight: 1.2 }}>{item.title}</p>
-                  <p style={{ fontSize: '12px', opacity: 0.9, margin: '4px 0 0 0' }}>{item.location}</p>
-                  <span className={styles.photoCreditBadge} style={{ position: 'relative', display: 'inline-flex', marginTop: '8px', bottom: 'auto', right: 'auto' }}>
-                    <Camera size={11} /> Image by {item.credit}
-                  </span>
-                </div>
+        <div className={styles.homePinterestGrid}>
+          {GALLERY_PHOTOS.map(item => (
+            <div 
+              key={item.id} 
+              className={styles.homePinCard}
+              onClick={() => navigate('/gallery')}
+            >
+              <img src={item.image} alt={item.title} className={styles.homePinImg} />
+              <div className={styles.homePinOverlay}>
+                <span className={styles.homeCategoryPill}>{item.category}</span>
               </div>
-            )
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </div>
