@@ -35,10 +35,11 @@ export default function Footer() {
             <p className={styles.colTitle}>Navigation</p>
             <div className={styles.linksList}>
               <Link to="/" className={styles.navLink}>Home</Link>
-              <Link to="/gallery" className={styles.navLink}>Campus Gallery</Link>
-              <Link to="/about" className={styles.navLink}>About DUET Hub</Link>
               <Link to="/resources" className={styles.navLink}>Academic Resources</Link>
+              <Link to="/bus-points" className={styles.navLink}>Bus Points &amp; Routes</Link>
+              <Link to="/gallery" className={styles.navLink}>Campus Gallery</Link>
               <Link to="/admissions" className={styles.navLink}>Admissions Guide</Link>
+              <Link to="/about" className={styles.navLink}>About DUET Hub</Link>
             </div>
           </div>
 

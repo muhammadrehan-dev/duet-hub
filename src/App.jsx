@@ -14,6 +14,8 @@ import GalleryPage from '@/pages/GalleryPage'
 import PWAInstallPrompt from '@/components/PWAInstallPrompt'
 import { SEMESTERS, MERIT_LISTS, SAMPLE_PAPERS } from '@/data/config'
 
+import BusPointsPage from '@/pages/BusPointsPage'
+
 function BrowserPageWrapper() {
   const { semesterId } = useParams()
   const decodedId = semesterId ? decodeURIComponent(semesterId) : ''
@@ -46,6 +48,8 @@ function PageTitleUpdater() {
       '/': 'DUET Resource Hub | Admissions & Student Resources',
       '/resources': 'Course Resources | DUET Resource Hub',
       '/contents': 'Course Resources | DUET Resource Hub',
+      '/bus-points': 'Bus Points & Routes | DUET Resource Hub',
+      '/points': 'Bus Points & Routes | DUET Resource Hub',
       '/gallery': 'Campus Event Gallery | DUET Resource Hub',
       '/admissions': 'Admissions Guide | DUET Resource Hub',
       '/newbie': 'Newbie Guide | DUET Resource Hub',
@@ -73,6 +77,8 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/contents" element={<ResourcesPage />} />
+          <Route path="/bus-points" element={<BusPointsPage />} />
+          <Route path="/points" element={<BusPointsPage />} />
           <Route path="/gallery" element={<GalleryPage />} />
           <Route path="/admissions" element={<AdmissionsPage />} />
           <Route path="/newbie" element={<NewBiePage />} />

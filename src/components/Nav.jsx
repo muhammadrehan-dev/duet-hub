@@ -97,6 +97,20 @@ export default function Nav() {
 
         <li>
           <NavLink
+            to="/bus-points"
+            className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
+          >
+            {({ isActive }) => (
+              <>
+                Bus Points
+                {isActive && <span className={styles.activeDot} />}
+              </>
+            )}
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
             to="/gallery"
             className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
           >
@@ -175,6 +189,9 @@ export default function Nav() {
             </Link>
             <Link to="/resources" onClick={() => setMobileMenuOpen(false)} className={`${styles.mobileLink} ${location.pathname === '/resources' ? styles.mobileActive : ''}`}>
               Resources &amp; Course Materials <ChevronRight size={18} />
+            </Link>
+            <Link to="/bus-points" onClick={() => setMobileMenuOpen(false)} className={`${styles.mobileLink} ${location.pathname === '/bus-points' ? styles.mobileActive : ''}`}>
+              Bus Points &amp; Routes <ChevronRight size={18} />
             </Link>
             <Link to="/gallery" onClick={() => setMobileMenuOpen(false)} className={`${styles.mobileLink} ${location.pathname === '/gallery' ? styles.mobileActive : ''}`}>
               Campus Gallery <ChevronRight size={18} />
