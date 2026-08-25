@@ -238,9 +238,6 @@ export default function AdmissionsPage() {
             Everything you need to secure your seat without losing your sanity — merit formulas, entry test patterns, campus photo tours, document checklists, and past merit archives.
           </p>
         </div>
-        <span className={styles.heroCreditBadge}>
-          <Camera size={12} /> Image by Faheem Bozdar
-        </span>
       </div>
 
       {/* Interactive Aggregate Calculator */}

@@ -72,30 +72,7 @@ export default function BusPointsPage() {
           <p className={styles.heroDescription}>
             Official transport routes, driver contact numbers, stop distances, and WhatsApp community groups (w.e.f {SCHEDULE_INFO.effectiveDate}).
           </p>
-
-          <div className={styles.timingPills}>
-            <div className={styles.pill}>
-              <Clock size={15} color="#60a5fa" />
-              <span>Arrival: <strong>{SCHEDULE_INFO.arrivalTime}</strong> ({SCHEDULE_INFO.arrivalLocation})</span>
-            </div>
-            <div className={styles.pill}>
-              <Clock size={15} color="#f43f5e" />
-              <span>Departure: <strong>{SCHEDULE_INFO.departureTime}</strong> ({SCHEDULE_INFO.departureLocation})</span>
-            </div>
-            <div className={styles.pill}>
-              <Clock size={15} color="#fbbf24" />
-              <span>Margin: <strong>±5 mins</strong> (10-min window)</span>
-            </div>
-            <div className={`${styles.pill} ${styles.pillHighlight}`}>
-              <CheckCircle2 size={15} />
-              <span>Active Schedule 2026</span>
-            </div>
-          </div>
         </div>
-
-        <span className={styles.heroCreditBadge}>
-          <Camera size={12} /> Points Hero Banner
-        </span>
       </div>
 
       {/* Controls & Search */}

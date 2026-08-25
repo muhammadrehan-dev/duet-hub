@@ -37,9 +37,6 @@ export default function ResourcesPage() {
             Explore curated semester repositories, lecture presentations, past exam papers, lab manuals, sample papers, and merit list archives.
           </p>
         </div>
-        <span className={styles.heroCreditBadge}>
-          <Camera size={12} /> Image by Aftab Ullah
-        </span>
       </div>
 
       {/* Controls & Search */}

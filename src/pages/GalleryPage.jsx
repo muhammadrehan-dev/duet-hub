@@ -250,9 +250,6 @@ export default function GalleryPage() {
             A visual chronicle of Dawood University of Engineering &amp; Technology — capturing main campus landmarks, IC&amp;S Gulberg departments, CEMET Sukkur facilities, and student celebrations.
           </p>
         </div>
-        <span className={styles.heroCreditBadge}>
-          <Camera size={12} /> Image by Official Facebook Page
-        </span>
       </div>
 
       {/* Search & Category Controls */}

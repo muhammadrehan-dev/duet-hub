@@ -145,9 +145,6 @@ export default function NewBiePage() {
             The unofficial survival manual for new Dawoodians — 75% attendance rules, QOBE portal setup, free Microsoft &amp; GitHub perks, cafeteria chai culture, and 1st semester pro-tips.
           </p>
         </div>
-        <span className={styles.heroCreditBadge}>
-          <Camera size={12} /> Image by Sidra tul Muntaha
-        </span>
       </div>
 
       {/* Freshman 5 Commandments Roadmap */}

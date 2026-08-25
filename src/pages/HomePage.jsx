@@ -176,10 +176,6 @@ export default function HomePage() {
             </button>
           </div>
         </div>
-
-        <span className={styles.heroCreditBadge}>
-          <Camera size={12} /> Image by {slide.credit}
-        </span>
       </div>
 
       {/* Live Impact Stats Bar */}

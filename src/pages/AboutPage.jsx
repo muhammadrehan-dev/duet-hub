@@ -169,9 +169,6 @@ export default function AboutPage() {
             A student-driven open initiative empowering Dawood University with centralized academic repositories, past papers, and freshman guides.
           </p>
         </div>
-        <span className={styles.heroCreditBadge}>
-          <Camera size={12} /> Image by Sidra tul Muntaha
-        </span>
       </div>
 
       {/* The Story */}
