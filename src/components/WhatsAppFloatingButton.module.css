@@ -1,0 +1,109 @@
+.floatingContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #ffffff;
+  padding: 10px 18px 10px 14px;
+  border-radius: 9999px;
+  font-family: var(--font-ui, 'DM Sans', sans-serif);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35), 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  user-select: none;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.iconWrapper svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.text {
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.pulseEffect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 9999px;
+  border: 2px solid #25D366;
+  opacity: 0;
+  pointer-events: none;
+  animation: pulse 2.5s infinite ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+.floatingContainer:hover .button {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45), 0 4px 10px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(135deg, #28e06c 0%, #159c8d 100%);
+}
+
+.floatingContainer:active .button {
+  transform: translateY(0) scale(0.98);
+}
+
+@media (max-width: 768px) {
+  .floatingContainer {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .button {
+    padding: 9px 14px 9px 12px;
+    font-size: 12.5px;
+    gap: 7px;
+  }
+
+  .iconWrapper {
+    width: 22px;
+    height: 22px;
+  }
+
+  .iconWrapper svg {
+    width: 19px;
+    height: 19px;
+  }
+}

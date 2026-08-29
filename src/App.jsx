@@ -12,6 +12,7 @@ import AdmissionsPage from '@/pages/AdmissionsPage'
 import ResourcesPage from '@/pages/ResourcesPage'
 import GalleryPage from '@/pages/GalleryPage'
 import PWAInstallPrompt from '@/components/PWAInstallPrompt'
+import WhatsAppFloatingButton from '@/components/WhatsAppFloatingButton'
 import { SEMESTERS, MERIT_LISTS, SAMPLE_PAPERS } from '@/data/config'
 
 import BusPointsPage from '@/pages/BusPointsPage'
@@ -89,6 +90,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <WhatsAppFloatingButton />
       <PWAInstallPrompt />
       <Analytics />
       <SpeedInsights />
