@@ -89,6 +89,48 @@ function FileRow({ item, onPreview }) {
   )
 }
 
+function FileCard({ item, onPreview }) {
+  const info = getFileInfo(item.name)
+  const IconComp = info.icon || FileText
+  const canPreview = isPreviewable(item.name)
+
+  return (
+    <div className={styles.fileCard}>
+      <div className={styles.fileCardTop}>
+        <div className={styles.fileCardIconWrap}>
+          <IconComp size={24} />
+        </div>
+        <span className={styles.extBadge} style={{ '--ext-color': info.color }}>
+          {info.label}
+        </span>
+      </div>
+      <p className={styles.fileCardName}>{item.name}</p>
+      <span className={styles.fileCardSize}>{formatFileSize(item.size)}</span>
+      <div className={styles.fileCardActions}>
+        {canPreview && (
+          <button
+            className={styles.previewBtn}
+            onClick={() => onPreview(item)}
+            title="Preview file"
+          >
+            <Eye size={13} /> Preview
+          </button>
+        )}
+        <a
+          href={item.download_url}
+          className={styles.dlBtn}
+          download
+          target="_blank"
+          rel="noreferrer"
+          title="Download file"
+        >
+          <Download size={15} />
+        </a>
+      </div>
+    </div>
+  )
+}
+
 // ─── Folder View Component ────────────────────────────────────────────────────
 function FolderView({ github, path, onEnterFolder, onPreview }) {
   const { items, loading, error } = useFolderContents(github, path)
@@ -189,15 +231,23 @@ function FolderView({ github, path, onEnterFolder, onPreview }) {
         </div>
       )}
 
-      {/* Files Table */}
+      {/* Files — List or Grid */}
       {filteredFiles.length > 0 && (
         <div>
           <p className={styles.sectionLabel}>Files ({filteredFiles.length})</p>
-          <div className={styles.fileListTable}>
-            {filteredFiles.map(f => (
-              <FileRow key={f.path} item={f} onPreview={onPreview} />
-            ))}
-          </div>
+          {viewMode === 'list' ? (
+            <div className={styles.fileListTable}>
+              {filteredFiles.map(f => (
+                <FileRow key={f.path} item={f} onPreview={onPreview} />
+              ))}
+            </div>
+          ) : (
+            <div className={styles.fileCardsGrid}>
+              {filteredFiles.map(f => (
+                <FileCard key={f.path} item={f} onPreview={onPreview} />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -427,6 +427,73 @@
   background: var(--accent-light);
 }
 
+/* ─── File Cards Grid (Grid View) ────────────────────────────────────────── */
+.fileCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.fileCard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.fileCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+}
+
+.fileCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fileCardIconWrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  background: var(--accent-light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fileCardName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  margin: 0;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.fileCardSize {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.fileCardActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
 /* Section Header */
 .sectionLabel {
   font-size: 12px;
@@ -444,4 +511,5 @@
   .pageTitle { font-size: 22px; }
   .fileSize { display: none; }
   .folderGrid { grid-template-columns: 1fr; }
+  .fileCardsGrid { grid-template-columns: 1fr 1fr; }
 }
