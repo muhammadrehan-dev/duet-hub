@@ -137,6 +137,31 @@ const CONTRIBUTORS = [
       { name: 'Muhammad Amaan', roll: '24F-AI-030' },
       { name: 'Muskan Zahid', roll: '24F-AI-052' }
     ]
+  },
+  {
+    name: 'Muhammad Rehan',
+    avatar: 'MR',
+    roll: '25F-CY-102',
+    dept: 'Cybersecurity',
+    role: '25F CY Resource Maintainer',
+    bio: 'Creator of DUET Hub and maintainer of 25F Cybersecurity resources. Built the entire platform and manages all course content for the Cybersecurity batch.',
+    contacts: [],
+    helpers: [
+      { name: 'Section A2 (25F-CY-A2)', roll: 'Batch' }
+    ],
+    helperNote: 'Shoutout to the entire Section A2 for providing study materials.'
+  },
+  {
+    name: 'Noor Fatima',
+    avatar: 'NF',
+    roll: '25F-CY-108',
+    dept: 'Cybersecurity',
+    role: '25F CY File Organizer',
+    bio: 'Provided the most notes for the 25F batch. Helped manage and organize the scattered course files for 25F Cybersecurity, making them structured and accessible for the entire batch. Also provided accurate timings for point routes.',
+    contacts: [
+      { label: 'Instagram', url: 'https://www.instagram.com/hijabestic._.0/', icon: <InstagramIcon size={14} /> },
+      { label: 'LinkedIn', url: 'https://www.linkedin.com/in/noor-bhatti-3183ab390/', icon: <LinkedinIcon size={14} /> }
+    ]
   }
 ]
 
@@ -330,68 +355,23 @@ export default function AboutPage() {
         </div>
 
         <p className={styles.devBio}>
-          Sophomore Cybersecurity student at Dawood University of Engineering &amp; Technology (Batch 25F). 
-          Passionate about CTFs, reverse engineering, Linux administration, open-source culture, and building tools that make academic life easier for every Dawoodian.
+          Cybersecurity student at DUET (Batch 25F). Built this platform to centralize academic resources for every Dawoodian.
         </p>
 
-        <p className={styles.subLabel}>Core Interests</p>
-        <div className={styles.interestsGrid}>
-          {INTERESTS.map((item, index) => (
-            <div key={index} className={styles.interestItem}>
-              {item.icon}
-              <span>{item.label}</span>
-            </div>
-          ))}
-        </div>
-
-        <p className={styles.subLabel} style={{ marginTop: '1.5rem' }}>Tech &amp; Animal Analogies</p>
-        <div className={styles.interestsGrid}>
-          {ANIMALS.map((item, index) => (
-            <div key={index} className={styles.interestItem}>
-              {item.icon}
-              <span>{item.animal} = {item.tech}</span>
-            </div>
-          ))}
-        </div>
-
-        <p className={styles.subLabel} style={{ marginTop: '1.5rem' }}>Authors, Urdu Literature &amp; Hobbies</p>
-        <div className={styles.hobbiesWrap}>
-          {HOBBIES.map((h, i) => (
-            <span key={i} className={`${styles.hobbyTag} ${HOBBY_COLORS[h.group]}`}>
-              {h.label}
-            </span>
-          ))}
-        </div>
-
-        <p className={styles.subLabel} style={{ marginTop: '1.5rem' }}>Connect with Developer</p>
         <div className={styles.linksRow}>
-          <a href="https://github.com/muhammadrehan-dev" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
-            <GithubIcon size={14} /> GitHub
+          <a href="https://github.com/muhammadrehan-dev" target="_blank" rel="noreferrer" className={styles.contactBtn}>
+            <GithubIcon size={14} /> <span>GitHub</span>
           </a>
-          <a href="https://linkedin.com/in/muhammadrehan-dev" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
-            <LinkedinIcon size={14} /> LinkedIn
+          <a href="https://linkedin.com/in/muhammadrehan-dev" target="_blank" rel="noreferrer" className={styles.contactBtn}>
+            <LinkedinIcon size={14} /> <span>LinkedIn</span>
           </a>
-          <a href="https://instagram.com/ch4_ezio" target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
-            <InstagramIcon size={14} /> Instagram
+          <a href="https://instagram.com/ch4_ezio" target="_blank" rel="noreferrer" className={styles.contactBtn}>
+            <InstagramIcon size={14} /> <span>Instagram</span>
           </a>
-          <a href="mailto:contact@rehan.dev" className="btn btn-secondary" style={{ fontSize: '13px', padding: '8px 14px' }}>
-            <Mail size={14} /> Email
+          <a href="https://wa.me/923229680603" target="_blank" rel="noreferrer" className={styles.contactBtn}>
+            <MessageSquare size={14} /> <span>WhatsApp</span>
           </a>
         </div>
-      </div>
-
-      {/* Projects */}
-      <p className="section-label" style={{ marginTop: '3rem' }}>Other Projects by Developer</p>
-      <div className={styles.projectsGrid}>
-        {PROJECTS.map((proj, index) => (
-          <a key={index} href={proj.url} target="_blank" rel="noreferrer" className={styles.projectCard}>
-            <div className={styles.projectTop}>
-              <h3 className={styles.projectName}>{proj.name}</h3>
-              <span className={styles.projectBadge}>{proj.badge}</span>
-            </div>
-            <p className={styles.projectDesc}>{proj.desc}</p>
-          </a>
-        ))}
       </div>
 
       {/* Key Contributors */}
@@ -418,30 +398,35 @@ export default function AboutPage() {
             {c.helpers && (
               <div className={styles.helpersSection}>
                 <p className={styles.helpersTitle}>Core Team Helpers:</p>
-                <div className={styles.helpersList}>
+                <div className={styles.helpersGrid}>
                   {c.helpers.map((h, idx) => (
-                    <span key={idx} className={styles.helperPill}>
+                    <span key={idx} className={styles.helperChip}>
                       {h.name} ({h.roll})
                     </span>
                   ))}
                 </div>
+                {c.helperNote && (
+                  <p className={styles.helperNote}>{c.helperNote}</p>
+                )}
               </div>
             )}
 
-            <div className={styles.contactsRow}>
-              {c.contacts.map((contact, idx) => (
-                <a 
-                  key={idx} 
-                  href={contact.url} 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className={styles.contactBtn}
-                >
-                  {contact.icon}
-                  <span>{contact.label}</span>
-                </a>
-              ))}
-            </div>
+            {c.contacts && c.contacts.length > 0 && (
+              <div className={styles.contributorContacts}>
+                {c.contacts.map((contact, idx) => (
+                  <a 
+                    key={idx} 
+                    href={contact.url} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className={styles.contactBtn}
+                  >
+                    {contact.icon}
+                    <span>{contact.label}</span>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>

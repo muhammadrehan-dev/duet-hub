@@ -753,7 +753,9 @@
 }
 
 .contactBtn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 5px 12px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -1157,6 +1159,15 @@
   color: var(--text-muted);
   font-size: 9px;
   margin-left: 4px;
+}
+
+.helperNote {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+  font-style: italic;
+  margin: 0.5rem 0 0 0;
+  line-height: 1.5;
 }
 
 .contributorContacts {
